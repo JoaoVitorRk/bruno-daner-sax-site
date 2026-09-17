@@ -21,7 +21,7 @@
 <meta property="og:title" content="Bruno Daner Sax — DJ e Sax ao Vivo">
 <meta property="og:description" content="Duas linguagens. Uma única experiência. DJ e saxofone ao vivo para casamentos e eventos.">
 <meta property="og:url" content="https://bruno.rkperformance.com.br/">
-<meta property="og:image" content="https://bruno.rkperformance.com.br/media/fotos/cta-sparklers.jpg">
+<meta property="og:image" content="https://bruno.rkperformance.com.br/media/fotos/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -218,6 +218,16 @@
     color: rgba(242, 237, 226, 0.6); animation: rise 1100ms var(--ease) 2200ms both;
   }
   .hero-proof strong { color: var(--dourado-claro); font-weight: 500; }
+  .sound {
+    background: none; border: 1px solid rgba(231, 206, 147, 0.5); border-radius: 999px; color: var(--dourado-claro);
+    font: inherit; font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 11px 18px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 10px; transition: background-color 250ms, color 250ms;
+  }
+  .sound:hover { background: var(--dourado); color: var(--noite); }
+  .sound .bars { height: 10px; }
+  .sound .bars i { height: 4px; }
+  .sound.on .bars i { animation: eq 700ms ease-in-out infinite alternate; }
+  .sound.on .bars i:nth-child(2) { animation-delay: 120ms; } .sound.on .bars i:nth-child(3) { animation-delay: 240ms; }
   .no-js .hero *, .reduce .hero * { animation: none !important; }
   @media (max-width: 820px) {
     .hero-wall { grid-template-columns: 1fr; }
@@ -324,7 +334,7 @@
     .strip-foot .strip-nav { display: flex; }
   }
   @media (min-width: 861px) { .strip-foot .strip-nav { display: none; } }
-  .card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 3; background: #000; }
+  .card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; z-index: 3; background: #000; }
   .card::after, .card .card-info { transition: opacity 400ms var(--ease); }
   .card.playing img, .card.playing::after, .card.playing .card-play, .card.playing .card-info { opacity: 0; pointer-events: none; }
   .card-stop { position: absolute; z-index: 4; top: 14px; right: 14px; display: none; background: rgba(11, 10, 8, 0.65); border: 1px solid rgba(231, 206, 147, 0.6); border-radius: 999px; color: var(--areia); font: inherit; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 8px 14px; cursor: pointer; }
@@ -463,7 +473,7 @@
       "alternateName": "Bruno Daner",
       "description": "DJ e saxofonista ao vivo no mesmo artista. Música para casamentos, eventos corporativos e celebrações — Rio de Janeiro e destination weddings.",
       "url": "https://bruno.rkperformance.com.br/",
-      "image": "https://bruno.rkperformance.com.br/media/fotos/cta-sparklers.jpg",
+      "image": "https://bruno.rkperformance.com.br/media/fotos/og-image.jpg",
       "logo": "https://bruno.rkperformance.com.br/media/logo-full.png",
       "telephone": "+55-21-99422-7045",
       "address": { "@type": "PostalAddress", "addressLocality": "Rio de Janeiro", "addressRegion": "RJ", "addressCountry": "BR" },
@@ -529,7 +539,8 @@
       <p class="hero-sub">É DJ e sax ao vivo num só artista. Eu leio a pista, conduzo a energia e transformo a sua celebração numa memória que ecoa para sempre.</p>
       <div class="hero-actions">
         <a class="btn btn-solid" href="https://wa.me/5521994227045?text=Oi%2C%20Bruno%21%20Vi%20seu%20site%20e%20quero%20ver%20sua%20disponibilidade.%0AData%3A%20%0ACidade%2FLocal%3A%20%0ATipo%20de%20evento%3A%20" target="_blank" rel="noopener"><span>Ver a disponibilidade da minha data</span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-        <a class="btn" href="#momentos"><span>Assistir com som</span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v11M3 8l5 5 5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        <button class="sound" id="soundBtn" type="button" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span>Ouvir com som</span></button>
+        <a class="btn" href="#momentos"><span>Ver os vídeos</span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v11M3 8l5 5 5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
       </div>
       <p class="hero-proof"><span><strong>5.0</strong> no casamentos.com.br · <strong>100%</strong> recomendam</span><span><strong>Casamentos Awards 2026</strong> · Música · RJ</span><span>Respondo em até <strong>24h</strong> · consulta gratuita</span></p>
     </div>
@@ -538,8 +549,8 @@
   <!-- ======================= LETREIRO ======================= -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span>DJ &amp; Sax Experience</span><span>Curadoria musical</span><span>Leitura de pista</span><span>Casamentos</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Cerimônia ao vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba e pagode</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span>
-      <span>DJ &amp; Sax Experience</span><span>Curadoria musical</span><span>Leitura de pista</span><span>Casamentos</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Cerimônia ao vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba e pagode</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span>
+      <span>DJ &amp; Sax Experience</span><span>Curadoria musical</span><span>Leitura de pista</span><span>Casamentos</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Cerimônia ao vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span>
+      <span>DJ &amp; Sax Experience</span><span>Curadoria musical</span><span>Leitura de pista</span><span>Casamentos</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Cerimônia ao vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span>
     </div>
   </div>
 
@@ -594,8 +605,8 @@
           <span class="num" aria-hidden="true">02</span>
           <h3>Cerimônia</h3>
           <p class="kick">Para quem não abre mão da emoção do "sim".</p>
-          <p>A delicadeza do piano, a emoção do violino e a presença marcante do saxofone ao vivo, com músicos e cantores conduzindo o momento mais importante do dia. Não é apenas música para a cerimônia. É a música da sua história. E, se eu sigo com você para a festa, a transição acontece sem quebra — a mesma linguagem musical, mudando de temperatura junto com o seu dia.</p>
-          <ul><li>Piano</li><li>Violino</li><li>Sax</li><li>Voz</li></ul>
+          <p>A formação padrão une a delicadeza do piano, a emoção do violino e a presença marcante do saxofone ao vivo no momento mais importante do dia — e, se vocês imaginarem diferente, eu monto uma formação personalizada para a sua cerimônia. Não é apenas música: é a música da sua história. E, se eu sigo com você para a festa, a transição acontece sem quebra — a mesma linguagem musical, mudando de temperatura junto com o seu dia.</p>
+          <ul><li>Sax</li><li>Piano</li><li>Violino</li><li>Formação personalizável</li></ul>
         </div>
       </article>
       <article class="serv reveal">
@@ -609,7 +620,7 @@
         </div>
       </article>
       <article class="serv reveal">
-        <figure class="serv-foto"><img src="media/fotos/serv-colordrums.jpg" alt="Bruno Daner em contraluz vermelha atrás do set de DJ com o saxofone" width="1080" height="1350" loading="lazy"></figure>
+        <figure class="serv-foto"><img src="media/fotos/serv-colordrums.jpg" alt="Noivos tocando os tambores de LED com jato de CO2 durante a festa" width="1800" height="1200" loading="lazy"></figure>
         <div class="serv-copy">
           <span class="num" aria-hidden="true">04</span>
           <h3>Color Drums <em>+ CO₂</em></h3>
@@ -653,6 +664,12 @@
       </div>
     </div>
     <div class="strip" id="strip">
+      <article class="card reveal" data-video="media/videos/v-cristo.mp4" data-title="Aos pés do Cristo — sax ao amanhecer">
+        <img src="media/videos/poster-cristo.jpg" alt="" width="1280" height="720" loading="lazy">
+        <button class="card-play" type="button" aria-label="Assistir: Aos pés do Cristo"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button>
+        <button class="card-stop" type="button">Fechar</button>
+        <div class="card-info"><h3>Aos pés do Cristo</h3><p>Sax ao amanhecer · Rio de Janeiro</p></div>
+      </article>
       <article class="card reveal" data-video="media/videos/v-festa.mp4" data-title="Contra o telão — set, sax e LED">
         <img src="media/videos/poster-festa.jpg" alt="" width="720" height="1280" loading="lazy">
         <button class="card-play" type="button" aria-label="Assistir: Contra o telão"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button>
@@ -660,7 +677,7 @@
         <div class="card-info"><h3>Contra o telão</h3><p>Set, sax e LED · estética de festival</p></div>
       </article>
       <article class="card reveal d1" data-video="media/videos/v-pista.mp4" data-title="A pista responde">
-        <img src="media/videos/poster-hero-b.jpg" alt="" width="720" height="1280" loading="lazy">
+        <img src="media/videos/poster-pista.jpg" alt="" width="720" height="1280" loading="lazy">
         <button class="card-play" type="button" aria-label="Assistir: A pista responde"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button>
         <button class="card-stop" type="button">Fechar</button>
         <div class="card-info"><h3>A pista responde</h3><p>Casamento · a festa termina lotada</p></div>
@@ -677,11 +694,11 @@
         <button class="card-stop" type="button">Fechar</button>
         <div class="card-info"><h3>Preto e branco</h3><p>Salão de lustres · sax na multidão</p></div>
       </article>
-      <article class="card reveal d3" data-video="media/videos/v-cerimonia.mp4" data-title="Cerimônia no jardim">
-        <img src="media/videos/poster-cerimonia.jpg" alt="" width="720" height="960" loading="lazy">
-        <button class="card-play" type="button" aria-label="Assistir: Cerimônia no jardim"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button>
+      <article class="card reveal d3" data-video="media/videos/v-cerimonia-igreja.mp4" data-title="A entrada da noiva — clarinada na igreja">
+        <img src="media/videos/poster-cerimonia-igreja.jpg" alt="" width="576" height="1024" loading="lazy">
+        <button class="card-play" type="button" aria-label="Assistir: A entrada da noiva"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button>
         <button class="card-stop" type="button">Fechar</button>
-        <div class="card-info"><h3>Cerimônia no jardim</h3><p>Piano e violino entre arcos e flores</p></div>
+        <div class="card-info"><h3>A entrada da noiva</h3><p>Clarinada na porta da igreja</p></div>
       </article>
       <article class="card reveal d3" data-video="media/videos/v-amor.mp4" data-title="Ah, o amor">
         <img src="media/videos/poster-amor.jpg" alt="" width="720" height="1280" loading="lazy">
@@ -734,15 +751,15 @@
     <div class="wrap sobre-grid">
       <figure class="collage reveal">
         <div class="main" data-parallax="-0.06"><img src="media/fotos/sobre-pioneer.jpg" alt="Bruno Daner de blazer claro atrás do mixer de DJ, com o saxofone pendurado" width="1350" height="2025" loading="lazy"></div>
-        <div class="second" data-parallax="0.08"><img src="media/fotos/sobre-bw.jpg" alt="Bruno Daner em preto e branco tocando saxofone sobre o set de DJ" width="1080" height="1350" loading="lazy"></div>
-        <figcaption>DJ &amp; sax — no mesmo artista</figcaption>
+        <div class="second" data-parallax="0.08"><img src="media/fotos/sobre-eua.jpg" alt="Bruno Daner de preto, sentado com o case do saxofone, em viagem nos Estados Unidos" width="1080" height="1755" loading="lazy"></div>
+        <figcaption>Do Rio para o mundo — em turnê · EUA</figcaption>
       </figure>
       <div class="sobre-copy">
         <p class="eyebrow reveal">O artista</p>
-        <h2 class="reveal d1">Do pagode ao <em>mundo</em>.</h2>
+        <h2 class="reveal d1">Do Rio para o <em>mundo</em>.</h2>
         <p class="lead reveal d2">Eu sou Bruno Daner, saxofonista e DJ, do Rio de Janeiro.</p>
-        <p class="reveal d2">Minha trajetória como saxofonista me ensinou a entender a música, o momento e, principalmente, as pessoas. "Do pagode ao mundo": foi assim que o meu caminho se desenhou — e essa escola me levou a centenas de celebrações: casamentos, cerimônias, eventos corporativos e destination weddings.</p>
-        <p class="reveal d2">Foi nesse caminho que nasceu a DJ &amp; Sax Experience — a união entre o DJ e o sax ao vivo, com a minha assinatura. Ao meu lado, um produtor e músicos parceiros de violino, piano e voz cuidam de cada formação, da igreja à pista.</p>
+        <p class="reveal d2">Minha trajetória como saxofonista me ensinou a entender a música, o momento e, principalmente, as pessoas. É isso que eu levo para cada apresentação: técnica de músico, energia de DJ e a leitura de quem já viveu centenas de celebrações — do casamento no Rio ao destination wedding do outro lado do mundo.</p>
+        <p class="reveal d2">Foi nesse caminho que nasceu a DJ &amp; Sax Experience: mixagem e sax ao vivo nas mesmas mãos, do primeiro acorde ao último momento da pista. Ao meu lado, um produtor e músicos parceiros montam a formação certa para cada evento — da cerimônia à festa.</p>
         <p class="reveal d2">Minha música não é só som; é a alma da sua festa, transformando cada instante em uma memória que você e seus convidados vão carregar para sempre.</p>
         <div class="facts reveal d3">
           <div><b>DJ + Sax</b><small>num só artista</small></div>
@@ -788,7 +805,7 @@
         <div class="rep-col reveal"><h3>Jazz &amp; Blues</h3><ul><li>Standards de jazz</li><li>Smooth jazz</li><li>Blues clássico</li><li>Bossa nova</li></ul><p class="rep-uso">Para o coquetel, o jantar e os momentos de elegância.</p></div>
         <div class="rep-col reveal d1"><h3>Eletrônico &amp; House</h3><ul><li>Afro house</li><li>Deep house</li><li>Eletrônica <span>com sax ao vivo</span></li></ul><p class="rep-uso">Para quando a pista assume o comando.</p></div>
         <div class="rep-col reveal d2"><h3>Pop &amp; Rock</h3><ul><li>Hits dos anos 80 e 90</li><li>Pop internacional</li><li>Rock leve</li></ul><p class="rep-uso">Para todo mundo cantar junto.</p></div>
-        <div class="rep-col reveal d3"><h3>Música Brasileira</h3><ul><li>Samba</li><li>Pagode</li><li>MPB</li></ul><p class="rep-uso">Para a festa ter a nossa cara.</p></div>
+        <div class="rep-col reveal d3"><h3>Música Brasileira</h3><ul><li>Samba</li><li>MPB</li></ul><p class="rep-uso">Para a festa ter a nossa cara.</p></div>
       </div>
       <p class="rep-note reveal">"Todos dançaram dos mais velhos aos mais novos, todos se comunicaram e foi um showzaço!" — <a href="https://www.casamentos.com.br/musica-de-casamento/bruno-daner-sax--e450884" target="_blank" rel="noopener">Giulia, no casamentos.com.br</a></p>
     </div>
@@ -802,14 +819,14 @@
         <h2 class="reveal d1">Antes de <em>fechar</em>.</h2>
       </div>
       <div class="faq-list reveal d1">
-        <details><summary>Como funciona a DJ &amp; Sax Experience na prática?</summary><p>Sou um único profissional que mixa e toca sax ao vivo ao mesmo tempo. Antes do evento, montamos juntos a curadoria musical; no dia, eu conduzo a energia da pista em tempo real, lendo o ambiente e os convidados. Você não precisa montar a música do seu evento — eu penso nela por você.</p></details>
-        <details><summary>Você faz a cerimônia E a festa?</summary><p>Faço. Na cerimônia, entro com piano, violino, sax e voz, com músicos e cantores parceiros; na festa, assumo a pista com a DJ &amp; Sax Experience. A vantagem é ter uma única direção musical do "sim" ao último drop — e um único contato para tudo.</p></details>
+        <details><summary>Como funciona a DJ &amp; Sax Experience na prática?</summary><p>Sou um único profissional que mixa e toca sax ao vivo ao mesmo tempo. Antes do evento, eu conduzo um processo de curadoria musical com vocês: escuto a história do casal, entendo o estilo da celebração e desenho o show que mais combina com vocês — personalizado, não um roteiro pronto. No dia, conduzo a energia da pista em tempo real, lendo o ambiente e os convidados.</p></details>
+        <details><summary>Você faz a cerimônia E a festa?</summary><p>Faço. Na cerimônia, a formação padrão é sax, piano e violino — e, se vocês quiserem algo diferente, eu monto uma formação personalizada a gosto do casal. Na festa, assumo a pista com a DJ &amp; Sax Experience. A vantagem é ter uma única direção musical do "sim" ao último drop — e um único contato para tudo.</p></details>
         <details><summary>Meu evento é intimista. Funciona mesmo assim?</summary><p>Funciona. O Live Sax circulando entre os convidados cria um clima elegante e envolvente sem precisar de pista cheia. Já criei ambientes intimistas e sofisticados exatamente assim — a experiência se adapta ao tamanho e ao espírito do seu evento.</p></details>
-        <details><summary>Posso pedir músicas específicas?</summary><p>Pode — e deve. A curadoria parte da personalidade do seu evento, e músicas que têm significado para vocês entram nesse desenho — do jazz ao pagode.</p></details>
+        <details><summary>Posso pedir músicas específicas?</summary><p>Pode — e deve. A curadoria parte da personalidade do seu evento, e músicas que têm significado para vocês entram nesse desenho — do clássico ao eletrônico.</p></details>
         <details><summary>E o equipamento? O som vai funcionar no meu espaço?</summary><p>O setup varia conforme o formato e a estrutura do local — por isso eu levanto essas informações antes e detalho na proposta exatamente o que eu levo e o que preciso do espaço. Nada de surpresa técnica no dia.</p></details>
         <details><summary>Você toca fora do Rio? Faz destination wedding?</summary><p>Minha base é o Rio de Janeiro e destination weddings fazem parte do meu trabalho. Deslocamento e logística variam conforme o destino — entram detalhados na proposta.</p></details>
         <details><summary>Quanto tempo dura a apresentação?</summary><p>Depende do formato e dos momentos que a gente escolher cobrir: cerimônia, coquetel, pista, encerramento. Isso é definido na curadoria do seu evento — me chama que eu monto a proposta para o seu roteiro.</p></details>
-        <details><summary>Quanto custa?</summary><p>Os formatos partem de R$ 2.500, e cada proposta é montada sob medida conforme formato, formação e local. Na conversa eu entendo o seu evento e te devolvo uma proposta clara.</p></details>
+        <details><summary>Quanto custa?</summary><p>Cada proposta é montada sob medida, conforme o formato, a formação e o local do evento. Na conversa eu entendo o que vocês imaginam e devolvo uma proposta clara, sem surpresa.</p></details>
         <details><summary>Como eu reservo a minha data?</summary><p>Me chama no WhatsApp com a data, a cidade e o tipo de evento. Eu respondo em até 24h, confirmo a disponibilidade e a gente agenda uma consulta gratuita para desenhar a experiência.</p></details>
       </div>
     </div>
@@ -901,6 +918,17 @@
   aplicarHero();
   if (mqMobile.addEventListener) mqMobile.addEventListener('change', aplicarHero);
   else if (mqMobile.addListener) mqMobile.addListener(aplicarHero);
+
+  // som do hero: liga/desliga o áudio da coluna central (estilo Jamilli)
+  var heroMeio = document.getElementById('heroMeio'), sb = document.getElementById('soundBtn');
+  if (sb && heroMeio) {
+    sb.addEventListener('click', function () {
+      var estavaMudo = heroMeio.muted; heroMeio.muted = !estavaMudo;
+      heroMeio.play().catch(function () {});
+      sb.classList.toggle('on', estavaMudo); sb.setAttribute('aria-pressed', estavaMudo);
+      sb.lastElementChild.textContent = estavaMudo ? 'Silenciar' : 'Ouvir com som';
+    });
+  }
 
   // iOS em economia de bateria bloqueia autoplay: tenta de novo a cada toque
   var acordarHero = function () { wallVideos.forEach(function (v) { if (v.paused && v.preload !== 'none' && !playingCard) v.play().catch(function () {}); }); };
