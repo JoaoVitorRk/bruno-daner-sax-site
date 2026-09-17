@@ -934,6 +934,9 @@
   var acordarHero = function () { wallVideos.forEach(function (v) { if (v.paused && v.preload !== 'none' && !playingCard) v.play().catch(function () {}); }); };
   document.addEventListener('touchstart', acordarHero, { passive: true });
   document.addEventListener('pointerdown', acordarHero, { passive: true });
+  // vigia: religa qualquer vídeo do hero que o navegador pausar sozinho
+  setInterval(function () { if (!document.hidden) acordarHero(); }, 4000);
+  window.addEventListener('pageshow', acordarHero);
 
   // letreiro via requestAnimationFrame
   var track = document.querySelector('.marquee-track');
