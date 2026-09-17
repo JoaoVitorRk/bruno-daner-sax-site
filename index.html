@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- ============================================================
+     BRUNO DANER SAX — DJ & Sax ao vivo · Rio de Janeiro
+     RK Performance · set/2026
+     Fotos e vídeos: acervo do Bruno (Instagram @brunodanersax + site)
+     ============================================================ -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DJ e Sax ao Vivo para Casamentos e Eventos | Bruno Daner Sax</title>
+<meta name="description" content="Bruno Daner: DJ e saxofonista ao vivo no mesmo artista. Casamentos, eventos corporativos e celebrações no Rio de Janeiro e onde a festa estiver. Consulte sua data.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://bruno.rkperformance.com.br/">
+<link rel="icon" type="image/png" href="media/favicon.png">
+<link rel="apple-touch-icon" href="media/favicon.png">
+<meta name="theme-color" content="#0B0A08">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Bruno Daner Sax">
+<meta property="og:title" content="Bruno Daner Sax — DJ e Sax ao Vivo">
+<meta property="og:description" content="Duas linguagens. Uma única experiência. DJ e saxofone ao vivo para casamentos e eventos.">
+<meta property="og:url" content="https://bruno.rkperformance.com.br/">
+<meta property="og:image" content="https://bruno.rkperformance.com.br/media/fotos/cta-sparklers.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,700;0,800;0,900;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap">
+<style>
+  :root {
+    --noite: #0B0A08;
+    --carvao: #161310;
+    --grafite: #26221D;
+    --areia: #F2EDE2;
+    --areia-2: #E9E0CD;
+    --dourado: #C9A24B;
+    --dourado-claro: #E7CE93;
+    --ink-soft: #6E675B;
+    --sans: "Archivo", "Segoe UI", system-ui, sans-serif;
+    --serif: "Newsreader", Georgia, serif;
+    --gutter: clamp(20px, 5vw, 80px);
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--noite);
+    color: var(--areia);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 1.03rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--dourado); color: var(--noite); }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--dourado); outline-offset: 4px; }
+  img, video { max-width: 100%; display: block; }
+
+  /* textura de filme sobre a página inteira */
+  .grain {
+    position: fixed; inset: -50%; z-index: 60; pointer-events: none;
+    width: 200%; height: 200%;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.45  0 0 0 0 0.4  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity: 0.14; mix-blend-mode: soft-light;
+    animation: grain 1.4s steps(4) infinite;
+  }
+  @keyframes grain {
+    0% { transform: translate(0, 0); } 25% { transform: translate(-2%, -3%); }
+    50% { transform: translate(3%, 1%); } 75% { transform: translate(-1%, 3%); } 100% { transform: translate(0, 0); }
+  }
+
+  .eyebrow {
+    font-weight: 500; font-size: 0.68rem;
+    letter-spacing: 0.34em; text-transform: uppercase; color: var(--dourado);
+  }
+  /* display: caixa-alta pesada; a palavra em <em> vira serifa itálica dourada — a assinatura tipográfica */
+  h1, h2, h3 { font-family: var(--sans); font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.02; text-wrap: balance; }
+  h2 { font-size: clamp(2.4rem, 5.6vw, 4.8rem); }
+  h1 em, h2 em, h3 em, .em {
+    font-family: var(--serif); font-style: italic; font-weight: 300; text-transform: lowercase;
+    letter-spacing: 0; color: var(--dourado-claro); font-size: 1.12em; line-height: 1;
+  }
+  .light h1 em, .light h2 em, .light h3 em, .light .em { color: #A07E2F; }
+  p { text-wrap: pretty; }
+  .wrap { max-width: 1320px; margin-inline: auto; padding-inline: var(--gutter); }
+  section { position: relative; }
+  .light { background: var(--areia); color: var(--grafite); }
+  .light .eyebrow { color: #A07E2F; }
+
+  .to-light { height: 150px; background: linear-gradient(to bottom, var(--noite), var(--areia)); }
+  .to-dark  { height: 150px; background: linear-gradient(to bottom, var(--areia), var(--noite)); }
+  .to-carvao { height: 140px; background: linear-gradient(to bottom, var(--areia), var(--carvao)); }
+  .carvao-to-light { height: 140px; background: linear-gradient(to bottom, var(--carvao), var(--areia)); }
+
+  /* botão-cápsula */
+  .btn {
+    display: inline-flex; align-items: center; gap: 18px;
+    text-decoration: none; font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: 1.3rem; letter-spacing: 0.01em; line-height: 1;
+    padding: 8px 8px 8px 30px; border: 1px solid rgba(201, 162, 75, 0.75); border-radius: 999px;
+    position: relative; isolation: isolate; color: var(--areia);
+    transition: color 400ms var(--ease), border-color 400ms var(--ease);
+  }
+  .btn::before {
+    content: ""; position: absolute; inset: -1px; z-index: -1; border-radius: 999px; background: var(--dourado);
+    transform: scaleX(0); transform-origin: right center; transition: transform 520ms var(--ease);
+  }
+  .btn:hover::before { transform: scaleX(1); transform-origin: left center; }
+  .btn:hover { color: var(--noite); border-color: var(--dourado); }
+  .btn .arrow {
+    width: 44px; height: 44px; border-radius: 50%; flex: none;
+    background: var(--dourado); color: var(--noite); display: grid; place-items: center;
+    transition: background-color 400ms var(--ease), color 400ms var(--ease);
+  }
+  .btn .arrow svg { transform: rotate(-45deg); transition: transform 520ms var(--ease); }
+  .btn:hover .arrow { background: var(--noite); color: var(--dourado-claro); }
+  .btn:hover .arrow svg { transform: rotate(0); }
+  .btn-solid { background: var(--dourado); color: var(--noite); border-color: var(--dourado); }
+  .btn-solid .arrow { background: var(--noite); color: var(--dourado-claro); }
+  .btn-solid::before { background: var(--areia); }
+  .btn-solid:hover { color: var(--noite); }
+  .btn-solid:hover .arrow { background: var(--noite); color: var(--areia); }
+  .light .btn { color: var(--grafite); }
+  .light .btn:hover { color: var(--noite); }
+
+  /* botão circular com texto girando */
+  .play-round {
+    position: relative; width: 116px; height: 116px; flex: none; display: grid; place-items: center;
+    color: var(--dourado-claro); text-decoration: none; border-radius: 50%;
+  }
+  .play-round svg.ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 14s linear infinite; }
+  .play-round:hover svg.ring { animation-duration: 6s; }
+  .play-round .ring text { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; fill: currentColor; }
+  .play-round .core { width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(231, 206, 147, 0.6); display: grid; place-items: center; transition: background-color 400ms var(--ease), transform 500ms var(--ease); }
+  .play-round .core svg { margin-left: 3px; }
+  .play-round:hover .core { background: var(--dourado); color: var(--noite); transform: scale(1.08); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* equalizador — motivo sonoro da marca */
+  .bars { display: inline-flex; gap: 3px; align-items: flex-end; height: 14px; }
+  .bars i { width: 2px; background: currentColor; height: 5px; }
+  .bars.live i { animation: eq 640ms ease-in-out infinite alternate; }
+  .bars.live i:nth-child(2) { animation-delay: 110ms; } .bars.live i:nth-child(3) { animation-delay: 220ms; }
+  .bars.live i:nth-child(4) { animation-delay: 330ms; } .bars.live i:nth-child(5) { animation-delay: 440ms; }
+  @keyframes eq { to { transform: scaleY(2.6); } }
+  .bars i { transform-origin: bottom; }
+
+  /* ---------- Navegação ---------- */
+  header {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    padding: 20px var(--gutter);
+    color: var(--areia);
+    transition: background-color 400ms var(--ease), padding 400ms var(--ease), box-shadow 400ms;
+  }
+  header.solid {
+    background: rgba(11, 10, 8, 0.78);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    padding-block: 12px;
+    box-shadow: 0 1px 0 rgba(201, 162, 75, 0.28);
+  }
+  .brand { display: inline-flex; align-items: center; text-decoration: none; }
+  .brand img { height: 46px; width: auto; transition: height 400ms var(--ease); }
+  header.solid .brand img { height: 38px; }
+  nav ul { display: flex; gap: clamp(18px, 3vw, 38px); list-style: none; padding: 0; align-items: center; }
+  nav a {
+    font-size: 0.66rem; letter-spacing: 0.26em; text-transform: uppercase; text-decoration: none; padding-bottom: 5px;
+    background: linear-gradient(var(--dourado), var(--dourado)) left bottom / 0 1px no-repeat;
+    transition: background-size 320ms var(--ease);
+  }
+  nav a:hover { background-size: 100% 1px; }
+  nav a.nav-cta { font-family: var(--serif); font-style: italic; font-size: 1.05rem; letter-spacing: 0.02em; text-transform: none; border: 1px solid rgba(201, 162, 75, 0.75); border-radius: 999px; padding: 9px 20px; background: none; transition: background-color 350ms var(--ease), color 350ms var(--ease); }
+  nav a.nav-cta:hover { background: var(--dourado); color: var(--noite); }
+  .menu-btn { display: none; background: none; border: 0; color: var(--areia); font: inherit; font-size: 0.66rem; letter-spacing: 0.26em; text-transform: uppercase; cursor: pointer; padding: 8px 0; }
+  @media (max-width: 900px) { nav { display: none; } .menu-btn { display: block; } }
+  .menu-full {
+    position: fixed; inset: 0; z-index: 49; background: var(--noite);
+    display: grid; place-content: center; gap: 16px; text-align: center;
+    transform: translateY(-100%); transition: transform 600ms var(--ease);
+  }
+  .menu-full.open { transform: translateY(0); }
+  .menu-full a { font-weight: 800; text-transform: uppercase; font-size: clamp(1.9rem, 8vw, 3rem); text-decoration: none; line-height: 1.25; letter-spacing: -0.01em; }
+  .menu-full a:hover { color: var(--dourado-claro); }
+  .menu-full .eyebrow { margin-bottom: 20px; }
+
+  /* ---------- Intro (só com JS) ---------- */
+  .intro { position: fixed; inset: 0; z-index: 70; background: var(--noite); display: none; place-items: center; }
+  .js .intro { display: grid; animation: intro-out 600ms var(--ease) 1500ms both; }
+  .intro-mark { font-weight: 800; font-size: clamp(1.5rem, 4vw, 2.3rem); letter-spacing: 0.34em; text-transform: uppercase; color: var(--areia); animation: rise 900ms var(--ease) both; }
+  .intro-mark b { color: var(--dourado); font-weight: 800; }
+  .intro-line { width: 0; height: 1px; background: var(--dourado); margin: 22px auto 0; animation: line 1100ms var(--ease) 300ms both; }
+  @keyframes line { to { width: 150px; } }
+  @keyframes intro-out { to { opacity: 0; visibility: hidden; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+  /* ---------- HERO: o painel de LED ---------- */
+  .hero { min-height: 100svh; display: grid; align-items: end; overflow: hidden; background: var(--noite); }
+  .hero-wall { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; background: var(--noite); }
+  .wall-col { position: relative; overflow: hidden; }
+  .wall-col video, .wall-col img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+  .wall-col::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px rgba(201, 162, 75, 0.14); }
+  .hero-wall::after {
+    content: ""; position: absolute; inset: 0; z-index: 2;
+    background:
+      linear-gradient(to top, rgba(11, 10, 8, 0.96) 0%, rgba(11, 10, 8, 0.55) 32%, rgba(11, 10, 8, 0.18) 55%, rgba(11, 10, 8, 0.45) 100%),
+      radial-gradient(ellipse 90% 60% at 50% 105%, rgba(11, 10, 8, 0.85), transparent 70%);
+  }
+  /* varredura de luz — um facho dourado cruza o painel de tempos em tempos */
+  .sweep { position: absolute; inset: -10% -40%; z-index: 3; pointer-events: none; overflow: hidden; }
+  .sweep i { position: absolute; top: -20%; bottom: -20%; left: 0; width: 22%; background: linear-gradient(100deg, transparent, rgba(231, 206, 147, 0.07) 45%, rgba(231, 206, 147, 0.13) 50%, rgba(231, 206, 147, 0.07) 55%, transparent); transform: translateX(-60vw) skewX(-12deg); animation: sweep 9s var(--ease) infinite; }
+  @keyframes sweep { 0%, 55% { transform: translateX(-60vw) skewX(-12deg); } 85%, 100% { transform: translateX(220vw) skewX(-12deg); } }
+  .hero-inner {
+    position: relative; z-index: 4; width: 100%;
+    padding: 150px var(--gutter) 58px;
+    max-width: 1320px; margin-inline: auto;
+    display: grid; gap: 0;
+  }
+  .hero-tag { display: inline-flex; align-items: center; gap: 14px; color: var(--dourado-claro); animation: rise 900ms var(--ease) 1550ms both; }
+  .hero-tag .eyebrow { color: inherit; }
+  .hero h1 { font-size: clamp(3.2rem, 10.5vw, 9rem); line-height: 0.94; margin-top: 22px; max-width: 12ch; animation: rise 1100ms var(--ease) 1700ms both; }
+  .hero h1 .w { display: block; }
+  .hero h1 .w:nth-child(2) { padding-left: 0.5em; }
+  .hero-sub { margin-top: 26px; max-width: 46ch; font-size: 1.07rem; color: rgba(242, 237, 226, 0.85); animation: rise 1100ms var(--ease) 1900ms both; }
+  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px 34px; margin-top: 36px; animation: rise 1100ms var(--ease) 2050ms both; }
+  .hero-proof {
+    margin-top: 38px; padding-top: 20px; border-top: 1px solid rgba(201, 162, 75, 0.35);
+    display: flex; flex-wrap: wrap; gap: 8px 30px; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(242, 237, 226, 0.6); animation: rise 1100ms var(--ease) 2200ms both;
+  }
+  .hero-proof strong { color: var(--dourado-claro); font-weight: 500; }
+  .sound {
+    background: none; border: 1px solid rgba(231, 206, 147, 0.5); border-radius: 999px; color: var(--dourado-claro);
+    font: inherit; font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 9px 16px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 10px; transition: background-color 250ms, color 250ms;
+  }
+  .sound:hover { background: var(--dourado); color: var(--noite); }
+  .sound .bars { height: 10px; }
+  .sound .bars i { height: 4px; }
+  .sound.on .bars i { animation: eq 700ms ease-in-out infinite alternate; }
+  .sound.on .bars i:nth-child(2) { animation-delay: 120ms; } .sound.on .bars i:nth-child(3) { animation-delay: 240ms; }
+  .no-js .hero *, .reduce .hero * { animation: none !important; }
+  @media (max-width: 820px) {
+    .hero-wall { grid-template-columns: 1fr; }
+    .wall-col.lado { display: none; }
+    .hero-inner { padding-top: 120px; padding-bottom: 84px; }
+    .hero h1 { max-width: none; }
+  }
+
+  /* ---------- Letreiro ---------- */
+  .marquee { background: var(--areia); color: var(--grafite); overflow: hidden; padding: 20px 0; border-block: 1px solid rgba(201, 162, 75, 0.45); }
+  .marquee-track { display: flex; gap: 0; width: max-content; will-change: transform; }
+  .marquee-track span { font-family: var(--serif); font-style: italic; font-size: 1.45rem; white-space: nowrap; padding-inline: 26px; }
+  .marquee-track span::after { content: "◆"; color: var(--dourado); font-style: normal; font-size: 0.62rem; margin-left: 52px; vertical-align: middle; }
+
+  /* ---------- Conceito ---------- */
+  .conceito { background: var(--carvao); padding: clamp(100px, 13vw, 180px) 0; overflow: hidden; }
+  .conceito .ghost { position: absolute; left: 50%; top: 30px; transform: translateX(-50%); font-weight: 900; text-transform: uppercase; font-size: clamp(5rem, 19vw, 17rem); line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(201, 162, 75, 0.14); white-space: nowrap; pointer-events: none; user-select: none; }
+  .conceito-head { max-width: 900px; }
+  .conceito-head h2 { margin-top: 20px; font-size: clamp(2.6rem, 6.4vw, 5.6rem); }
+  .conceito-head .lead { margin-top: 26px; font-family: var(--serif); font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 300; line-height: 1.5; color: rgba(242, 237, 226, 0.88); max-width: 56ch; }
+  .pilares { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(26px, 4vw, 60px); margin-top: clamp(50px, 7vw, 90px); }
+  .pilar { padding-top: 22px; border-top: 1px solid rgba(201, 162, 75, 0.4); }
+  .pilar b { display: flex; align-items: baseline; gap: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.95rem; }
+  .pilar b span { font-weight: 400; color: var(--dourado); font-size: 0.8rem; }
+  .pilar p { margin-top: 12px; font-size: 0.97rem; color: rgba(242, 237, 226, 0.68); }
+  .conceito-fecho { margin-top: clamp(40px, 6vw, 70px); font-family: var(--serif); font-style: italic; font-size: clamp(1.4rem, 2.6vw, 2rem); color: var(--dourado-claro); }
+  @media (max-width: 860px) { .pilares { grid-template-columns: 1fr; } }
+
+  /* ---------- Serviços ---------- */
+  .servicos { padding: clamp(90px, 12vw, 160px) 0 0; background: linear-gradient(180deg, var(--areia) 0%, var(--areia-2) 100%); }
+  .servicos-head { max-width: 780px; }
+  .servicos-head p.intro { margin-top: 22px; color: var(--ink-soft); max-width: 56ch; }
+  .serv-list { margin-top: clamp(46px, 6vw, 80px); display: grid; gap: clamp(56px, 8vw, 110px); }
+  .serv { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 80px); align-items: center; }
+  .serv:nth-child(even) .serv-foto { order: 2; }
+  .serv-foto { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
+  .serv-foto img { width: 100%; height: 100%; object-fit: cover; transition: transform 1400ms var(--ease); }
+  .serv:hover .serv-foto img { transform: scale(1.05); }
+  .serv-foto::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(201, 162, 75, 0.7); transform: translate(14px, 14px); pointer-events: none; transition: transform 600ms var(--ease); }
+  .serv:hover .serv-foto::after { transform: translate(8px, 8px); }
+  .serv-copy { display: grid; gap: 16px; align-content: center; }
+  .serv-copy .num { font-weight: 900; font-size: clamp(3rem, 6vw, 5rem); line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(160, 126, 47, 0.65); }
+  .serv-copy h3 { font-size: clamp(1.8rem, 3.6vw, 2.8rem); }
+  .serv-copy .kick { font-family: var(--serif); font-style: italic; font-size: 1.2rem; color: #A07E2F; }
+  .serv-copy p { color: var(--ink-soft); max-width: 52ch; }
+  .serv-cta { margin-top: clamp(60px, 8vw, 100px); display: grid; gap: 20px; justify-items: start; }
+  .serv-cta p { font-family: var(--serif); font-style: italic; font-size: 1.4rem; max-width: 44ch; line-height: 1.4; }
+  .serv-copy ul { list-style: none; margin: 6px 0 0; padding: 14px 0 0; border-top: 1px solid rgba(201, 162, 75, 0.5); display: flex; flex-wrap: wrap; gap: 8px 26px; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: #A07E2F; }
+  .serv-copy ul li::before { content: "◆"; margin-right: 9px; font-size: 0.55rem; color: var(--dourado); }
+  @media (max-width: 860px) { .serv { grid-template-columns: 1fr; } .serv:nth-child(even) .serv-foto { order: 0; } }
+
+  /* faixa corporativo — sangrada, escura */
+  .corp { position: relative; margin-top: clamp(90px, 13vw, 170px); background: var(--carvao); color: var(--areia); }
+  .corp::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 55% 80% at 82% 45%, rgba(201, 162, 75, 0.15), transparent 70%); pointer-events: none; }
+  .corp-inner { position: relative; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(30px, 6vw, 90px); align-items: center; padding-block: clamp(56px, 8vw, 96px) clamp(64px, 9vw, 110px); }
+  .corp-copy { display: grid; gap: 18px; max-width: 52ch; }
+  .corp-copy .eyebrow { color: var(--dourado-claro); }
+  .corp-copy h3 { font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1.02; }
+  .corp-copy p { color: rgba(242, 237, 226, 0.78); }
+  .corp-tags { list-style: none; padding: 14px 0 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; border-top: 1px solid rgba(201, 162, 75, 0.35); font-size: 0.66rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--dourado-claro); }
+  .corp-tags li::before { content: "◆"; margin-right: 10px; font-size: 0.55rem; color: var(--dourado); }
+  .corp-foto { position: relative; justify-self: end; width: min(100%, 380px); aspect-ratio: 3 / 4; margin: calc(-1 * clamp(90px, 13vw, 170px) - 30px) 0 0; overflow: hidden; box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45); }
+  .corp-foto img { width: 100%; height: 100%; object-fit: cover; }
+  .corp-foto::after { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(231, 206, 147, 0.5); pointer-events: none; }
+  @media (max-width: 860px) {
+    .corp-inner { grid-template-columns: 1fr; padding-top: 0; }
+    .corp-foto { order: -1; justify-self: center; width: min(78%, 300px); margin: -60px 0 0; }
+  }
+
+  /* ---------- Momentos (vídeos) ---------- */
+  .filmes { background: var(--carvao); padding: clamp(90px, 12vw, 160px) 0 clamp(80px, 10vw, 140px); overflow: hidden; }
+  .filmes-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 30px; margin-bottom: clamp(40px, 6vw, 70px); }
+  .filmes-head p { max-width: 44ch; color: rgba(242, 237, 226, 0.7); }
+  .strip { display: flex; gap: clamp(18px, 2.5vw, 34px); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); padding: 0 var(--gutter) 30px; scrollbar-width: none; cursor: grab; overscroll-behavior-x: contain; }
+  .strip::-webkit-scrollbar { display: none; }
+  .strip.dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
+  .strip.dragging .card img { transition: none; }
+  .strip-nav { display: flex; align-items: center; gap: 12px; }
+  .strip-btn { width: 54px; height: 54px; border-radius: 50%; border: 1px solid rgba(201, 162, 75, 0.7); background: none; color: var(--dourado-claro); cursor: pointer; display: grid; place-items: center; transition: background-color 350ms var(--ease), color 350ms var(--ease), opacity 300ms; }
+  .strip-btn:hover { background: var(--dourado); color: var(--noite); }
+  .strip-btn[disabled] { opacity: 0.3; cursor: default; background: none; color: var(--dourado-claro); }
+  .strip-foot { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 0 var(--gutter); }
+  .strip-progress { flex: 1; height: 1px; background: rgba(201, 162, 75, 0.3); position: relative; max-width: 420px; }
+  .strip-progress i { position: absolute; left: 0; top: -1px; height: 3px; width: 20%; background: var(--dourado); transition: width 200ms var(--ease), transform 200ms var(--ease); }
+  .card {
+    flex: 0 0 min(78vw, 340px); scroll-snap-align: start; position: relative; aspect-ratio: 9 / 16; overflow: hidden;
+    background: var(--noite); cursor: pointer; border: 0; padding: 0; text-align: left; color: var(--areia); font: inherit;
+  }
+  .card:nth-child(even) { margin-top: 64px; }
+  .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms var(--ease), filter 600ms, opacity 400ms var(--ease); filter: saturate(0.92); }
+  .card:hover img { transform: scale(1.06); filter: saturate(1); }
+  .card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(11, 10, 8, 0.9) 0%, rgba(11, 10, 8, 0.1) 55%, transparent 100%); }
+  .card-play { position: absolute; top: 50%; left: 50%; z-index: 2; width: 72px; height: 72px; margin: -36px 0 0 -36px; border-radius: 50%; border: 1px solid var(--dourado-claro); display: grid; place-items: center; background: rgba(11, 10, 8, 0.3); backdrop-filter: blur(4px); transition: transform 400ms var(--ease), background-color 300ms, opacity 400ms var(--ease); cursor: pointer; padding: 0; color: inherit; }
+  .card:hover .card-play { transform: scale(1.12); background: rgba(201, 162, 75, 0.35); }
+  .card-play svg { margin-left: 4px; }
+  .card-info { position: absolute; z-index: 2; left: 22px; right: 22px; bottom: 22px; display: grid; gap: 6px; }
+  .card-info h3 { font-size: 1.35rem; line-height: 1.12; }
+  .card-info p { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dourado-claro); }
+  .strip-hint { padding: 0 var(--gutter); font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(242, 237, 226, 0.4); }
+  @media (max-width: 860px) {
+    .filmes-head { grid-template-columns: 1fr; align-items: start; }
+    .card:nth-child(even) { margin-top: 0; }
+    .filmes-head .strip-nav { display: none; }
+    .strip-foot .strip-nav { display: flex; }
+  }
+  @media (min-width: 861px) { .strip-foot .strip-nav { display: none; } }
+  .card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 3; background: #000; }
+  .card::after, .card .card-info { transition: opacity 400ms var(--ease); }
+  .card.playing img, .card.playing::after, .card.playing .card-play, .card.playing .card-info { opacity: 0; pointer-events: none; }
+  .card-stop { position: absolute; z-index: 4; top: 14px; right: 14px; display: none; background: rgba(11, 10, 8, 0.65); border: 1px solid rgba(231, 206, 147, 0.6); border-radius: 999px; color: var(--areia); font: inherit; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 8px 14px; cursor: pointer; }
+  .card-stop:hover { background: var(--dourado); color: var(--noite); }
+  .card.playing .card-stop { display: block; }
+
+  /* ---------- Frase cinematográfica ---------- */
+  .banda { position: relative; min-height: 78vh; display: grid; place-items: center; overflow: hidden; background: var(--noite); }
+  .banda img { position: absolute; inset: -12% 0; width: 100%; height: 124%; object-fit: cover; object-position: center 30%; will-change: transform; }
+  .banda::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, var(--carvao) 0%, rgba(11, 10, 8, 0.35) 30%, rgba(11, 10, 8, 0.45) 70%, var(--noite) 100%); }
+  .banda-quote { position: relative; z-index: 2; text-align: center; padding: 120px var(--gutter); max-width: 26ch; }
+  .banda-quote p { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(1.9rem, 4.6vw, 3.6rem); line-height: 1.18; text-transform: none; }
+  .banda-quote small { display: block; margin-top: 26px; font-family: var(--sans); font-style: normal; font-size: 0.66rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dourado-claro); }
+
+  /* ---------- Sobre ---------- */
+  .sobre { background: linear-gradient(180deg, var(--areia) 0%, var(--areia-2) 100%); color: var(--grafite); padding: clamp(90px, 12vw, 160px) 0 clamp(110px, 13vw, 180px); overflow: hidden; }
+  .sobre-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(40px, 7vw, 110px); align-items: center; }
+  .collage { position: relative; }
+  .collage .main { position: relative; width: 82%; aspect-ratio: 3 / 4; overflow: hidden; }
+  .collage .main img { width: 100%; height: 100%; object-fit: cover; }
+  .collage .main::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(201, 162, 75, 0.7); transform: translate(18px, 18px); pointer-events: none; }
+  .collage .second { position: absolute; right: 0; bottom: -12%; width: 52%; aspect-ratio: 4 / 5; overflow: hidden; box-shadow: 0 30px 70px rgba(38, 34, 29, 0.3); }
+  .collage .second img { width: 100%; height: 100%; object-fit: cover; }
+  .collage figcaption { position: absolute; left: 0; bottom: -9%; width: 40%; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); line-height: 1.7; }
+  .sobre-copy { display: grid; gap: 22px; }
+  .sobre-copy h2 { margin-top: 6px; }
+  .sobre-copy .lead { font-family: var(--serif); font-size: 1.45rem; line-height: 1.45; font-weight: 400; }
+  .facts { display: flex; flex-wrap: wrap; gap: 10px 0; margin-top: 10px; padding-top: 22px; border-top: 1px solid rgba(201, 162, 75, 0.5); }
+  .facts div { flex: 1 1 150px; padding-right: 18px; }
+  .facts b { display: block; font-weight: 800; text-transform: uppercase; font-size: 1.4rem; line-height: 1.15; }
+  .facts small { font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
+  @media (max-width: 900px) { .sobre-grid { grid-template-columns: 1fr; } .collage { margin-bottom: 20%; } }
+
+  /* ---------- Depoimentos ---------- */
+  .depo { background: var(--noite); padding: clamp(100px, 13vw, 180px) 0; overflow: hidden; }
+  .depo-bg { position: absolute; inset: 0; opacity: 0.26; }
+  .depo-bg img { width: 100%; height: 100%; object-fit: cover; }
+  .depo::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, var(--noite) 0%, transparent 35%, transparent 65%, var(--noite) 100%); z-index: 1; }
+  .depo .wrap { position: relative; z-index: 2; }
+  .depo-list { display: grid; gap: clamp(50px, 7vw, 90px); margin-top: clamp(40px, 6vw, 70px); }
+  .depo-item { position: relative; max-width: 780px; display: grid; gap: 18px; }
+  .depo-item:nth-child(2), .depo-item:nth-child(4) { margin-left: auto; }
+  .depo-item::before { content: "“"; position: absolute; left: -0.35em; top: -0.55em; font-family: var(--serif); font-size: 9rem; line-height: 1; color: var(--dourado); opacity: 0.4; }
+  .depo-item blockquote { font-family: var(--serif); font-weight: 300; font-style: italic; font-size: clamp(1.4rem, 2.8vw, 2.1rem); line-height: 1.38; }
+  .depo-item figcaption { font-size: 0.66rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--dourado-claro); }
+  .depo-item figcaption span { color: rgba(242, 237, 226, 0.5); }
+  .proof { display: flex; flex-wrap: wrap; gap: 14px 50px; margin-top: clamp(60px, 8vw, 100px); padding-top: 28px; border-top: 1px solid rgba(201, 162, 75, 0.4); }
+  .proof b { display: block; font-weight: 800; font-size: 2.4rem; line-height: 1.05; color: var(--dourado-claro); }
+  .proof small { font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(242, 237, 226, 0.6); }
+
+  /* ---------- Repertório ---------- */
+  .repertorio { background: linear-gradient(180deg, var(--areia) 0%, var(--areia-2) 100%); color: var(--grafite); padding: clamp(90px, 12vw, 160px) 0; overflow: hidden; }
+  .repertorio .ghost { position: absolute; left: 50%; top: 40px; transform: translateX(-50%); font-family: var(--serif); font-style: italic; text-transform: none; font-weight: 300; font-size: clamp(5rem, 20vw, 18rem); line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(160, 126, 47, 0.3); white-space: nowrap; pointer-events: none; user-select: none; }
+  .rep-intro { position: relative; margin-top: 22px; max-width: 58ch; color: var(--ink-soft); }
+  .rep-cols { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(26px, 4vw, 56px); margin-top: clamp(40px, 6vw, 70px); }
+  .rep-col h3 { font-size: 0.66rem; font-weight: 500; letter-spacing: 0.3em; color: #A07E2F; padding-bottom: 14px; border-bottom: 1px solid var(--dourado); margin-bottom: 18px; }
+  .rep-col ul { list-style: none; padding: 0; display: grid; gap: 11px; }
+  .rep-col li { font-family: var(--serif); font-size: 1.25rem; line-height: 1.25; }
+  .rep-col li span { display: block; font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); }
+  .rep-col .rep-uso { margin-top: 16px; font-family: var(--serif); font-style: italic; font-size: 1.02rem; color: var(--ink-soft); }
+  .rep-note { position: relative; margin-top: clamp(40px, 6vw, 70px); max-width: 54ch; font-family: var(--serif); font-size: 1.4rem; font-style: italic; line-height: 1.4; }
+  .rep-note a { color: #A07E2F; text-decoration-color: var(--dourado); text-underline-offset: 5px; }
+  @media (max-width: 980px) { .rep-cols { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .rep-cols { grid-template-columns: 1fr; } }
+
+  /* ---------- FAQ ---------- */
+  .faq { background: var(--areia); color: var(--grafite); padding: clamp(90px, 12vw, 160px) 0; }
+  .faq-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(30px, 6vw, 90px); align-items: start; }
+  .faq-list { border-top: 1px solid var(--dourado); }
+  .faq-list details { border-bottom: 1px solid rgba(201, 162, 75, 0.5); }
+  .faq-list summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 24px 4px; font-family: var(--serif); font-size: 1.35rem; transition: color 250ms; }
+  .faq-list summary:hover { color: #A07E2F; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after { content: "+"; font-family: var(--sans); font-weight: 300; font-size: 1.4rem; color: var(--dourado); transition: transform 300ms var(--ease); }
+  .faq-list details[open] summary::after { transform: rotate(45deg); }
+  .faq-list details p { padding: 0 4px 26px; max-width: 58ch; color: var(--ink-soft); }
+  @media (max-width: 860px) { .faq-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- CTA final ---------- */
+  .cta { background: var(--noite); min-height: 92vh; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); overflow: hidden; }
+  .cta-copy { display: grid; align-content: center; gap: 26px; padding: clamp(80px, 10vw, 140px) var(--gutter); position: relative; z-index: 2; }
+  .cta-copy h2 { font-size: clamp(2.6rem, 6vw, 5.2rem); max-width: 13ch; }
+  .cta-copy p { max-width: 46ch; color: rgba(242, 237, 226, 0.75); }
+  .cta-img { position: relative; }
+  .cta-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+  .cta-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--noite) 0%, rgba(11, 10, 8, 0.2) 35%, transparent 60%), linear-gradient(to top, var(--noite), transparent 30%); }
+  .cta-small { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(242, 237, 226, 0.5); }
+  @media (max-width: 860px) {
+    .cta { grid-template-columns: 1fr; }
+    .cta-img { position: absolute; inset: 0; }
+    .cta-img::after { background: linear-gradient(to top, var(--noite) 30%, rgba(11, 10, 8, 0.55) 100%); }
+    .cta-copy { min-height: 92vh; align-content: end; }
+  }
+
+  /* ---------- Rodapé ---------- */
+  footer { background: var(--noite); border-top: 1px solid rgba(201, 162, 75, 0.3); padding: 60px var(--gutter) 120px; position: relative; overflow: hidden; }
+  .foot-ghost { position: absolute; left: 50%; bottom: -0.22em; transform: translateX(-50%); font-weight: 900; text-transform: uppercase; font-size: clamp(4rem, 16vw, 14rem); line-height: 1; white-space: nowrap; color: rgba(242, 237, 226, 0.04); pointer-events: none; }
+  .foot { position: relative; max-width: 1320px; margin-inline: auto; display: flex; flex-wrap: wrap; gap: 20px 50px; align-items: center; justify-content: space-between; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(242, 237, 226, 0.6); }
+  .foot a { text-decoration: none; padding-bottom: 4px; background: linear-gradient(var(--dourado), var(--dourado)) left bottom / 0 1px no-repeat; transition: background-size 300ms var(--ease); }
+  .foot a:hover { background-size: 100% 1px; color: var(--areia); }
+  .foot .foot-logo img { height: 60px; width: auto; }
+  @media (max-width: 700px) { .foot { justify-content: flex-start; } }
+  .foot-rk { color: rgba(242, 237, 226, 0.35); font-size: 0.6rem; }
+
+  .wa-float { position: fixed; right: 22px; bottom: 22px; z-index: 45; width: 56px; height: 56px; border-radius: 50%; background: rgba(11, 10, 8, 0.85); backdrop-filter: blur(8px); color: var(--areia); display: grid; place-items: center; border: 1px solid rgba(201, 162, 75, 0.55); transition: background-color 250ms, transform 250ms var(--ease); }
+  .wa-float:hover { background: #128C4B; border-color: #128C4B; transform: translateY(-3px); }
+
+  /* revelação no scroll (só com JS) */
+  .js .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1000ms var(--ease), transform 1000ms var(--ease); }
+  .js .reveal.in { opacity: 1; transform: none; }
+  .js .reveal.d1 { transition-delay: 120ms; } .js .reveal.d2 { transition-delay: 240ms; } .js .reveal.d3 { transition-delay: 360ms; }
+
+  @media (max-width: 480px) {
+    .btn { font-size: 1.1rem; gap: 12px; padding-left: 22px; }
+    .btn .arrow { width: 40px; height: 40px; }
+    .play-round { width: 84px; height: 84px; }
+    .play-round .ring text { font-size: 12px; letter-spacing: 0.24em; }
+    .play-round .core { width: 38px; height: 38px; }
+    .play-round .core svg { width: 11px; height: 12px; }
+    .hero h1 { font-size: clamp(2.7rem, 14vw, 4rem); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .grain, .sweep i, .intro, .intro-mark, .intro-line, .bars.live i { animation: none !important; }
+    .js .intro { display: none; }
+    .hero * { animation: none !important; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .card img, .serv-foto img { transition: none; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LocalBusiness", "MusicGroup"],
+      "@id": "https://bruno.rkperformance.com.br/#negocio",
+      "name": "Bruno Daner Sax — DJ e Sax ao Vivo",
+      "alternateName": "Bruno Daner",
+      "description": "DJ e saxofonista ao vivo no mesmo artista. Música para casamentos, eventos corporativos e celebrações — Rio de Janeiro e destination weddings.",
+      "url": "https://bruno.rkperformance.com.br/",
+      "image": "https://bruno.rkperformance.com.br/media/fotos/cta-sparklers.jpg",
+      "logo": "https://bruno.rkperformance.com.br/media/logo-full.png",
+      "telephone": "+55-21-99422-7045",
+      "address": { "@type": "PostalAddress", "addressLocality": "Rio de Janeiro", "addressRegion": "RJ", "addressCountry": "BR" },
+      "sameAs": [
+        "https://www.instagram.com/brunodanersax",
+        "https://www.youtube.com/@BrunoDanerSax",
+        "https://www.casamentos.com.br/musica-de-casamento/bruno-daner-sax--e450884"
+      ],
+      "genre": ["Música para casamento", "DJ para eventos", "Saxofone ao vivo"],
+      "knowsLanguage": "pt-BR",
+      "makesOffer": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "DJ & Sax Experience", "serviceType": "DJ e saxofone ao vivo para festas e casamentos" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cerimônia", "serviceType": "Música ao vivo para cerimônia de casamento — piano, violino e sax" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Live Sax", "serviceType": "Saxofone ao vivo circulando entre os convidados" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Color Drums + CO2", "serviceType": "Tambores de LED e jatos de CO2 sobre o set de DJ e sax" } }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="intro" aria-hidden="true"><div><div class="intro-mark">Bruno Daner <b>Sax</b></div><div class="intro-line"></div></div></div>
+
+<header id="topo">
+  <a class="brand" href="#inicio" aria-label="Bruno Daner Sax — início"><img src="media/logo-header.png" alt="Bruno Daner Sax" width="480" height="270"></a>
+  <nav aria-label="Seções do site">
+    <ul>
+      <li><a href="#experiencia">A experiência</a></li>
+      <li><a href="#servicos">Formatos</a></li>
+      <li><a href="#momentos">Vídeos</a></li>
+      <li><a href="#sobre">O Bruno</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a class="nav-cta" href="https://wa.me/5521994227045?text=Oi%2C%20Bruno%21%20Vi%20seu%20site%20e%20quero%20ver%20sua%20disponibilidade.%0AData%3A%20%0ACidade%2FLocal%3A%20%0ATipo%20de%20evento%3A%20" target="_blank" rel="noopener">Consultar data</a></li>
+    </ul>
+  </nav>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuFull">Menu</button>
+</header>
+<div class="menu-full" id="menuFull">
+  <p class="eyebrow">Bruno Daner — DJ &amp; Sax</p>
+  <a href="#experiencia">A experiência</a>
+  <a href="#servicos">Formatos</a>
+  <a href="#momentos">Vídeos</a>
+  <a href="#sobre">O Bruno</a>
+  <a href="#depoimentos">Depoimentos</a>
+  <a href="#contato">Consultar data</a>
+</div>
+
+<main id="inicio">
+  <!-- ======================= HERO — painel de LED ======================= -->
+  <section class="hero" aria-label="Apresentação">
+    <div class="hero-wall" aria-hidden="true">
+      <div class="wall-col lado"><video autoplay muted loop playsinline preload="auto" poster="media/videos/poster-hero-b.jpg"><source src="media/videos/hero-b.mp4" type="video/mp4"></video></div>
+      <div class="wall-col meio"><video id="heroMeio" autoplay muted loop playsinline preload="auto" poster="media/videos/poster-hero-a.jpg"><source src="media/videos/hero-a.mp4" type="video/mp4"></video></div>
+      <div class="wall-col lado"><video autoplay muted loop playsinline preload="auto" poster="media/videos/poster-hero-c.jpg"><source src="media/videos/hero-c.mp4" type="video/mp4"></video></div>
+    </div>
+    <div class="sweep" aria-hidden="true"><i></i></div>
+    <div class="hero-inner">
+      <div class="hero-tag"><span class="bars live" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="eyebrow">Bruno Daner — DJ &amp; Sax ao vivo · Rio de Janeiro</span></div>
+      <h1><span class="w">Isso não é</span><span class="w">uma <em>festa</em>.</span></h1>
+      <p class="hero-sub">É DJ e sax ao vivo num só artista. Eu leio a pista, conduzo a energia e transformo a sua celebração numa memória que ecoa para sempre.</p>
+      <div class="hero-actions">
+        <a class="btn btn-solid" href="https://wa.me/5521994227045?text=Oi%2C%20Bruno%21%20Vi%20seu%20site%20e%20quero%20ver%20sua%20disponibilidade.%0AData%3A%20%0ACidade%2FLocal%3A%20%0ATipo%20de%20evento%3A%20" target="_blank" rel="noopener"><span>Ver a disponibilidade da minha data</span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        <a class="play-round" href="#momentos" aria-label="Assistir aos vídeos">
+          <svg class="ring" viewBox="0 0 116 116" aria-hidden="true"><defs><path id="ringPath" d="M58,58 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs><text><textPath href="#ringPath">assista com som · assista com som ·</textPath></text></svg>
+          <span class="core" aria-hidden="true"><svg width="14" height="16" viewBox="0 0 14 16" fill="currentColor"><path d="M0 0L14 8L0 16V0Z"/></svg></span>
+        </a>
+        <button class="sound" id="soundBtn" type="button" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span>Ouvir a pista</span></button>
+      </div>
+      <p class="hero-proof"><span><strong>5.0</strong> no casamentos.com.br · <strong>100%</strong> recomendam</span><span><strong>Casamentos Awards 2026</strong> · Música · RJ</span><span>Respondo em até <strong>24h</strong> · consulta gratuita</span></p>
+    </div>
+  </section>
+
+  <!-- ======================= LETREIRO ======================= -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>DJ &amp; Sax Experience</span><span>Curadoria musical</span><span>Leitura de pista</span><span>Casamentos</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Cerimônia ao vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba e pagode</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span>
+      <span>DJ &amp; Sax Experience</span><span>Curadoria musical</span><span>Leitura de pista</span><span>Casamentos</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Cerimônia ao vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba e pagode</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span>
+    </div>
+  </div>
+
+  <!-- ======================= CONCEITO ======================= -->
+  <section id="experiencia" class="conceito" aria-label="A experiência DJ e Sax">
+    <span class="ghost" aria-hidden="true">DJ·SAX</span>
+    <div class="wrap conceito-head">
+      <p class="eyebrow reveal">A experiência</p>
+      <h2 class="reveal d1">Duas linguagens. Uma <em>experiência</em>.</h2>
+      <p class="lead reveal d2">Eu não apenas seleciono músicas ou toco sax. Eu construo a atmosfera da celebração.</p>
+    </div>
+    <div class="wrap pilares">
+      <div class="pilar reveal">
+        <b><span>01</span> Nas mesmas mãos</b>
+        <p>Você já viu saxofonista tocando por cima de playlist. O que eu faço é diferente: eu mixo e toco sax ao vivo ao mesmo tempo — a liberdade e a energia do DJ combinadas à presença, à improvisação e à personalidade do sax.</p>
+      </div>
+      <div class="pilar reveal d1">
+        <b><span>02</span> Curadoria e leitura</b>
+        <p>O trabalho começa antes: eu escuto a sua história e desenho um repertório com escolhas que fogem do previsível. Na pista, entra o que não dá para programar — perceber o ambiente, entender os convidados e conduzir a energia. Subir quando a pista pede, respirar quando o momento merece.</p>
+      </div>
+      <div class="pilar reveal d2">
+        <b><span>03</span> Um só contato</b>
+        <p>Um único profissional à frente da experiência, do primeiro acorde ao último momento da pista. Sem telefone sem fio entre banda, DJ e cerimonialista.</p>
+      </div>
+    </div>
+    <div class="wrap"><p class="conceito-fecho reveal">Tudo conectado. Nada por acaso.</p></div>
+  </section>
+
+  <div class="carvao-to-light" aria-hidden="true"></div>
+
+  <!-- ======================= SERVIÇOS ======================= -->
+  <section id="servicos" class="servicos light" aria-label="Formatos de show">
+    <div class="wrap servicos-head">
+      <p class="eyebrow reveal">Formatos</p>
+      <h2 class="reveal d1">Quatro <em>atos</em>.</h2>
+      <p class="intro reveal d2">Quatro formatos que se combinam para cobrir o seu evento inteiro — do "sim" ao último drop, com um único contato para tudo.</p>
+    </div>
+    <div class="wrap serv-list">
+      <article class="serv reveal">
+        <figure class="serv-foto"><img src="media/fotos/serv-djsax.jpg" alt="Bruno Daner de fones tocando saxofone sobre o mixer Pioneer DJ em festa ao ar livre" width="1080" height="1350" loading="lazy"></figure>
+        <div class="serv-copy">
+          <span class="num" aria-hidden="true">01</span>
+          <h3>DJ &amp; Sax <em>Experience</em></h3>
+          <p class="kick">Para quem tem medo de pista vazia.</p>
+          <p>A união entre o DJ e o sax ao vivo, com a minha assinatura: enquanto o set segura o groove, o sax responde à pista em tempo real, e cada evento recebe uma identidade musical própria. Mais do que tocar — criar a experiência certa para cada momento.</p>
+          <ul><li>O carro-chefe</li><li>Festa</li><li>Pista</li></ul>
+        </div>
+      </article>
+      <article class="serv reveal">
+        <figure class="serv-foto"><img src="media/fotos/serv-cerimonia.jpg" alt="Formação de cerimônia na igreja com violinista, saxofonista, cantora e tecladista" width="1536" height="1713" loading="lazy"></figure>
+        <div class="serv-copy">
+          <span class="num" aria-hidden="true">02</span>
+          <h3>Cerimônia</h3>
+          <p class="kick">Para quem não abre mão da emoção do "sim".</p>
+          <p>A delicadeza do piano, a emoção do violino e a presença marcante do saxofone ao vivo, com músicos e cantores conduzindo o momento mais importante do dia. Não é apenas música para a cerimônia. É a música da sua história. E, se eu sigo com você para a festa, a transição acontece sem quebra — a mesma linguagem musical, mudando de temperatura junto com o seu dia.</p>
+          <ul><li>Piano</li><li>Violino</li><li>Sax</li><li>Voz</li></ul>
+        </div>
+      </article>
+      <article class="serv reveal">
+        <figure class="serv-foto"><img src="media/fotos/serv-livesax.jpg" alt="Bruno Daner de perfil tocando saxofone entre convidados" width="1080" height="1350" loading="lazy"></figure>
+        <div class="serv-copy">
+          <span class="num" aria-hidden="true">03</span>
+          <h3>Live Sax</h3>
+          <p class="kick">Para quem quer os convidados dentro da festa, não assistindo a ela.</p>
+          <p>O sax sai do palco e circula entre as mesas e a pista, adicionando improviso, energia e interação à experiência. Faça o seu convidado querer fazer parte desse momento.</p>
+          <ul><li>Entre os convidados</li><li>Coquetel</li><li>Jantar</li></ul>
+        </div>
+      </article>
+      <article class="serv reveal">
+        <figure class="serv-foto"><img src="media/fotos/serv-colordrums.jpg" alt="Bruno Daner em contraluz vermelha atrás do set de DJ com o saxofone" width="1080" height="1350" loading="lazy"></figure>
+        <div class="serv-copy">
+          <span class="num" aria-hidden="true">04</span>
+          <h3>Color Drums <em>+ CO₂</em></h3>
+          <p class="kick">Para quem quer que o fim da festa seja o ponto alto.</p>
+          <p>Tambores de LED tocados sobre o set de DJ e sax, combinados com jatos de CO₂: cada batida vira um espetáculo visual e a energia sobe nos momentos certos. Um momento de alta intensidade para a sua pista — na hora exata em que outras festas começam a esvaziar.</p>
+          <ul><li>Tambores de LED</li><li>Jatos de CO₂</li><li>Ponto alto</li></ul>
+        </div>
+      </article>
+    </div>
+    <div class="wrap serv-cta reveal" style="padding-bottom: clamp(80px, 10vw, 130px)">
+      <p>Não sabe qual formato combina com o seu evento? Me chama que eu monto essa curadoria com você.</p>
+      <a class="btn" href="https://wa.me/5521994227045?text=Oi%2C%20Bruno%21%20Vi%20seu%20site%20e%20quero%20ver%20sua%20disponibilidade.%0AData%3A%20%0ACidade%2FLocal%3A%20%0ATipo%20de%20evento%3A%20" target="_blank" rel="noopener"><span>Montar a curadoria do meu evento</span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
+    <!-- corporativo: faixa sangrada -->
+    <div class="corp">
+      <div class="wrap corp-inner">
+        <div class="corp-copy reveal">
+          <p class="eyebrow">Também para empresas</p>
+          <h3>A mesma leitura, em versão <em>executiva</em>.</h3>
+          <p>Festas e eventos corporativos de alto nível, bares, clubs e rooftops sofisticados, sunsets e celebrações exclusivas: a DJ &amp; Sax Experience adapta repertório e energia ao seu público — do jazz do coquetel à eletrônica com sax ao vivo.</p>
+          <ul class="corp-tags"><li>Corporativo</li><li>Rooftops &amp; sunsets</li><li>Celebrações exclusivas</li></ul>
+        </div>
+        <figure class="corp-foto reveal d1" data-parallax="-0.05"><img src="media/fotos/corporativo.jpg" alt="Bruno Daner tocando saxofone entre convidados que brindam em evento corporativo" width="861" height="1293" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= MOMENTOS (vídeos) ======================= -->
+  <section id="momentos" class="filmes" aria-label="Vídeos de eventos reais">
+    <div class="wrap filmes-head">
+      <div>
+        <p class="eyebrow reveal">Assista com som</p>
+        <h2 class="reveal d1">Cenas <em>reais</em>.</h2>
+      </div>
+      <div class="reveal d2">
+        <p>Nada aqui é ensaio ou banco de imagem — é o que os seus convidados vão viver. Toque num vídeo e ouça com som. Tem mais no <a href="https://www.youtube.com/@BrunoDanerSax" target="_blank" rel="noopener" style="color: var(--dourado-claro)">YouTube</a>.</p>
+        <div class="strip-nav" style="margin-top: 22px">
+          <button class="strip-btn" type="button" data-dir="-1" aria-label="Vídeo anterior"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M15 9H3M8 4L3 9l5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="strip-btn" type="button" data-dir="1" aria-label="Próximo vídeo"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="strip" id="strip">
+      <article class="card reveal" data-video="media/videos/v-festa.mp4" data-title="Contra o telão — set, sax e LED">
+        <img src="media/videos/poster-festa.jpg" alt="" width="720" height="1280" loading="lazy">
+        <button class="card-play" type="button" aria-label="Assistir: Contra o telão"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button>
+        <button class="card-stop" type="button">Fechar</button>
+        <div class="card-info"><h3>Contra o telão</h3><p>Set, sax e LED · estética de festival</p></div>
+      </article>
+      <article class="card reveal d1" data-video="media/videos/v-pista.mp4" data-title="A pista responde">
+        <img src="media/videos/poster-hero-b.jpg" alt="" width="720" height="1280" loading="lazy">
+        <button class="card-play" type="button" aria-label="Assistir: A pista responde"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button>
+        <button class="card-stop" type="button">Fechar</button>
+        <div class="card-info"><h3>A pista responde</h3><p>Casamento · a festa termina lotada</p></div>
+      </article>
+      <article class="card reveal d2" data-video="media/videos/v-depoimento.mp4" data-title="Na voz deles — depoimento dos noivos">
+        <img src="media/videos/poster-depoimento.jpg" alt="" width="720" height="1280" loading="lazy">
+        <button class="card-play" type="button" aria-label="Assistir: Na voz deles"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button>
+        <button class="card-stop" type="button">Fechar</button>
+        <div class="card-info"><h3>Na voz deles</h3><p>Noivos contam como foi · com um susto no começo</p></div>
+      </article>
+      <article class="card reveal d3" data-video="media/videos/v-bw.mp4" data-title="Preto e branco — salão de lustres">
+        <img src="media/videos/poster-hero-c.jpg" alt="" width="720" height="1280" loading="lazy">
+        <button class="card-play" type="button" aria-label="Assistir: Preto e branco"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button>
+        <button class="card-stop" type="button">Fechar</button>
+        <div class="card-info"><h3>Preto e branco</h3><p>Salão de lustres · sax na multidão</p></div>
+      </article>
+      <article class="card reveal d3" data-video="media/videos/v-cerimonia.mp4" data-title="Cerimônia no jardim">
+        <img src="media/videos/poster-cerimonia.jpg" alt="" width="720" height="960" loading="lazy">
+        <button class="card-play" type="button" aria-label="Assistir: Cerimônia no jardim"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button>
+        <button class="card-stop" type="button">Fechar</button>
+        <div class="card-info"><h3>Cerimônia no jardim</h3><p>Piano e violino entre arcos e flores</p></div>
+      </article>
+      <article class="card reveal d3" data-video="media/videos/v-amor.mp4" data-title="Ah, o amor">
+        <img src="media/videos/poster-amor.jpg" alt="" width="720" height="1280" loading="lazy">
+        <button class="card-play" type="button" aria-label="Assistir: Ah, o amor"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button>
+        <button class="card-stop" type="button">Fechar</button>
+        <div class="card-info"><h3>Ah, o amor</h3><p>O mundo para · só o amor continua tocando</p></div>
+      </article>
+      <article class="card reveal d3" data-video="media/videos/v-energia.mp4" data-title="Essa energia">
+        <img src="media/videos/poster-energia.jpg" alt="" width="720" height="1280" loading="lazy">
+        <button class="card-play" type="button" aria-label="Assistir: Essa energia"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button>
+        <button class="card-stop" type="button">Fechar</button>
+        <div class="card-info"><h3>Essa energia</h3><p>Festa ao ar livre · noiva na pista</p></div>
+      </article>
+      <article class="card reveal d3" data-video="media/videos/v-estudio.mp4" data-title="No estúdio — Overjoyed">
+        <img src="media/videos/poster-estudio.jpg" alt="" width="720" height="1280" loading="lazy">
+        <button class="card-play" type="button" aria-label="Assistir: No estúdio"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button>
+        <button class="card-stop" type="button">Fechar</button>
+        <div class="card-info"><h3>No estúdio</h3><p>Overjoyed · Stevie Wonder</p></div>
+      </article>
+      <article class="card reveal d3" data-video="media/videos/v-noite.mp4" data-title="Mais uma noite — o Bruno conta como constrói a experiência">
+        <img src="media/videos/poster-noite.jpg" alt="" width="720" height="1280" loading="lazy">
+        <button class="card-play" type="button" aria-label="Assistir: Mais uma noite"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button>
+        <button class="card-stop" type="button">Fechar</button>
+        <div class="card-info"><h3>Mais uma noite</h3><p>O Bruno conta como constrói a experiência</p></div>
+      </article>
+    </div>
+    <div class="strip-foot">
+      <div class="strip-progress" aria-hidden="true"><i id="stripBar"></i></div>
+      <div class="strip-nav">
+        <button class="strip-btn" type="button" data-dir="-1" aria-label="Vídeo anterior"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M15 9H3M8 4L3 9l5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="strip-btn" type="button" data-dir="1" aria-label="Próximo vídeo"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <p class="strip-hint" style="padding: 0">Arraste ou use as setas</p>
+    </div>
+  </section>
+
+  <!-- ======================= FRASE ======================= -->
+  <section class="banda" aria-label="Frase do Bruno">
+    <img src="media/fotos/pista-pb.jpg" alt="" width="1270" height="2037" loading="lazy" data-parallax="0.12">
+    <div class="banda-quote reveal">
+      <p>A música acontece, a pista responde e o casamento ganha uma atmosfera que fica na memória.</p>
+      <small>— Bruno Daner</small>
+    </div>
+  </section>
+
+  <div class="to-light" aria-hidden="true"></div>
+
+  <!-- ======================= SOBRE ======================= -->
+  <section id="sobre" class="sobre light" aria-label="Sobre o Bruno Daner">
+    <div class="wrap sobre-grid">
+      <figure class="collage reveal">
+        <div class="main" data-parallax="-0.06"><img src="media/fotos/sobre-pioneer.jpg" alt="Bruno Daner de blazer claro atrás do mixer de DJ, com o saxofone pendurado" width="1350" height="2025" loading="lazy"></div>
+        <div class="second" data-parallax="0.08"><img src="media/fotos/sobre-bw.jpg" alt="Bruno Daner em preto e branco tocando saxofone sobre o set de DJ" width="1080" height="1350" loading="lazy"></div>
+        <figcaption>DJ &amp; sax — no mesmo artista</figcaption>
+      </figure>
+      <div class="sobre-copy">
+        <p class="eyebrow reveal">O artista</p>
+        <h2 class="reveal d1">Do pagode ao <em>mundo</em>.</h2>
+        <p class="lead reveal d2">Eu sou Bruno Daner, saxofonista e DJ, do Rio de Janeiro.</p>
+        <p class="reveal d2">Minha trajetória como saxofonista me ensinou a entender a música, o momento e, principalmente, as pessoas. "Do pagode ao mundo": foi assim que o meu caminho se desenhou — e essa escola me levou a centenas de celebrações: casamentos, cerimônias, eventos corporativos e destination weddings.</p>
+        <p class="reveal d2">Foi nesse caminho que nasceu a DJ &amp; Sax Experience — a união entre o DJ e o sax ao vivo, com a minha assinatura. Ao meu lado, um produtor e músicos parceiros de violino, piano e voz cuidam de cada formação, da igreja à pista.</p>
+        <p class="reveal d2">Minha música não é só som; é a alma da sua festa, transformando cada instante em uma memória que você e seus convidados vão carregar para sempre.</p>
+        <div class="facts reveal d3">
+          <div><b>DJ + Sax</b><small>num só artista</small></div>
+          <div><b>5.0</b><small>casamentos.com.br · 100% recomendam</small></div>
+          <div><b>Awards 2026</b><small>Casamentos Awards · Música · RJ</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="to-dark" aria-hidden="true"></div>
+
+  <!-- ======================= DEPOIMENTOS ======================= -->
+  <section id="depoimentos" class="depo" aria-label="Depoimentos">
+    <div class="depo-bg" aria-hidden="true"><img src="media/fotos/g-brinde-bw.jpg" alt="" loading="lazy"></div>
+    <div class="wrap">
+      <p class="eyebrow reveal">Depoimentos</p>
+      <h2 class="reveal d1">A palavra de quem <em>viveu</em>.</h2>
+      <div class="depo-list">
+        <figure class="depo-item reveal"><blockquote>O Bruno foi absolutamente sensacional! ... Assim que começou a performance, a pista não parava de encher. Depois da festa, só recebemos elogios e uma lista enorme de convidados pedindo o contato dele. Se pudéssemos recomendar, recomendaríamos um milhão de vezes!</blockquote><figcaption>Fernanda <span>— noiva · casamentos.com.br</span></figcaption></figure>
+        <figure class="depo-item reveal"><blockquote>Nós queríamos criar um ambiente mais intimista, aconchegante e elegante… e você conseguiu entregar exatamente isso, de uma forma leve, sofisticada e simplesmente encantadora. ... Você não apenas se apresentou — você criou uma experiência.</blockquote><figcaption>Mariana <span>— noiva · casamentos.com.br</span></figcaption></figure>
+        <figure class="depo-item reveal"><blockquote>Todo o processo - desde a contratação até o dia da festa - o Bruno e o seu produtor foram profissionais excepcionais.</blockquote><figcaption>Cecilia <span>— noiva · casamentos.com.br</span></figcaption></figure>
+        <figure class="depo-item reveal"><blockquote>Tivemos os músicos e cantores na cerimônia da igreja, deixando tudo ainda mais emocionante e especial. E, no final da festa, o sax com tambor foi simplesmente sensacional! ... Fechamos nosso casamento com chave de ouro!</blockquote><figcaption>Natalia <span>— noiva · casamentos.com.br</span></figcaption></figure>
+      </div>
+      <div class="proof reveal">
+        <div><b>5.0</b><small>no casamentos.com.br</small></div>
+        <div><b>100%</b><small>dos casais recomendam</small></div>
+        <div><b>Awards 2026</b><small>Casamentos Awards · Música · RJ</small></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="to-light" aria-hidden="true"></div>
+
+  <!-- ======================= REPERTÓRIO ======================= -->
+  <section id="repertorio" class="repertorio light" aria-label="Repertório">
+    <span class="ghost" aria-hidden="true">repertório</span>
+    <div class="wrap">
+      <p class="eyebrow reveal">Repertório</p>
+      <h2 class="reveal d1">Curadoria, não <em>playlist</em>.</h2>
+      <p class="rep-intro reveal d2">Repertório selecionado de acordo com a personalidade do evento — o seu, não o da última festa que eu toquei. De "Titanium" a Tim Maia, de Daft Punk a Roberto Carlos: a música certa, no momento certo, para os seus convidados.</p>
+      <div class="rep-cols">
+        <div class="rep-col reveal"><h3>Jazz &amp; Blues</h3><ul><li>Standards de jazz</li><li>Smooth jazz</li><li>Blues clássico</li><li>Bossa nova</li></ul><p class="rep-uso">Para o coquetel, o jantar e os momentos de elegância.</p></div>
+        <div class="rep-col reveal d1"><h3>Eletrônico &amp; House</h3><ul><li>Afro house</li><li>Deep house</li><li>Eletrônica <span>com sax ao vivo</span></li></ul><p class="rep-uso">Para quando a pista assume o comando.</p></div>
+        <div class="rep-col reveal d2"><h3>Pop &amp; Rock</h3><ul><li>Hits dos anos 80 e 90</li><li>Pop internacional</li><li>Rock leve</li></ul><p class="rep-uso">Para todo mundo cantar junto.</p></div>
+        <div class="rep-col reveal d3"><h3>Música Brasileira</h3><ul><li>Samba</li><li>Pagode</li><li>MPB</li></ul><p class="rep-uso">Para a festa ter a nossa cara.</p></div>
+      </div>
+      <p class="rep-note reveal">"Todos dançaram dos mais velhos aos mais novos, todos se comunicaram e foi um showzaço!" — <a href="https://www.casamentos.com.br/musica-de-casamento/bruno-daner-sax--e450884" target="_blank" rel="noopener">Giulia, no casamentos.com.br</a></p>
+    </div>
+  </section>
+
+  <!-- ======================= FAQ ======================= -->
+  <section class="faq light" aria-label="Perguntas frequentes">
+    <div class="wrap faq-grid">
+      <div>
+        <p class="eyebrow reveal">Perguntas frequentes</p>
+        <h2 class="reveal d1">Antes de <em>fechar</em>.</h2>
+      </div>
+      <div class="faq-list reveal d1">
+        <details><summary>Como funciona a DJ &amp; Sax Experience na prática?</summary><p>Sou um único profissional que mixa e toca sax ao vivo ao mesmo tempo. Antes do evento, montamos juntos a curadoria musical; no dia, eu conduzo a energia da pista em tempo real, lendo o ambiente e os convidados. Você não precisa montar a música do seu evento — eu penso nela por você.</p></details>
+        <details><summary>Você faz a cerimônia E a festa?</summary><p>Faço. Na cerimônia, entro com piano, violino, sax e voz, com músicos e cantores parceiros; na festa, assumo a pista com a DJ &amp; Sax Experience. A vantagem é ter uma única direção musical do "sim" ao último drop — e um único contato para tudo.</p></details>
+        <details><summary>Meu evento é intimista. Funciona mesmo assim?</summary><p>Funciona. O Live Sax circulando entre os convidados cria um clima elegante e envolvente sem precisar de pista cheia. Já criei ambientes intimistas e sofisticados exatamente assim — a experiência se adapta ao tamanho e ao espírito do seu evento.</p></details>
+        <details><summary>Posso pedir músicas específicas?</summary><p>Pode — e deve. A curadoria parte da personalidade do seu evento, e músicas que têm significado para vocês entram nesse desenho — do jazz ao pagode.</p></details>
+        <details><summary>E o equipamento? O som vai funcionar no meu espaço?</summary><p>O setup varia conforme o formato e a estrutura do local — por isso eu levanto essas informações antes e detalho na proposta exatamente o que eu levo e o que preciso do espaço. Nada de surpresa técnica no dia.</p></details>
+        <details><summary>Você toca fora do Rio? Faz destination wedding?</summary><p>Minha base é o Rio de Janeiro e destination weddings fazem parte do meu trabalho. Deslocamento e logística variam conforme o destino — entram detalhados na proposta.</p></details>
+        <details><summary>Quanto tempo dura a apresentação?</summary><p>Depende do formato e dos momentos que a gente escolher cobrir: cerimônia, coquetel, pista, encerramento. Isso é definido na curadoria do seu evento — me chama que eu monto a proposta para o seu roteiro.</p></details>
+        <details><summary>Quanto custa?</summary><p>Os formatos partem de R$ 2.500, e cada proposta é montada sob medida conforme formato, formação e local. Na conversa eu entendo o seu evento e te devolvo uma proposta clara.</p></details>
+        <details><summary>Como eu reservo a minha data?</summary><p>Me chama no WhatsApp com a data, a cidade e o tipo de evento. Eu respondo em até 24h, confirmo a disponibilidade e a gente agenda uma consulta gratuita para desenhar a experiência.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CTA ======================= -->
+  <section id="contato" class="cta" aria-label="Contato">
+    <div class="cta-copy">
+      <p class="eyebrow reveal">Consultar disponibilidade</p>
+      <h2 class="reveal d1">Me conta a sua <em>data</em>.</h2>
+      <p class="reveal d2">Me manda a data, a cidade e o tipo de evento. Eu respondo em até 24h com a disponibilidade e o próximo passo.</p>
+      <div class="reveal d3"><a class="btn btn-solid" href="https://wa.me/5521994227045?text=Oi%2C%20Bruno%21%20Vi%20seu%20site%20e%20quero%20ver%20sua%20disponibilidade.%0AData%3A%20%0ACidade%2FLocal%3A%20%0ATipo%20de%20evento%3A%20" target="_blank" rel="noopener"><span>Chamar o Bruno no WhatsApp</span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></div>
+      <p class="cta-small reveal d3">Consulta gratuita · Rio de Janeiro · Destination weddings</p>
+    </div>
+    <div class="cta-img" aria-hidden="true"><img src="media/fotos/cta-sparklers.jpg" alt="" width="1600" height="2400" loading="lazy"></div>
+  </section>
+</main>
+
+<footer>
+  <span class="foot-ghost" aria-hidden="true">Bruno Daner</span>
+  <div class="foot">
+    <a class="brand foot-logo" href="#inicio" aria-label="Bruno Daner Sax — início"><img src="media/logo-full.png" alt="Bruno Daner Sax" width="960" height="540"></a>
+    <a href="https://www.instagram.com/brunodanersax" target="_blank" rel="noopener">@brunodanersax</a>
+    <a href="https://www.youtube.com/@BrunoDanerSax" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://www.casamentos.com.br/musica-de-casamento/bruno-daner-sax--e450884" target="_blank" rel="noopener">casamentos.com.br</a>
+    <span>Rio de Janeiro · RJ</span>
+    <span class="foot-rk">Site por RK Performance</span>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/5521994227045?text=Oi%2C%20Bruno%21%20Vi%20seu%20site%20e%20quero%20ver%20sua%20disponibilidade.%0AData%3A%20%0ACidade%2FLocal%3A%20%0ATipo%20de%20evento%3A%20" target="_blank" rel="noopener" aria-label="Falar com o Bruno no WhatsApp">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a9.9 9.9 0 0 0-8.5 15.1L2 22l5-1.4A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.2.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2l-.5-.3-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-2-1.2 7.5 7.5 0 0 1-1.4-1.7c-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5v-.5L9.6 8.2c-.2-.4-.4-.4-.7-.4Z"/></svg>
+</a>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  root.classList.add('js');
+  if (reduce) root.classList.add('reduce');
+
+  // cabeçalho vira vidro depois do hero
+  var header = document.getElementById('topo');
+  var onScroll = function () { header.classList.toggle('solid', window.scrollY > 80); };
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // menu mobile
+  var menuBtn = document.getElementById('menuBtn'), menu = document.getElementById('menuFull');
+  menuBtn.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open); menuBtn.textContent = open ? 'Fechar' : 'Menu';
+  });
+  menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { menu.classList.remove('open'); menuBtn.textContent = 'Menu'; menuBtn.setAttribute('aria-expanded', 'false'); }); });
+
+  // revelação no scroll
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+  // parallax suave (só transform, só desktop, só com movimento permitido)
+  var px = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
+  if (!reduce && window.matchMedia('(min-width: 861px)').matches && px.length) {
+    var ticking = false;
+    var update = function () {
+      var vh = window.innerHeight;
+      px.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) return;
+        var p = (r.top + r.height / 2 - vh / 2) / vh;
+        el.style.transform = 'translate3d(0,' + (p * -100 * parseFloat(el.dataset.parallax)).toFixed(1) + 'px,0)';
+      });
+      ticking = false;
+    };
+    window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive: true });
+    update();
+  }
+
+  // hero: no celular só a coluna do meio toca; as laterais nem carregam
+  var wallVideos = Array.prototype.slice.call(document.querySelectorAll('.hero-wall video'));
+  var heroMeio = document.getElementById('heroMeio');
+  var mqMobile = window.matchMedia('(max-width: 820px)');
+  var aplicarHero = function () {
+    wallVideos.forEach(function (v) {
+      var lateral = v.closest('.wall-col').classList.contains('lado');
+      if (mqMobile.matches && lateral) { v.removeAttribute('autoplay'); v.preload = 'none'; v.pause(); }
+      else if (!playingCard) { v.preload = 'auto'; v.play().catch(function () {}); }
+    });
+  };
+  aplicarHero();
+  if (mqMobile.addEventListener) mqMobile.addEventListener('change', aplicarHero);
+  else if (mqMobile.addListener) mqMobile.addListener(aplicarHero);
+
+  // som do hero: liga o áudio da coluna central
+  var sb = document.getElementById('soundBtn');
+  if (sb && heroMeio) {
+    sb.addEventListener('click', function () {
+      var estavaMudo = heroMeio.muted; heroMeio.muted = !estavaMudo; if (estavaMudo) heroMeio.currentTime = 0;
+      heroMeio.play().catch(function () {});
+      sb.classList.toggle('on', estavaMudo); sb.setAttribute('aria-pressed', estavaMudo);
+      sb.lastElementChild.textContent = estavaMudo ? 'Silenciar' : 'Ouvir a pista';
+    });
+  }
+
+  // iOS em economia de bateria bloqueia autoplay: tenta de novo a cada toque
+  var acordarHero = function () { wallVideos.forEach(function (v) { if (v.paused && v.preload !== 'none' && !playingCard) v.play().catch(function () {}); }); };
+  document.addEventListener('touchstart', acordarHero, { passive: true });
+  document.addEventListener('pointerdown', acordarHero, { passive: true });
+
+  // letreiro via requestAnimationFrame
+  var track = document.querySelector('.marquee-track');
+  if (track) {
+    var x = 0, last = null, speed = 44;
+    var half = function () { return track.scrollWidth / 2; };
+    var tick = function (t) {
+      if (last !== null && !document.hidden) { x -= speed * (t - last) / 1000; if (-x >= half()) x += half(); track.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)'; }
+      last = t; requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  // faixa de vídeos
+  var strip = document.getElementById('strip'), bar = document.getElementById('stripBar');
+  var dragged = false;
+  if (strip) {
+    var step = function () { var c = strip.querySelector('.card'); return c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(strip).columnGap || getComputedStyle(strip).gap || 24) : 340; };
+    var updateBar = function () {
+      var max = strip.scrollWidth - strip.clientWidth; if (max <= 0) return;
+      var ratio = strip.clientWidth / strip.scrollWidth, pos = strip.scrollLeft / max;
+      if (bar) { bar.style.width = (ratio * 100) + '%'; bar.style.transform = 'translateX(' + (pos * (100 / ratio - 100)) + '%)'; }
+      document.querySelectorAll('.strip-btn[data-dir="-1"]').forEach(function (b) { b.disabled = strip.scrollLeft <= 2; });
+      document.querySelectorAll('.strip-btn[data-dir="1"]').forEach(function (b) { b.disabled = strip.scrollLeft >= max - 2; });
+    };
+    strip.addEventListener('scroll', updateBar, { passive: true }); window.addEventListener('resize', updateBar); updateBar();
+    document.querySelectorAll('.strip-btn').forEach(function (b) { b.addEventListener('click', function () { strip.scrollBy({ left: step() * parseInt(b.dataset.dir, 10), behavior: reduce ? 'auto' : 'smooth' }); }); });
+    strip.addEventListener('wheel', function (e) {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+      var max = strip.scrollWidth - strip.clientWidth;
+      var atEdge = (e.deltaY < 0 && strip.scrollLeft <= 0) || (e.deltaY > 0 && strip.scrollLeft >= max - 1);
+      if (atEdge) return;
+      e.preventDefault(); strip.scrollLeft += e.deltaY;
+    }, { passive: false });
+    var sx = 0, sl = 0, down = false;
+    strip.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = true; dragged = false; sx = e.clientX; sl = strip.scrollLeft; });
+    window.addEventListener('pointermove', function (e) { if (!down) return; var dx = e.clientX - sx; if (Math.abs(dx) > 6) { dragged = true; strip.classList.add('dragging'); } if (dragged) strip.scrollLeft = sl - dx; });
+    window.addEventListener('pointerup', function () { if (!down) return; down = false; setTimeout(function () { strip.classList.remove('dragging'); dragged = false; }, 50); });
+    strip.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') strip.scrollBy({ left: step(), behavior: 'smooth' }); if (e.key === 'ArrowLeft') strip.scrollBy({ left: -step(), behavior: 'smooth' }); });
+  }
+
+  // o vídeo toca dentro do próprio card, com som e controles
+  var playingCard = null;
+  var stopCard = function (c) {
+    if (!c) return;
+    var v = c.querySelector('video'); if (v) { v.pause(); v.removeAttribute('src'); v.load(); v.remove(); }
+    c.classList.remove('playing'); if (playingCard === c) playingCard = null;
+    if (!playingCard) aplicarHero();
+  };
+  document.querySelectorAll('.card').forEach(function (c) {
+    var start = function () {
+      if (dragged || c.classList.contains('playing')) return;
+      if (playingCard && playingCard !== c) stopCard(playingCard);
+      wallVideos.forEach(function (v) { v.pause(); });
+      var v = document.createElement('video');
+      v.src = c.dataset.video; v.controls = true; v.playsInline = true; v.preload = 'auto'; v.setAttribute('aria-label', c.dataset.title);
+      v.addEventListener('ended', function () { stopCard(c); });
+      c.appendChild(v); c.classList.add('playing'); playingCard = c;
+      v.play().catch(function () {});
+    };
+    c.addEventListener('click', function (e) { if (e.target.closest('video') || e.target.closest('.card-stop')) return; start(); });
+    c.querySelector('.card-stop').addEventListener('click', function (e) { e.stopPropagation(); stopCard(c); });
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && playingCard) stopCard(playingCard); });
+
+  // pausa vídeos quando a aba some
+  document.addEventListener('visibilitychange', function () { document.querySelectorAll('video').forEach(function (v) { if (document.hidden) v.pause(); else if (v.autoplay && !playingCard) v.play().catch(function () {}); }); });
+})();
+</script>
+</body>
+</html>

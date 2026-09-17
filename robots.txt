@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bruno.rkperformance.com.br/sitemap.xml
