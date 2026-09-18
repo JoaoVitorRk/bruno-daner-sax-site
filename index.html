@@ -877,6 +877,20 @@
   root.classList.add('js');
   if (reduce) root.classList.add('reduce');
 
+  // tela de abertura: some sozinha via CSS, mas se a aba ficar em 2o plano
+  // no meio da animação alguns navegadores pausam e ela trava na tela —
+  // isso força a remoção de verdade, não importa o que aconteça com a aba
+  var introEl = document.querySelector('.intro');
+  if (introEl) {
+    var introStart = Date.now();
+    var esconderIntro = function () { introEl.style.setProperty('display', 'none', 'important'); };
+    setTimeout(esconderIntro, 2300);
+    var reforcarSeVisivel = function () { if (Date.now() - introStart > 2300) esconderIntro(); };
+    document.addEventListener('visibilitychange', reforcarSeVisivel);
+    window.addEventListener('pageshow', reforcarSeVisivel);
+    window.addEventListener('focus', reforcarSeVisivel);
+  }
+
   // cabeçalho vira vidro depois do hero
   var header = document.getElementById('topo');
   var onScroll = function () { header.classList.toggle('solid', window.scrollY > 80); };
