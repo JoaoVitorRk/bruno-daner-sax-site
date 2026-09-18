@@ -8,19 +8,6 @@
      ============================================================ -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<script>
-  /* decide ANTES de renderizar: a tela de abertura só aparece na 1a visita da sessão.
-     Recarregar ou voltar para a página não reexibe (evita o overlay travar sobre o conteúdo). */
-  (function () {
-    try {
-      if (sessionStorage.getItem('bd_intro_vista') === '1') {
-        document.documentElement.className += ' intro-done';
-      } else {
-        sessionStorage.setItem('bd_intro_vista', '1');
-      }
-    } catch (e) {}
-  })();
-</script>
 <title>DJ e Sax ao Vivo para Casamentos e Eventos | Bruno Daner Sax</title>
 <meta name="description" content="Bruno Daner: DJ e saxofonista ao vivo no mesmo artista. Casamentos, eventos corporativos e celebrações em todo o Brasil e no exterior. Consulte sua data.">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -186,16 +173,6 @@
   .menu-full a:hover { color: var(--dourado-claro); }
   .menu-full .eyebrow { margin-bottom: 20px; }
 
-  /* ---------- Intro (só com JS, só na 1a visita da sessão) ---------- */
-  .intro { position: fixed; inset: 0; z-index: 70; background: var(--noite); display: none; place-items: center; }
-  .js .intro { display: grid; animation: intro-out 600ms var(--ease) 1500ms both; }
-  /* já vista nesta sessão (recarregar não reexibe) — esconde antes de qualquer render */
-  html.intro-done .intro { display: none !important; animation: none !important; }
-  .intro-mark { font-weight: 800; font-size: clamp(1.5rem, 4vw, 2.3rem); letter-spacing: 0.34em; text-transform: uppercase; color: var(--areia); animation: rise 900ms var(--ease) both; }
-  .intro-mark b { color: var(--dourado); font-weight: 800; }
-  .intro-line { width: 0; height: 1px; background: var(--dourado); margin: 22px auto 0; animation: line 1100ms var(--ease) 300ms both; }
-  @keyframes line { to { width: 150px; } }
-  @keyframes intro-out { to { opacity: 0; visibility: hidden; } }
   @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 
   /* ---------- HERO: o painel de LED ---------- */
@@ -471,8 +448,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .grain, .sweep i, .intro, .intro-mark, .intro-line, .bars.live i { animation: none !important; }
-    .js .intro { display: none; }
+    .grain, .sweep i, .bars.live i { animation: none !important; }
     .hero * { animation: none !important; }
     .js .reveal { opacity: 1; transform: none; transition: none; }
     .card img, .serv-foto img { transition: none; }
@@ -515,7 +491,6 @@
 <body>
 
 <div class="grain" aria-hidden="true"></div>
-<div class="intro" aria-hidden="true"><div><div class="intro-mark">Bruno Daner <b>Sax</b></div><div class="intro-line"></div></div></div>
 
 <header id="topo">
   <a class="brand" href="#inicio" aria-label="Bruno Daner Sax — início"><img src="media/logo-header.png" alt="Bruno Daner Sax" width="480" height="270"></a>
@@ -891,16 +866,6 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   root.classList.add('js');
   if (reduce) root.classList.add('reduce');
-
-  // tela de abertura: o script do <head> já garante que ela só aparece na 1a
-  // visita da sessão. Aqui é a rede de segurança: força a remoção de verdade
-  // após a animação, caso o navegador pause a animação CSS com a aba em 2o plano.
-  var introEl = document.querySelector('.intro');
-  if (introEl && !root.classList.contains('intro-done')) {
-    var esconderIntro = function () { introEl.style.setProperty('display', 'none', 'important'); };
-    setTimeout(esconderIntro, 2300);
-    window.addEventListener('focus', esconderIntro);
-  }
 
   // cabeçalho vira vidro depois do hero
   var header = document.getElementById('topo');
