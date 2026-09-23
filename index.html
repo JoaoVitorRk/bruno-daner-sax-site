@@ -103,10 +103,12 @@
   .light { background: var(--areia); color: var(--grafite); }
   .light .eyebrow { color: #A07E2F; }
 
-  .to-light { height: 150px; background: linear-gradient(to bottom, var(--noite), var(--areia)); }
-  .to-dark  { height: 150px; background: linear-gradient(to bottom, var(--areia), var(--noite)); }
-  .to-carvao { height: 140px; background: linear-gradient(to bottom, var(--areia), var(--carvao)); }
-  .carvao-to-light { height: 140px; background: linear-gradient(to bottom, var(--carvao), var(--areia)); }
+  /* transições claro↔escuro: começam na cor exata em que a seção anterior termina, curva cosseno
+     (entra e sai devagar, sem "borda" nas pontas) e paradas calculadas em OKLab (degradê perceptualmente uniforme) */
+  .to-light, .to-dark, .carvao-to-light { height: clamp(190px, 24vw, 360px); }
+  .to-light { background: linear-gradient(to bottom, #0B0A08 0%, #0D0C09 6.25%, #12100E 12.5%, #1A1916 18.75%, #262421 25%, #353330 31.25%, #484541 37.5%, #5C5A55 43.75%, #73706A 50%, #8A8780 56.25%, #A29E96 62.5%, #B7B3AB 68.75%, #CBC7BD 75%, #DBD7CD 81.25%, #E8E3D8 87.5%, #EFEAE0 93.75%, #F2EDE2 100%); }
+  .to-dark { background: linear-gradient(to bottom, #E9E0CD 0%, #E7DECB 6.25%, #DFD7C4 12.5%, #D3CBBA 18.75%, #C4BCAC 25%, #B1AA9B 31.25%, #9C9688 37.5%, #858075 43.75%, #6F6A61 50%, #59564D 56.25%, #45423C 62.5%, #34312C 68.75%, #25231F 75%, #1A1815 81.25%, #11100E 87.5%, #0D0C09 93.75%, #0B0A08 100%); }
+  .carvao-to-light { background: linear-gradient(to bottom, #161310 0%, #181512 6.25%, #1D1A16 12.5%, #25221E 18.75%, #312D29 25%, #3F3C37 31.25%, #514D48 37.5%, #65615B 43.75%, #7A766F 50%, #908C85 56.25%, #A6A299 62.5%, #BBB6AD 68.75%, #CDC9BF 75%, #DDD8CE 81.25%, #E8E3D9 87.5%, #F0EBE0 93.75%, #F2EDE2 100%); }
 
   /* botão-cápsula */
   .btn {
@@ -385,7 +387,8 @@
   .collage .main { position: relative; width: 82%; aspect-ratio: 3 / 4; overflow: hidden; }
   .collage .main img { width: 100%; height: 100%; object-fit: cover; }
   .collage .main::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(201, 162, 75, 0.7); transform: translate(18px, 18px); pointer-events: none; }
-  .collage .second { position: absolute; right: 0; bottom: -12%; width: 52%; aspect-ratio: 4 / 5; overflow: hidden; box-shadow: 0 30px 70px rgba(38, 34, 29, 0.3); }
+  /* 40%: a principal é de corpo inteiro e centralizada — a secundária só pode ocupar o fundo vazio à direita dele */
+  .collage .second { position: absolute; right: 0; bottom: -12%; width: 40%; aspect-ratio: 4 / 5; overflow: hidden; box-shadow: 0 30px 70px rgba(38, 34, 29, 0.3); }
   .collage .second img { width: 100%; height: 100%; object-fit: cover; }
   .collage figcaption { position: absolute; left: 0; bottom: -9%; width: 40%; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); line-height: 1.7; }
   .sobre-copy { display: grid; gap: 22px; }
@@ -396,6 +399,28 @@
   .facts b { display: block; font-weight: 800; text-transform: uppercase; font-size: 1.4rem; line-height: 1.15; }
   .facts small { font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
   @media (max-width: 900px) { .sobre-grid { grid-template-columns: 1fr; } .collage { margin-bottom: 20%; } }
+
+  /* ---------- PARCERIA (Constance Zahn) ---------- */
+  .parceria { background: var(--noite); padding: clamp(40px, 6vw, 80px) 0 clamp(70px, 9vw, 120px); overflow: hidden; }
+  .parceria::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 70% at 78% 50%, rgba(201, 162, 75, 0.13), transparent 70%); pointer-events: none; }
+  /* foto à direita: a do "Sobre" (mesma sessão de fotos) fica à esquerda, logo acima */
+  .parceria-grid { position: relative; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(40px, 7vw, 110px); align-items: center; }
+  .parceria-foto { position: relative; isolation: isolate; order: 2; justify-self: end; width: min(100%, 500px); aspect-ratio: 4 / 5; }
+  .parceria-foto img { width: 100%; height: 100%; object-fit: cover; box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55); }
+  .parceria-foto::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(201, 162, 75, 0.7); transform: translate(-18px, 18px); pointer-events: none; z-index: -1; }
+  .parceria-copy { display: grid; gap: 20px; }
+  .parceria-copy h2 em { text-transform: none; }
+  .parceria-copy .lead { font-family: var(--serif); font-style: italic; font-size: clamp(1.35rem, 2.3vw, 1.7rem); line-height: 1.4; color: var(--dourado-claro); }
+  .parceria-copy p { color: rgba(242, 237, 226, 0.78); max-width: 58ch; }
+  .parceria-copy strong { color: var(--areia); font-weight: 500; }
+  .parceria-copy .fecho { font-family: var(--serif); font-size: 1.3rem; line-height: 1.45; color: var(--areia); padding-top: 22px; border-top: 1px solid rgba(201, 162, 75, 0.4); }
+  .parceria-copy .fecho strong { color: var(--dourado-claro); font-weight: 400; font-style: italic; }
+  .parceria-link { justify-self: start; display: inline-flex; align-items: center; gap: 10px; font-size: 0.66rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--dourado-claro); text-decoration: none; padding-bottom: 4px; background: linear-gradient(var(--dourado), var(--dourado)) left bottom / 100% 1px no-repeat; transition: color 250ms; }
+  .parceria-link:hover { color: var(--areia); }
+  @media (max-width: 900px) {
+    .parceria-grid { grid-template-columns: 1fr; }
+    .parceria-foto { order: 0; justify-self: center; width: min(86%, 420px); margin-bottom: 18px; }
+  }
 
   /* ---------- Depoimentos ---------- */
   .depo { background: var(--noite); padding: clamp(100px, 13vw, 180px) 0; overflow: hidden; }
@@ -430,7 +455,7 @@
   @media (max-width: 560px) { .rep-cols { grid-template-columns: 1fr; } }
 
   /* ---------- FAQ ---------- */
-  .faq { background: var(--areia); color: var(--grafite); padding: clamp(90px, 12vw, 160px) 0; }
+  .faq { background: var(--areia-2); color: var(--grafite); padding: clamp(90px, 12vw, 160px) 0; }
   .faq-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(30px, 6vw, 90px); align-items: start; }
   .faq-list { border-top: 1px solid var(--dourado); }
   .faq-list details { border-bottom: 1px solid rgba(201, 162, 75, 0.5); }
@@ -514,6 +539,7 @@
       "image": "https://brunodanersax.com/media/fotos/og-image.jpg",
       "logo": "https://brunodanersax.com/media/logo-full.png",
       "telephone": "+55-21-99422-7045",
+      "email": "brunodanersax@gmail.com",
       "priceRange": "$$$",
       "address": { "@type": "PostalAddress", "addressLocality": "Rio de Janeiro", "addressRegion": "RJ", "addressCountry": "BR" },
       "areaServed": [{ "@type": "Country", "name": "Brasil" }, { "@type": "Place", "name": "Internacional" }],
@@ -521,8 +547,10 @@
         "https://www.instagram.com/brunodanersax",
         "https://www.youtube.com/@BrunoDanerSax",
         "https://www.tiktok.com/@brunodaner",
-        "https://www.casamentos.com.br/musica-de-casamento/bruno-daner-sax--e450884"
+        "https://www.casamentos.com.br/musica-de-casamento/bruno-daner-sax--e450884",
+        "https://www.constancezahn.com/fornecedores/bruno-daner/"
       ],
+      "memberOf": { "@type": "Organization", "name": "Guia de Fornecedores Constance Zahn", "url": "https://www.constancezahn.com/" },
       "genre": ["Música para casamento", "DJ para eventos", "Saxofone ao vivo"],
       "knowsLanguage": ["pt-BR", "en", "es"],
       "founder": { "@id": "https://brunodanersax.com/#bruno" },
@@ -542,7 +570,7 @@
         { "@type": "Review", "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }, "author": { "@type": "Person", "name": "Natalia" }, "reviewBody": "Tivemos os músicos e cantores na cerimônia da igreja, deixando tudo ainda mais emocionante e especial. E, no final da festa, o sax com tambor foi simplesmente sensacional! Fechamos nosso casamento com chave de ouro!" }
       ],
       "makesOffer": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "DJ & Sax Experience", "serviceType": "DJ e saxofone ao vivo para festas e casamentos" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "DJ & Live Sax Experience", "serviceType": "DJ e saxofone ao vivo para festas e casamentos" } },
         { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cerimônia", "serviceType": "Música ao vivo para cerimônia de casamento — piano, violino e sax" } },
         { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Live Sax", "serviceType": "Saxofone ao vivo circulando entre os convidados" } },
         { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Color Drums + CO2", "serviceType": "Tambores de LED e jatos de CO2 sobre o set de DJ e sax" } }
@@ -555,7 +583,7 @@
       "jobTitle": "Saxofonista, DJ e produtor musical",
       "description": "Saxofonista e DJ do Rio de Janeiro, formado pela Escola de Música Villa-Lobos. Une saxofone ao vivo e DJ num único artista para casamentos e eventos no Brasil e no exterior.",
       "url": "https://brunodanersax.com/",
-      "image": "https://brunodanersax.com/media/fotos/og-image.jpg",
+      "image": "https://brunodanersax.com/media/fotos/sobre-bruno.jpg",
       "alumniOf": { "@type": "EducationalOrganization", "name": "Escola de Música Villa-Lobos (EMVL)" },
       "worksFor": { "@id": "https://brunodanersax.com/#negocio" },
       "sameAs": [
@@ -568,8 +596,8 @@
       "@type": "FAQPage",
       "@id": "https://brunodanersax.com/#faq",
       "mainEntity": [
-        { "@type": "Question", "name": "Como funciona a DJ & Sax Experience na prática?", "acceptedAnswer": { "@type": "Answer", "text": "Sou um único profissional que mixa e toca sax ao vivo ao mesmo tempo. Antes do evento, conduzo um processo de curadoria musical com vocês: escuto a história do casal, entendo o estilo da celebração e desenho o show que mais combina com vocês. No dia, conduzo a energia da pista em tempo real, lendo o ambiente e os convidados." } },
-        { "@type": "Question", "name": "Você faz a cerimônia e a festa?", "acceptedAnswer": { "@type": "Answer", "text": "Faço. Na cerimônia, a formação padrão é sax, piano e violino — e, se quiserem algo diferente, monto uma formação personalizada. Na festa, assumo a pista com a DJ & Sax Experience. A vantagem é ter uma única direção musical do sim ao último drop, e um único contato para tudo." } },
+        { "@type": "Question", "name": "Como funciona a DJ & Live Sax Experience na prática?", "acceptedAnswer": { "@type": "Answer", "text": "Sou um único profissional que mixa e toca sax ao vivo ao mesmo tempo. Antes do evento, conduzo um processo de curadoria musical com vocês: escuto a história do casal, entendo o estilo da celebração e desenho o show que mais combina com vocês. No dia, conduzo a energia da pista em tempo real, lendo o ambiente e os convidados." } },
+        { "@type": "Question", "name": "Você faz a cerimônia e a festa?", "acceptedAnswer": { "@type": "Answer", "text": "Faço. Na cerimônia, a formação padrão é sax, piano e violino — e, se quiserem algo diferente, monto uma formação personalizada. Na festa, assumo a pista com a DJ & Live Sax Experience. A vantagem é ter uma única direção musical do sim ao último drop, e um único contato para tudo." } },
         { "@type": "Question", "name": "Meu evento é intimista. Funciona mesmo assim?", "acceptedAnswer": { "@type": "Answer", "text": "Funciona. O Live Sax circulando entre os convidados cria um clima elegante e envolvente sem precisar de pista cheia. A experiência se adapta ao tamanho e ao espírito do seu evento." } },
         { "@type": "Question", "name": "Posso pedir músicas específicas?", "acceptedAnswer": { "@type": "Answer", "text": "Pode e deve. A curadoria parte da personalidade do seu evento, e músicas que têm significado para vocês entram nesse desenho, do clássico ao eletrônico." } },
         { "@type": "Question", "name": "E o equipamento? O som vai funcionar no meu espaço?", "acceptedAnswer": { "@type": "Answer", "text": "O setup varia conforme o formato e a estrutura do local. Levanto essas informações antes e detalho na proposta exatamente o que levo e o que preciso do espaço. Nada de surpresa técnica no dia." } },
@@ -636,15 +664,15 @@
         <button class="sound" id="soundBtn" type="button" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span data-i18n="hero.som">Ouvir com som</span></button>
         <a class="btn" href="#momentos"><span data-i18n="hero.vervideos">Ver os vídeos</span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v11M3 8l5 5 5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
       </div>
-      <p class="hero-proof" data-i18n="hero.proof"><span><strong>5.0</strong> no casamentos.com.br · <strong>100%</strong> recomendam</span><span><strong>Casamentos Awards 2026</strong> · Música · RJ</span><span>Respondo em até <strong>24h</strong> · consulta gratuita</span></p>
+      <p class="hero-proof" data-i18n="hero.proof"><span><strong>5.0</strong> no casamentos.com.br · <strong>100%</strong> recomendam</span><span><strong>Casamentos Awards 2026</strong> · Música · RJ</span><span>Parceiro <strong>Constance Zahn</strong></span><span>Respondo em até <strong>24h</strong> · consulta gratuita</span></p>
     </div>
   </section>
 
   <!-- ======================= LETREIRO ======================= -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track" data-i18n="marquee">
-      <span>DJ &amp; Sax Experience</span><span>Curadoria musical</span><span>Leitura de pista</span><span>Casamentos</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Cerimônia ao vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span>
-      <span>DJ &amp; Sax Experience</span><span>Curadoria musical</span><span>Leitura de pista</span><span>Casamentos</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Cerimônia ao vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span>
+      <span>DJ &amp; Live Sax Experience</span><span>Curadoria musical</span><span>Leitura de pista</span><span>Casamentos</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Cerimônia ao vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span>
+      <span>DJ &amp; Live Sax Experience</span><span>Curadoria musical</span><span>Leitura de pista</span><span>Casamentos</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Cerimônia ao vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span>
     </div>
   </div>
 
@@ -687,7 +715,7 @@
         <figure class="serv-foto"><img src="media/fotos/serv-djsax.jpg" alt="Bruno Daner de fones tocando saxofone sobre o mixer Pioneer DJ em festa ao ar livre" width="1080" height="1350" loading="lazy"></figure>
         <div class="serv-copy">
           <span class="num" aria-hidden="true">01</span>
-          <h3 data-i18n="serv1.h3">DJ &amp; Sax <em>Experience</em></h3>
+          <h3 data-i18n="serv1.h3">DJ &amp; Live Sax <em>Experience</em></h3>
           <p class="kick" data-i18n="serv1.kick">Para quem tem medo de pista vazia.</p>
           <p data-i18n="serv1.p">A união entre o DJ e o sax ao vivo, com a minha assinatura: enquanto o set segura o groove, o sax responde à pista em tempo real, e cada evento recebe uma identidade musical própria. Mais do que tocar — criar a experiência certa para cada momento.</p>
           <ul data-i18n="serv1.tags"><li>O carro-chefe</li><li>Festa</li><li>Pista</li></ul>
@@ -734,7 +762,7 @@
         <div class="corp-copy reveal">
           <p class="eyebrow" data-i18n="corp.eyebrow">Também para empresas</p>
           <h3 data-i18n="corp.h3">A mesma leitura, em versão <em>executiva</em>.</h3>
-          <p data-i18n="corp.p">Festas e eventos corporativos de alto nível, bares, clubs e rooftops sofisticados, sunsets e celebrações exclusivas: a DJ &amp; Sax Experience adapta repertório e energia ao seu público — do jazz do coquetel à eletrônica com sax ao vivo.</p>
+          <p data-i18n="corp.p">Festas e eventos corporativos de alto nível, bares, clubs e rooftops sofisticados, sunsets e celebrações exclusivas: a DJ &amp; Live Sax Experience adapta repertório e energia ao seu público — do jazz do coquetel à eletrônica com sax ao vivo.</p>
           <ul class="corp-tags" data-i18n="corp.tags"><li>Corporativo</li><li>Rooftops &amp; sunsets</li><li>Celebrações exclusivas</li></ul>
         </div>
         <figure class="corp-foto reveal d1" data-parallax="-0.05"><img src="media/fotos/corporativo.jpg" alt="Bruno Daner tocando saxofone entre convidados que brindam em evento corporativo" width="861" height="1293" loading="lazy"></figure>
@@ -850,7 +878,7 @@
   <section id="sobre" class="sobre light" aria-label="Sobre o Bruno Daner">
     <div class="wrap sobre-grid">
       <figure class="collage reveal">
-        <div class="main" data-parallax="-0.06"><img src="media/fotos/sobre-pioneer.jpg" alt="Bruno Daner de blazer claro atrás do mixer de DJ, com o saxofone pendurado" width="1350" height="2025" loading="lazy"></div>
+        <div class="main" data-parallax="-0.06"><img src="media/fotos/sobre-bruno.jpg" alt="Bruno Daner de blazer claro e óculos escuros, braços abertos, com o saxofone iluminado em dourado" width="826" height="1144" loading="lazy"></div>
         <div class="second" data-parallax="0.08"><img src="media/fotos/sobre-eua.jpg" alt="Bruno Daner cantando ao microfone com o saxofone em mãos, sob luz azul" width="1080" height="1620" loading="lazy"></div>
         <figcaption data-i18n="sobre.cap">Ao vivo · sax e voz</figcaption>
       </figure>
@@ -872,6 +900,23 @@
   </section>
 
   <div class="to-dark" aria-hidden="true"></div>
+
+  <!-- ======================= PARCERIA (Constance Zahn) ======================= -->
+  <section id="parceria" class="parceria" aria-label="Parceiro Constance Zahn">
+    <div class="wrap parceria-grid">
+      <figure class="parceria-foto reveal"><img src="media/fotos/parceria-cz.jpg" alt="Bruno Daner no set de DJ com o saxofone, com o selo Guia de Fornecedores CZ da Constance Zahn" width="1080" height="1350" loading="lazy"></figure>
+      <div class="parceria-copy">
+        <p class="eyebrow reveal" data-i18n="cz.eyebrow">Parceria</p>
+        <h2 class="reveal d1" data-i18n="cz.h2">Parceiro <em>Constance Zahn</em>.</h2>
+        <p class="lead reveal d2" data-i18n="cz.lead">Uma parceria que representa confiança, curadoria e excelência no mercado de casamentos.</p>
+        <p class="reveal d2" data-i18n="cz.p1">Bruno Daner é parceiro <strong>Constance Zahn</strong>, uma das marcas mais reconhecidas e influentes do mercado de casamentos no Brasil.</p>
+        <p class="reveal d2" data-i18n="cz.p2">Desde 2007, a plataforma ConstanceZahn.com construiu uma trajetória dedicada à curadoria de referências, profissionais, tendências e experiências para casamentos, tornando-se uma importante fonte de inspiração para noivos e uma referência para profissionais do segmento. Sua atuação também contempla conteúdos e experiências voltados a <strong>destination weddings</strong>, conectando o mercado brasileiro a referências nacionais e internacionais.</p>
+        <p class="reveal d2" data-i18n="cz.p3">Fazer parte desse universo representa mais do que uma parceria. É estar inserido em um mercado que valoriza <strong>experiência, estética, curadoria e excelência em cada detalhe</strong>.</p>
+        <p class="fecho reveal d3" data-i18n="cz.p4">É com esse mesmo propósito que Bruno Daner apresenta sua proposta de <strong>DJ &amp; Live Sax Experience</strong>: uma experiência musical pensada para transformar momentos especiais em celebrações marcantes.</p>
+        <a class="parceria-link reveal d3" href="https://www.constancezahn.com/fornecedores/bruno-daner/" target="_blank" rel="noopener"><span data-i18n="cz.link">Ver o perfil no Guia CZ</span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </section>
 
   <!-- ======================= DEPOIMENTOS ======================= -->
   <section id="depoimentos" class="depo" aria-label="Depoimentos">
@@ -920,8 +965,8 @@
         <h2 class="reveal d1" data-i18n="faq.h2">Antes de <em>fechar</em>.</h2>
       </div>
       <div class="faq-list reveal d1">
-        <details><summary data-i18n="faq.q1">Como funciona a DJ &amp; Sax Experience na prática?</summary><p data-i18n="faq.a1">Sou um único profissional que mixa e toca sax ao vivo ao mesmo tempo. Antes do evento, eu conduzo um processo de curadoria musical com vocês: escuto a história do casal, entendo o estilo da celebração e desenho o show que mais combina com vocês — personalizado, não um roteiro pronto. No dia, conduzo a energia da pista em tempo real, lendo o ambiente e os convidados.</p></details>
-        <details><summary data-i18n="faq.q2">Você faz a cerimônia E a festa?</summary><p data-i18n="faq.a2">Faço. Na cerimônia, a formação padrão é sax, piano e violino — e, se vocês quiserem algo diferente, eu monto uma formação personalizada a gosto do casal. Na festa, assumo a pista com a DJ &amp; Sax Experience. A vantagem é ter uma única direção musical do "sim" ao último drop — e um único contato para tudo.</p></details>
+        <details><summary data-i18n="faq.q1">Como funciona a DJ &amp; Live Sax Experience na prática?</summary><p data-i18n="faq.a1">Sou um único profissional que mixa e toca sax ao vivo ao mesmo tempo. Antes do evento, eu conduzo um processo de curadoria musical com vocês: escuto a história do casal, entendo o estilo da celebração e desenho o show que mais combina com vocês — personalizado, não um roteiro pronto. No dia, conduzo a energia da pista em tempo real, lendo o ambiente e os convidados.</p></details>
+        <details><summary data-i18n="faq.q2">Você faz a cerimônia E a festa?</summary><p data-i18n="faq.a2">Faço. Na cerimônia, a formação padrão é sax, piano e violino — e, se vocês quiserem algo diferente, eu monto uma formação personalizada a gosto do casal. Na festa, assumo a pista com a DJ &amp; Live Sax Experience. A vantagem é ter uma única direção musical do "sim" ao último drop — e um único contato para tudo.</p></details>
         <details><summary data-i18n="faq.q3">Meu evento é intimista. Funciona mesmo assim?</summary><p data-i18n="faq.a3">Funciona. O Live Sax circulando entre os convidados cria um clima elegante e envolvente sem precisar de pista cheia. Já criei ambientes intimistas e sofisticados exatamente assim — a experiência se adapta ao tamanho e ao espírito do seu evento.</p></details>
         <details><summary data-i18n="faq.q4">Posso pedir músicas específicas?</summary><p data-i18n="faq.a4">Pode — e deve. A curadoria parte da personalidade do seu evento, e músicas que têm significado para vocês entram nesse desenho — do clássico ao eletrônico.</p></details>
         <details><summary data-i18n="faq.q5">E o equipamento? O som vai funcionar no meu espaço?</summary><p data-i18n="faq.a5">O setup varia conforme o formato e a estrutura do local — por isso eu levanto essas informações antes e detalho na proposta exatamente o que eu levo e o que preciso do espaço. Nada de surpresa técnica no dia.</p></details>
@@ -932,6 +977,8 @@
       </div>
     </div>
   </section>
+
+  <div class="to-dark" aria-hidden="true"></div>
 
   <!-- ======================= CTA ======================= -->
   <section id="contato" class="cta" aria-label="Contato">
@@ -953,6 +1000,7 @@
     <a href="https://www.instagram.com/brunodanersax" target="_blank" rel="noopener">@brunodanersax</a>
     <a href="https://www.youtube.com/@BrunoDanerSax" target="_blank" rel="noopener">YouTube</a>
     <a href="https://www.casamentos.com.br/musica-de-casamento/bruno-daner-sax--e450884" target="_blank" rel="noopener">casamentos.com.br</a>
+    <a href="mailto:brunodanersax@gmail.com">brunodanersax@gmail.com</a>
     <span>Rio de Janeiro · Brasil e exterior</span>
     <a class="foot-rk" href="https://instagram.com/rkperformance.digital" target="_blank" rel="noopener">Site por RK Performance</a>
   </div>
@@ -980,24 +1028,24 @@
   var I18N = {
     en: {
       'nav.exp': `The experience`, 'nav.serv': `Formats`, 'nav.vid': `Videos`, 'nav.sobre': `About`, 'nav.depo': `Reviews`, 'nav.cta': `Check your date`,
-      'marquee': `<span>DJ &amp; Sax Experience</span><span>Music curation</span><span>Floor reading</span><span>Weddings</span><span>Destination weddings</span><span>Corporate events</span><span>Live ceremony</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span><span>DJ &amp; Sax Experience</span><span>Music curation</span><span>Floor reading</span><span>Weddings</span><span>Destination weddings</span><span>Corporate events</span><span>Live ceremony</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span>`,
+      'marquee': `<span>DJ &amp; Live Sax Experience</span><span>Music curation</span><span>Floor reading</span><span>Weddings</span><span>Destination weddings</span><span>Corporate events</span><span>Live ceremony</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span><span>DJ &amp; Live Sax Experience</span><span>Music curation</span><span>Floor reading</span><span>Weddings</span><span>Destination weddings</span><span>Corporate events</span><span>Live ceremony</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span>`,
       'hero.tag': `Bruno Daner — Live DJ &amp; Sax · Brazil &amp; abroad`,
       'hero.h1': `<span class="w">The music happens.</span><span class="w">The floor <em>answers</em>.</span>`,
       'hero.sub': `Live DJ and sax in a single artist. I read the floor, drive the energy and turn your celebration into a memory that echoes forever.`,
       'hero.cta': `See if my date is open`, 'hero.som': `Play with sound`, 'hero.vervideos': `Watch the videos`,
-      'hero.proof': `<span><strong>5.0</strong> on casamentos.com.br · <strong>100%</strong> recommend</span><span><strong>Casamentos Awards 2026</strong> · Music · Rio</span><span>I reply within <strong>24h</strong> · free consultation</span>`,
+      'hero.proof': `<span><strong>5.0</strong> on casamentos.com.br · <strong>100%</strong> recommend</span><span><strong>Casamentos Awards 2026</strong> · Music · Rio</span><span><strong>Constance Zahn</strong> partner</span><span>I reply within <strong>24h</strong> · free consultation</span>`,
       'conc.eyebrow': `The experience`, 'conc.h2': `Two languages. One <em>experience</em>.`, 'conc.lead': `I don't just pick songs or play sax. I build the atmosphere of the celebration.`,
       'conc.p1t': `In the same hands`, 'conc.p1': `You've seen a saxophonist playing over a playlist. What I do is different: I mix and play live sax at the same time — the freedom and energy of a DJ combined with the presence, improvisation and personality of the sax.`,
       'conc.p2t': `Curation and reading`, 'conc.p2': `The work starts earlier: I listen to your story and design a repertoire with choices that break the obvious. On the floor comes what you can't program — sensing the room, understanding the guests and steering the energy. Lifting when the floor asks for it, breathing when the moment deserves it.`,
       'conc.p3t': `One single contact`, 'conc.p3': `A single professional leading the experience, from the first note to the last moment on the floor. No broken telephone between band, DJ and planner.`,
       'conc.fecho': `Everything connected. Nothing by chance.`,
       'serv.eyebrow': `Formats`, 'serv.h2': `Four <em>acts</em>.`, 'serv.intro': `Four formats that combine to cover your whole event — from the "I do" to the last drop, with a single contact for everything.`,
-      'serv1.h3': `DJ &amp; Sax <em>Experience</em>`, 'serv1.kick': `For those afraid of an empty dance floor.`, 'serv1.p': `The union of DJ and live sax, with my signature: while the set holds the groove, the sax answers the floor in real time, and every event gets its own musical identity. More than playing — creating the right experience for each moment.`, 'serv1.tags': `<li>The flagship</li><li>Party</li><li>Dance floor</li>`,
+      'serv1.h3': `DJ &amp; Live Sax <em>Experience</em>`, 'serv1.kick': `For those afraid of an empty dance floor.`, 'serv1.p': `The union of DJ and live sax, with my signature: while the set holds the groove, the sax answers the floor in real time, and every event gets its own musical identity. More than playing — creating the right experience for each moment.`, 'serv1.tags': `<li>The flagship</li><li>Party</li><li>Dance floor</li>`,
       'serv2.h3': `Ceremony`, 'serv2.kick': `For those who won't give up the emotion of the "I do".`, 'serv2.p': `The standard lineup blends the delicacy of the piano, the emotion of the violin and the striking presence of live saxophone at the most important moment of the day — and if you picture it differently, I build a custom lineup for your ceremony. It's not just music: it's the music of your story. And if I follow you to the party, the transition happens seamlessly — the same musical language, changing temperature along with your day.`, 'serv2.tags': `<li>Sax</li><li>Piano</li><li>Violin</li><li>Custom lineup</li>`,
       'serv3.h3': `Live Sax`, 'serv3.kick': `For those who want guests inside the party, not watching it.`, 'serv3.p': `The sax leaves the stage and moves among the tables and the floor, adding improvisation, energy and interaction to the experience. Make your guest want to be part of the moment.`, 'serv3.tags': `<li>Among the guests</li><li>Cocktail</li><li>Dinner</li>`,
       'serv4.h3': `Color Drums <em>+ CO₂</em>`, 'serv4.kick': `For those who want the end of the party to be the peak.`, 'serv4.p': `LED drums played over the DJ and sax set, combined with CO₂ jets: every beat becomes a visual show and the energy rises at the right moments. A high-intensity moment for your floor — exactly when other parties start to empty out.`, 'serv4.tags': `<li>LED drums</li><li>CO₂ jets</li><li>Peak moment</li>`,
       'serv.ctap': `Not sure which format fits your event? Message me and I'll build this curation with you.`, 'serv.ctabtn': `Build my event's curation`,
-      'corp.eyebrow': `Also for companies`, 'corp.h3': `The same reading, in an <em>executive</em> version.`, 'corp.p': `High-level corporate parties and events, sophisticated bars, clubs and rooftops, sunsets and exclusive celebrations: the DJ &amp; Sax Experience adapts repertoire and energy to your audience — from cocktail jazz to electronic music with live sax.`, 'corp.tags': `<li>Corporate</li><li>Rooftops &amp; sunsets</li><li>Exclusive celebrations</li>`,
+      'corp.eyebrow': `Also for companies`, 'corp.h3': `The same reading, in an <em>executive</em> version.`, 'corp.p': `High-level corporate parties and events, sophisticated bars, clubs and rooftops, sunsets and exclusive celebrations: the DJ &amp; Live Sax Experience adapts repertoire and energy to your audience — from cocktail jazz to electronic music with live sax.`, 'corp.tags': `<li>Corporate</li><li>Rooftops &amp; sunsets</li><li>Exclusive celebrations</li>`,
       'mom.eyebrow': `Watch with sound`, 'mom.h2': `Real <em>scenes</em>.`, 'mom.p': `Nothing here is a rehearsal or stock footage — it's what your guests will live. Tap a video and listen with sound. There's more on <a href="https://www.youtube.com/@BrunoDanerSax" target="_blank" rel="noopener" style="color: var(--dourado-claro)">YouTube</a>.`,
       'mom.c1': `<h3>At the feet of Christ</h3><p>Sax at dawn · Rio de Janeiro</p>`, 'mom.c2': `<h3>New York skyline</h3><p>Sax at dusk · United States</p>`, 'mom.c3': `<h3>Against the screen</h3><p>Set, sax and LED · festival vibe</p>`, 'mom.c4': `<h3>The floor responds</h3><p>Wedding · the party ends packed</p>`, 'mom.c5': `<h3>In their words</h3><p>The couple tells how it went · with a scare at the start</p>`, 'mom.c6': `<h3>Black and white</h3><p>Chandelier hall · sax in the crowd</p>`, 'mom.c7': `<h3>The bride's entrance</h3><p>Trumpet call at the church door</p>`, 'mom.c8': `<h3>Ah, love</h3><p>The world stops · only love keeps playing</p>`, 'mom.c9': `<h3>That energy</h3><p>Open-air party · bride on the floor</p>`, 'mom.c10': `<h3>In the studio</h3><p>Overjoyed · Stevie Wonder</p>`, 'mom.c11': `<h3>One more night</h3><p>Bruno explains how he builds the experience</p>`,
       'mom.hint': `Drag or use the arrows`,
@@ -1009,6 +1057,13 @@
       'sobre.p3': `But growth was never only about the number of performances. It was the drive to build something more complete and personal that led me to deepen my knowledge of DJing — not to add the DJ role to the show, but to master that tool of my artistic vision, integrating music selection, transitions, floor reading and live saxophone performance. That same restlessness brought me closer to music production: understanding how a song is built, its arrangements and its energy expands my ability to turn ideas into real experiences.`,
       'sobre.p4': `Today, my proposal goes beyond a saxophone performance: it's the union of musician, DJ and music producer, with my own curation and a constant pursuit of creating moments that are not only heard, but lived. More than accompanying a party, I build the atmosphere, drive the energy and turn music into a memorable experience.`,
       'sobre.f1': `performances delivered`, 'sobre.f2': `casamentos.com.br · 100% recommend`, 'sobre.f3b': `NY &amp; Florida`, 'sobre.f3': `international tour`,
+      'cz.eyebrow': `Partnership`, 'cz.h2': `A <em>Constance Zahn</em> partner.`,
+      'cz.lead': `A partnership that stands for trust, curation and excellence in the wedding market.`,
+      'cz.p1': `Bruno Daner is a <strong>Constance Zahn</strong> partner — one of the most recognized and influential brands in the Brazilian wedding market.`,
+      'cz.p2': `Since 2007, ConstanceZahn.com has built a track record dedicated to curating references, professionals, trends and experiences for weddings, becoming a major source of inspiration for couples and a benchmark for professionals in the industry. Its work also covers content and experiences for <strong>destination weddings</strong>, connecting the Brazilian market to national and international references.`,
+      'cz.p3': `Being part of this universe means more than a partnership. It means belonging to a market that values <strong>experience, aesthetics, curation and excellence in every detail</strong>.`,
+      'cz.p4': `It is with this same purpose that Bruno Daner presents his <strong>DJ &amp; Live Sax Experience</strong>: a musical experience designed to turn special moments into unforgettable celebrations.`,
+      'cz.link': `See the profile on the CZ Guide`,
       'depo.eyebrow': `Reviews`, 'depo.h2': `The word of those who <em>lived it</em>.`,
       'depo.q1': `Bruno was absolutely sensational! ... The moment the performance started, the floor never stopped filling up. After the party, we only got compliments and a huge list of guests asking for his contact. If we could recommend him, we'd do it a million times!`, 'depo.n1': `— bride · casamentos.com.br`,
       'depo.q2': `We wanted to create a more intimate, cozy and elegant atmosphere… and you delivered exactly that, in a light, sophisticated and simply enchanting way. ... You didn't just perform — you created an experience.`, 'depo.n2': `— bride · casamentos.com.br`,
@@ -1022,8 +1077,8 @@
       'rep.c4h': `Brazilian Music`, 'rep.c4u': `For the party to feel like us.`,
       'rep.note': `"Everyone danced, from the oldest to the youngest, everyone connected and it was an amazing show!" — <a href="https://www.casamentos.com.br/musica-de-casamento/bruno-daner-sax--e450884" target="_blank" rel="noopener">Giulia, on casamentos.com.br</a>`,
       'faq.eyebrow': `FAQ`, 'faq.h2': `Before you <em>book</em>.`,
-      'faq.q1': `How does the DJ &amp; Sax Experience work in practice?`, 'faq.a1': `I'm a single professional who mixes and plays live sax at the same time. Before the event, I lead a music curation process with you: I listen to the couple's story, understand the style of the celebration and design the show that fits you best — personalized, not a ready-made script. On the day, I drive the floor's energy in real time, reading the room and the guests.`,
-      'faq.q2': `Do you do the ceremony AND the party?`, 'faq.a2': `Yes. At the ceremony, the standard lineup is sax, piano and violin — and, if you'd like something different, I build a custom lineup for the couple. At the party, I take over the floor with the DJ &amp; Sax Experience. The advantage is having a single musical direction from the "I do" to the last drop — and a single contact for everything.`,
+      'faq.q1': `How does the DJ &amp; Live Sax Experience work in practice?`, 'faq.a1': `I'm a single professional who mixes and plays live sax at the same time. Before the event, I lead a music curation process with you: I listen to the couple's story, understand the style of the celebration and design the show that fits you best — personalized, not a ready-made script. On the day, I drive the floor's energy in real time, reading the room and the guests.`,
+      'faq.q2': `Do you do the ceremony AND the party?`, 'faq.a2': `Yes. At the ceremony, the standard lineup is sax, piano and violin — and, if you'd like something different, I build a custom lineup for the couple. At the party, I take over the floor with the DJ &amp; Live Sax Experience. The advantage is having a single musical direction from the "I do" to the last drop — and a single contact for everything.`,
       'faq.q3': `My event is intimate. Does it still work?`, 'faq.a3': `It does. Live Sax moving among the guests creates an elegant, engaging vibe without needing a full floor. I've created intimate, sophisticated settings exactly like this — the experience adapts to the size and spirit of your event.`,
       'faq.q4': `Can I request specific songs?`, 'faq.a4': `You can — and you should. The curation starts from your event's personality, and songs that mean something to you become part of that design — from classical to electronic.`,
       'faq.q5': `What about equipment? Will the sound work in my venue?`, 'faq.a5': `The setup varies with the format and the venue's structure — that's why I gather this info beforehand and detail in the proposal exactly what I bring and what I need from the space. No technical surprises on the day.`,
@@ -1035,24 +1090,24 @@
     },
     es: {
       'nav.exp': `La experiencia`, 'nav.serv': `Formatos`, 'nav.vid': `Videos`, 'nav.sobre': `El artista`, 'nav.depo': `Reseñas`, 'nav.cta': `Consultar fecha`,
-      'marquee': `<span>DJ &amp; Sax Experience</span><span>Curaduría musical</span><span>Lectura de pista</span><span>Bodas</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Ceremonia en vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Río de Janeiro</span><span>DJ &amp; Sax Experience</span><span>Curaduría musical</span><span>Lectura de pista</span><span>Bodas</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Ceremonia en vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Río de Janeiro</span>`,
+      'marquee': `<span>DJ &amp; Live Sax Experience</span><span>Curaduría musical</span><span>Lectura de pista</span><span>Bodas</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Ceremonia en vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Río de Janeiro</span><span>DJ &amp; Live Sax Experience</span><span>Curaduría musical</span><span>Lectura de pista</span><span>Bodas</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Ceremonia en vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Río de Janeiro</span>`,
       'hero.tag': `Bruno Daner — DJ &amp; Sax en vivo · Brasil y exterior`,
       'hero.h1': `<span class="w">La música sucede.</span><span class="w">La pista <em>responde</em>.</span>`,
       'hero.sub': `DJ y sax en vivo en un solo artista. Leo la pista, conduzco la energía y transformo tu celebración en un recuerdo que resuena para siempre.`,
       'hero.cta': `Ver si mi fecha está libre`, 'hero.som': `Escuchar con sonido`, 'hero.vervideos': `Ver los videos`,
-      'hero.proof': `<span><strong>5.0</strong> en casamentos.com.br · <strong>100%</strong> recomiendan</span><span><strong>Casamentos Awards 2026</strong> · Música · Río</span><span>Respondo en <strong>24h</strong> · consulta gratuita</span>`,
+      'hero.proof': `<span><strong>5.0</strong> en casamentos.com.br · <strong>100%</strong> recomiendan</span><span><strong>Casamentos Awards 2026</strong> · Música · Río</span><span>Aliado <strong>Constance Zahn</strong></span><span>Respondo en <strong>24h</strong> · consulta gratuita</span>`,
       'conc.eyebrow': `La experiencia`, 'conc.h2': `Dos lenguajes. Una <em>experiencia</em>.`, 'conc.lead': `No solo selecciono música o toco el sax. Construyo la atmósfera de la celebración.`,
       'conc.p1t': `En las mismas manos`, 'conc.p1': `Ya has visto a un saxofonista tocando sobre una playlist. Lo que hago es diferente: mezclo y toco el sax en vivo al mismo tiempo — la libertad y la energía del DJ combinadas con la presencia, la improvisación y la personalidad del sax.`,
       'conc.p2t': `Curaduría y lectura`, 'conc.p2': `El trabajo empieza antes: escucho tu historia y diseño un repertorio con elecciones que huyen de lo previsible. En la pista entra lo que no se puede programar — percibir el ambiente, entender a los invitados y conducir la energía. Subir cuando la pista lo pide, respirar cuando el momento lo merece.`,
       'conc.p3t': `Un solo contacto`, 'conc.p3': `Un único profesional al frente de la experiencia, desde el primer acorde hasta el último momento de la pista. Sin teléfono descompuesto entre banda, DJ y organizador.`,
       'conc.fecho': `Todo conectado. Nada al azar.`,
       'serv.eyebrow': `Formatos`, 'serv.h2': `Cuatro <em>actos</em>.`, 'serv.intro': `Cuatro formatos que se combinan para cubrir todo tu evento — del "sí, acepto" al último drop, con un solo contacto para todo.`,
-      'serv1.h3': `DJ &amp; Sax <em>Experience</em>`, 'serv1.kick': `Para quien teme una pista vacía.`, 'serv1.p': `La unión entre el DJ y el sax en vivo, con mi firma: mientras el set sostiene el groove, el sax responde a la pista en tiempo real, y cada evento recibe una identidad musical propia. Más que tocar — crear la experiencia adecuada para cada momento.`, 'serv1.tags': `<li>El buque insignia</li><li>Fiesta</li><li>Pista</li>`,
+      'serv1.h3': `DJ &amp; Live Sax <em>Experience</em>`, 'serv1.kick': `Para quien teme una pista vacía.`, 'serv1.p': `La unión entre el DJ y el sax en vivo, con mi firma: mientras el set sostiene el groove, el sax responde a la pista en tiempo real, y cada evento recibe una identidad musical propia. Más que tocar — crear la experiencia adecuada para cada momento.`, 'serv1.tags': `<li>El buque insignia</li><li>Fiesta</li><li>Pista</li>`,
       'serv2.h3': `Ceremonia`, 'serv2.kick': `Para quien no renuncia a la emoción del "sí".`, 'serv2.p': `La formación estándar une la delicadeza del piano, la emoción del violín y la presencia marcante del saxofón en vivo en el momento más importante del día — y, si lo imaginan diferente, armo una formación personalizada para su ceremonia. No es solo música: es la música de su historia. Y, si los acompaño a la fiesta, la transición ocurre sin cortes — el mismo lenguaje musical, cambiando de temperatura junto con su día.`, 'serv2.tags': `<li>Sax</li><li>Piano</li><li>Violín</li><li>Formación personalizable</li>`,
       'serv3.h3': `Live Sax`, 'serv3.kick': `Para quien quiere a los invitados dentro de la fiesta, no viéndola.`, 'serv3.p': `El sax sale del escenario y circula entre las mesas y la pista, añadiendo improvisación, energía e interacción a la experiencia. Haz que tu invitado quiera ser parte del momento.`, 'serv3.tags': `<li>Entre los invitados</li><li>Cóctel</li><li>Cena</li>`,
       'serv4.h3': `Color Drums <em>+ CO₂</em>`, 'serv4.kick': `Para quien quiere que el final de la fiesta sea el punto máximo.`, 'serv4.p': `Tambores de LED tocados sobre el set de DJ y sax, combinados con chorros de CO₂: cada golpe se vuelve un espectáculo visual y la energía sube en los momentos justos. Un momento de alta intensidad para tu pista — justo cuando otras fiestas empiezan a vaciarse.`, 'serv4.tags': `<li>Tambores de LED</li><li>Chorros de CO₂</li><li>Punto máximo</li>`,
       'serv.ctap': `¿No sabes qué formato encaja con tu evento? Escríbeme y armo esta curaduría contigo.`, 'serv.ctabtn': `Armar la curaduría de mi evento`,
-      'corp.eyebrow': `También para empresas`, 'corp.h3': `La misma lectura, en versión <em>ejecutiva</em>.`, 'corp.p': `Fiestas y eventos corporativos de alto nivel, bares, clubs y rooftops sofisticados, sunsets y celebraciones exclusivas: la DJ &amp; Sax Experience adapta repertorio y energía a tu público — del jazz del cóctel a la electrónica con sax en vivo.`, 'corp.tags': `<li>Corporativo</li><li>Rooftops y sunsets</li><li>Celebraciones exclusivas</li>`,
+      'corp.eyebrow': `También para empresas`, 'corp.h3': `La misma lectura, en versión <em>ejecutiva</em>.`, 'corp.p': `Fiestas y eventos corporativos de alto nivel, bares, clubs y rooftops sofisticados, sunsets y celebraciones exclusivas: la DJ &amp; Live Sax Experience adapta repertorio y energía a tu público — del jazz del cóctel a la electrónica con sax en vivo.`, 'corp.tags': `<li>Corporativo</li><li>Rooftops y sunsets</li><li>Celebraciones exclusivas</li>`,
       'mom.eyebrow': `Míralo con sonido`, 'mom.h2': `Escenas <em>reales</em>.`, 'mom.p': `Nada aquí es un ensayo ni banco de imágenes — es lo que tus invitados van a vivir. Toca un video y escúchalo con sonido. Hay más en <a href="https://www.youtube.com/@BrunoDanerSax" target="_blank" rel="noopener" style="color: var(--dourado-claro)">YouTube</a>.`,
       'mom.c1': `<h3>A los pies del Cristo</h3><p>Sax al amanecer · Río de Janeiro</p>`, 'mom.c2': `<h3>Skyline de Nueva York</h3><p>Sax al atardecer · Estados Unidos</p>`, 'mom.c3': `<h3>Contra la pantalla</h3><p>Set, sax y LED · estética de festival</p>`, 'mom.c4': `<h3>La pista responde</h3><p>Boda · la fiesta termina llena</p>`, 'mom.c5': `<h3>En sus palabras</h3><p>Los novios cuentan cómo fue · con un susto al inicio</p>`, 'mom.c6': `<h3>Blanco y negro</h3><p>Salón de arañas · sax entre la multitud</p>`, 'mom.c7': `<h3>La entrada de la novia</h3><p>Clarinada en la puerta de la iglesia</p>`, 'mom.c8': `<h3>Ah, el amor</h3><p>El mundo se detiene · solo el amor sigue sonando</p>`, 'mom.c9': `<h3>Esa energía</h3><p>Fiesta al aire libre · novia en la pista</p>`, 'mom.c10': `<h3>En el estudio</h3><p>Overjoyed · Stevie Wonder</p>`, 'mom.c11': `<h3>Una noche más</h3><p>Bruno cuenta cómo construye la experiencia</p>`,
       'mom.hint': `Arrastra o usa las flechas`,
@@ -1064,6 +1119,13 @@
       'sobre.p3': `Pero la evolución nunca estuvo solo en el número de presentaciones. Fue el deseo de construir algo más completo y autoral lo que me llevó a profundizar en el arte del DJ — no para sumar la función de DJ al show, sino para dominar esa herramienta de mi visión artística, integrando la selección musical, las transiciones, la lectura de pista y la interpretación en vivo del saxofón. Esa misma inquietud me acercó a la producción musical: entender la construcción de una canción, sus arreglos y su energía amplía mi capacidad de transformar ideas en experiencias reales.`,
       'sobre.p4': `Hoy, mi propuesta va más allá de una presentación de saxofón: es la unión entre músico, DJ y productor musical, con curaduría propia y la búsqueda constante de crear momentos que no solo se escuchen, sino que se vivan. Más que acompañar una fiesta, construyo la atmósfera, conduzco la energía y transformo la música en una experiencia memorable.`,
       'sobre.f1': `presentaciones realizadas`, 'sobre.f2': `casamentos.com.br · 100% recomiendan`, 'sobre.f3b': `NY y Florida`, 'sobre.f3': `gira internacional`,
+      'cz.eyebrow': `Alianza`, 'cz.h2': `Aliado de <em>Constance Zahn</em>.`,
+      'cz.lead': `Una alianza que representa confianza, curaduría y excelencia en el mercado de bodas.`,
+      'cz.p1': `Bruno Daner es aliado de <strong>Constance Zahn</strong>, una de las marcas más reconocidas e influyentes del mercado de bodas en Brasil.`,
+      'cz.p2': `Desde 2007, la plataforma ConstanceZahn.com ha construido una trayectoria dedicada a la curaduría de referencias, profesionales, tendencias y experiencias para bodas, convirtiéndose en una importante fuente de inspiración para las parejas y en una referencia para los profesionales del sector. Su labor también abarca contenidos y experiencias dedicados a <strong>destination weddings</strong>, conectando el mercado brasileño con referencias nacionales e internacionales.`,
+      'cz.p3': `Formar parte de este universo representa más que una alianza. Es estar dentro de un mercado que valora <strong>la experiencia, la estética, la curaduría y la excelencia en cada detalle</strong>.`,
+      'cz.p4': `Es con este mismo propósito que Bruno Daner presenta su propuesta de <strong>DJ &amp; Live Sax Experience</strong>: una experiencia musical pensada para transformar momentos especiales en celebraciones memorables.`,
+      'cz.link': `Ver el perfil en la Guía CZ`,
       'depo.eyebrow': `Reseñas`, 'depo.h2': `La palabra de quien lo <em>vivió</em>.`,
       'depo.q1': `¡Bruno fue absolutamente sensacional! ... En cuanto empezó la actuación, la pista no paraba de llenarse. Después de la fiesta, solo recibimos elogios y una lista enorme de invitados pidiendo su contacto. ¡Si pudiéramos recomendarlo, lo haríamos un millón de veces!`, 'depo.n1': `— novia · casamentos.com.br`,
       'depo.q2': `Queríamos crear un ambiente más íntimo, acogedor y elegante… y lograste entregar exactamente eso, de una forma ligera, sofisticada y simplemente encantadora. ... No solo te presentaste — creaste una experiencia.`, 'depo.n2': `— novia · casamentos.com.br`,
@@ -1077,8 +1139,8 @@
       'rep.c4h': `Música Brasileña`, 'rep.c4u': `Para que la fiesta tenga nuestra esencia.`,
       'rep.note': `"¡Todos bailaron, de los más grandes a los más jóvenes, todos se comunicaron y fue un showzaso!" — <a href="https://www.casamentos.com.br/musica-de-casamento/bruno-daner-sax--e450884" target="_blank" rel="noopener">Giulia, en casamentos.com.br</a>`,
       'faq.eyebrow': `Preguntas frecuentes`, 'faq.h2': `Antes de <em>cerrar</em>.`,
-      'faq.q1': `¿Cómo funciona la DJ &amp; Sax Experience en la práctica?`, 'faq.a1': `Soy un único profesional que mezcla y toca el sax en vivo al mismo tiempo. Antes del evento, conduzco un proceso de curaduría musical con ustedes: escucho la historia de la pareja, entiendo el estilo de la celebración y diseño el show que mejor los represente — personalizado, no un guion prefabricado. El día, conduzco la energía de la pista en tiempo real, leyendo el ambiente y a los invitados.`,
-      'faq.q2': `¿Haces la ceremonia Y la fiesta?`, 'faq.a2': `Sí. En la ceremonia, la formación estándar es sax, piano y violín — y, si quieren algo diferente, armo una formación personalizada al gusto de la pareja. En la fiesta, tomo la pista con la DJ &amp; Sax Experience. La ventaja es tener una única dirección musical del "sí" al último drop — y un solo contacto para todo.`,
+      'faq.q1': `¿Cómo funciona la DJ &amp; Live Sax Experience en la práctica?`, 'faq.a1': `Soy un único profesional que mezcla y toca el sax en vivo al mismo tiempo. Antes del evento, conduzco un proceso de curaduría musical con ustedes: escucho la historia de la pareja, entiendo el estilo de la celebración y diseño el show que mejor los represente — personalizado, no un guion prefabricado. El día, conduzco la energía de la pista en tiempo real, leyendo el ambiente y a los invitados.`,
+      'faq.q2': `¿Haces la ceremonia Y la fiesta?`, 'faq.a2': `Sí. En la ceremonia, la formación estándar es sax, piano y violín — y, si quieren algo diferente, armo una formación personalizada al gusto de la pareja. En la fiesta, tomo la pista con la DJ &amp; Live Sax Experience. La ventaja es tener una única dirección musical del "sí" al último drop — y un solo contacto para todo.`,
       'faq.q3': `Mi evento es íntimo. ¿Funciona igual?`, 'faq.a3': `Funciona. El Live Sax circulando entre los invitados crea un clima elegante y envolvente sin necesidad de una pista llena. Ya he creado ambientes íntimos y sofisticados exactamente así — la experiencia se adapta al tamaño y al espíritu de tu evento.`,
       'faq.q4': `¿Puedo pedir canciones específicas?`, 'faq.a4': `Puedes — y debes. La curaduría parte de la personalidad de tu evento, y las canciones que tienen significado para ustedes entran en ese diseño — de lo clásico a lo electrónico.`,
       'faq.q5': `¿Y el equipo? ¿El sonido funcionará en mi espacio?`, 'faq.a5': `El setup varía según el formato y la estructura del lugar — por eso levanto esa información antes y detallo en la propuesta exactamente qué llevo y qué necesito del espacio. Nada de sorpresas técnicas el día del evento.`,
