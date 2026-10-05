@@ -39,8 +39,6 @@
   .b:hover { border-color: var(--dourado); }
   .b-ouro { background: var(--dourado); border-color: var(--dourado); color: var(--noite); }
   .b-ouro:hover { background: var(--dourado-claro); border-color: var(--dourado-claro); }
-  .b-zap { background: #1FA855; border-color: #1FA855; color: #fff; }
-  .b-zap:hover { background: #25C062; border-color: #25C062; }
   .b-cheio { width: 100%; min-height: 54px; font-size: 0.95rem; }
   .b-pq { min-height: 38px; padding: 8px 14px; font-size: 0.76rem; }
   .b:disabled { opacity: 0.5; cursor: default; }
@@ -122,7 +120,6 @@
   .perigo { color: var(--erro); border-color: rgba(227, 139, 118, 0.4); }
 
   .envio { display: grid; gap: 8px; grid-template-columns: 1fr 1fr; margin-bottom: 14px; }
-  .envio .b-zap { grid-column: 1 / -1; }
 
   .barra { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 12px 18px calc(12px + env(safe-area-inset-bottom)); background: rgba(11, 10, 8, 0.94); backdrop-filter: blur(10px); border-top: 1px solid var(--linha); }
   .barra .in { max-width: 640px; margin: 0 auto; }
@@ -177,8 +174,7 @@
   <h2 class="titulo" id="edTitulo">Nova proposta</h2>
 
   <div class="envio" id="edEnvio" hidden>
-    <button class="b b-zap" type="button" data-acao="whats">Enviar no WhatsApp</button>
-    <button class="b" type="button" data-acao="copiar">Copiar link</button>
+    <button class="b b-ouro" type="button" data-acao="copiar">Copiar link</button>
     <a class="b" id="edVer" href="#" target="_blank" rel="noopener">Ver proposta</a>
   </div>
 
@@ -241,13 +237,10 @@
 <div class="folha-fundo" id="folha" hidden>
   <div class="folha" role="dialog" aria-modal="true" aria-labelledby="folhaTit">
     <h3 id="folhaTit">Proposta pronta</h3>
-    <p>Agora é só mandar pro cliente:</p>
+    <p>Copie o link e mande pro cliente na conversa do WhatsApp:</p>
     <code id="folhaLink"></code>
-    <button class="b b-zap b-cheio" type="button" data-acao="whats">Enviar no WhatsApp</button>
-    <div class="duas">
-      <button class="b" type="button" data-acao="copiar">Copiar link</button>
-      <a class="b" id="folhaVer" href="#" target="_blank" rel="noopener">Ver proposta</a>
-    </div>
+    <button class="b b-ouro b-cheio" type="button" data-acao="copiar">Copiar link</button>
+    <a class="b b-cheio" id="folhaVer" href="#" target="_blank" rel="noopener">Ver proposta</a>
     <button class="texto-link" type="button" id="folhaFechar">Fechar</button>
   </div>
 </div>
@@ -381,32 +374,25 @@
       abrir.appendChild(el('span', 'vista' + (p.views ? ' sim' : ''), p.views ? '● Aberta ' + p.views + (p.views === 1 ? ' vez' : ' vezes') + ' · última ' + quando(p.ultima_vista) : 'Ainda não aberta pelo cliente'));
       c.appendChild(abrir);
       var ac = el('div', 'acoes');
-      var bWa = el('button', 'b b-pq b-zap', 'WhatsApp'); bWa.type = 'button'; bWa.onclick = function () { enviar(p, 'whats'); };
-      var bCp = el('button', 'b b-pq', 'Copiar link'); bCp.type = 'button'; bCp.onclick = function () { enviar(p, 'copiar'); };
-      ac.appendChild(bWa); ac.appendChild(bCp);
+      var bCp = el('button', 'b b-pq b-ouro', 'Copiar link'); bCp.type = 'button'; bCp.onclick = function () { copiarLink(p); };
+      var bVer = el('a', 'b b-pq', 'Ver proposta'); bVer.href = linkDe(p); bVer.target = '_blank'; bVer.rel = 'noopener';
+      ac.appendChild(bCp); ac.appendChild(bVer);
       c.appendChild(ac);
       box.appendChild(c);
     });
   }
 
-  // ---------- enviar ----------
-  function mensagemEnvio(p) {
-    var d = p.dados, nome = d.cliente || '';
-    if (d.idioma === 'en') return 'Hi' + (nome ? ' ' + nome : '') + '! Here is the proposal I prepared for you: ' + linkDe(p);
-    if (d.idioma === 'es') return '¡Hola' + (nome ? ', ' + nome : '') + '! Aquí está la propuesta que preparé para ustedes: ' + linkDe(p);
-    return 'Oi' + (nome ? ', ' + nome : '') + '! Segue a proposta que preparei pra vocês: ' + linkDe(p);
-  }
-  function enviar(p, como) {
+  // ---------- copiar o link (o Bruno cola na conversa do WhatsApp) ----------
+  function copiarLink(p) {
     if (p.status !== 'publicada') {   // proposta antiga em rascunho: publica antes de mandar
-      return api('PUT', '/admin/propostas/' + p.id, { dados: p.dados, status: 'publicada' }).then(function (np) { atualizarNaLista(np); enviar(np, como); }).catch(falhou);
+      return api('PUT', '/admin/propostas/' + p.id, { dados: p.dados, status: 'publicada' }).then(function (np) { atualizarNaLista(np); copiarLink(np); }).catch(falhou);
     }
-    if (como === 'whats') { window.open('https://wa.me/?text=' + encodeURIComponent(mensagemEnvio(p)), '_blank', 'noopener'); return; }
     var txt = linkDe(p);
     if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(function () { toast('Link copiado'); }, function () { prompt('Copie o link:', txt); });
     else prompt('Copie o link:', txt);
   }
   document.querySelectorAll('[data-acao]').forEach(function (b) {
-    b.addEventListener('click', function () { if (editando && editando.id) enviar(editando, b.getAttribute('data-acao')); });
+    b.addEventListener('click', function () { if (editando && editando.id) copiarLink(editando); });
   });
   function atualizarNaLista(np) {
     var i = propostas.findIndex(function (x) { return x.id === np.id; });

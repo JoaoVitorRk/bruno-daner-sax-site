@@ -4,9 +4,11 @@
 <!-- ============================================================
      PROPOSTA COMERCIAL — Bruno Daner Sax
      Uma página por cliente: /proposta/?p=<link>
-     O conteúdo comercial vem da API (Cloudflare Worker + D1) e é
-     editado pelo Bruno no painel (/admin/). O resto é fixo.
-     RK Performance · out/2026
+     Autoridade antes do valor (pedido do Bruno, 05/10/2026). O conteúdo
+     comercial vem da API (Cloudflare Worker + D1) e é editado no painel
+     (/admin/). O resto é fixo.
+     Estrutura: página escura num só esqueleto (título 5/12 · prova 7/12);
+     o investimento é uma folha creme sobre o preto. RK Performance · out/2026
      ============================================================ -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -35,50 +37,48 @@
     --areia: #F2EDE2;
     --dourado: #C9A24B;
     --dourado-claro: #E7CE93;
-    --dourado-escuro: #A07E2F;
-    --ink-soft: #6E675B;
+    --dourado-escuro: #8F6F27;
+    --tinta-suave: #5B5448;
+    --texto-suave: rgba(242, 237, 226, 0.74);
+    --fio: rgba(201, 162, 75, 0.2);
     --sans: "Archivo", "Segoe UI", system-ui, sans-serif;
     --serif: "Instrument Serif", Georgia, serif;
     --gutter: clamp(20px, 5vw, 80px);
     --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
     /* escala de texto: mínimo = celular, máximo ≈ monitor de 1440-1920px */
-    --t-corpo: clamp(1.02rem, 0.9rem + 0.35vw, 1.22rem);
-    --t-lead: clamp(1.08rem, 0.92rem + 0.5vw, 1.42rem);
-    --t-eyebrow: clamp(0.68rem, 0.58rem + 0.24vw, 0.84rem);
-    --t-mini: clamp(0.62rem, 0.54rem + 0.22vw, 0.8rem);
+    --t-corpo: clamp(1.02rem, 0.9rem + 0.35vw, 1.2rem);
+    --t-lead: clamp(1.08rem, 0.94rem + 0.42vw, 1.32rem);
+    --t-mini: clamp(0.64rem, 0.56rem + 0.2vw, 0.78rem);
+    --respiro: clamp(84px, 9vw, 140px);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scrollbar-color: var(--dourado) var(--noite); scrollbar-width: thin; }
   body {
     background: var(--noite); color: var(--areia);
     font-family: var(--sans); font-weight: 300; font-size: var(--t-corpo); line-height: 1.7;
     font-variant-numeric: lining-nums; -webkit-font-smoothing: antialiased; overflow-x: hidden;
   }
   ::selection { background: var(--dourado); color: var(--noite); }
-  a { color: inherit; }
+  a { color: inherit; text-underline-offset: 4px; }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--dourado); outline-offset: 4px; }
   img, video { max-width: 100%; height: auto; display: block; }
   [hidden] { display: none !important; }
-  .wrap { max-width: 1320px; margin-inline: auto; padding-inline: var(--gutter); }
+  .wrap { max-width: 1280px; margin-inline: auto; padding-inline: var(--gutter); }
+  p { text-wrap: pretty; }
 
   .grain {
     position: fixed; inset: -50%; z-index: 60; pointer-events: none; width: 200%; height: 200%;
     background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.45  0 0 0 0 0.4  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-    opacity: 0.14; mix-blend-mode: soft-light; animation: grain 1.4s steps(4) infinite;
+    opacity: 0.12; mix-blend-mode: soft-light; animation: grain 1.4s steps(4) infinite;
   }
   @keyframes grain { 0% { transform: translate(0, 0); } 25% { transform: translate(-2%, -3%); } 50% { transform: translate(3%, 1%); } 75% { transform: translate(-1%, 3%); } 100% { transform: translate(0, 0); } }
 
-  .eyebrow { font-weight: 500; font-size: var(--t-eyebrow); letter-spacing: 0.34em; text-transform: uppercase; color: var(--dourado); }
+  /* ---------- tipografia ---------- */
   h1, h2, h3 { font-family: var(--sans); font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.02; text-wrap: balance; }
-  h2 { font-size: clamp(2.3rem, 5.4vw, 4.6rem); }
-  h1 em, h2 em, h3 em {
-    font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: lowercase;
-    letter-spacing: 0; color: var(--dourado-claro); font-size: 1.12em; line-height: 1;
-  }
-  .light { background: var(--areia); color: var(--grafite); }
-  .light h2 em, .light h3 em { color: var(--dourado-escuro); }
-  .light .eyebrow { color: var(--dourado-escuro); }
-  p { text-wrap: pretty; }
+  h2 { font-size: clamp(2.2rem, 3.9vw, 3.6rem); }
+  h1 em, h2 em, h3 em { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: lowercase; letter-spacing: 0; color: var(--dourado-claro); font-size: 1.12em; line-height: 1; }
+  .rotulo { font-size: var(--t-mini); font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--dourado-claro); }
+  .losango::before { content: ""; display: inline-block; width: 5px; height: 5px; background: var(--dourado); transform: rotate(45deg); margin-right: 12px; vertical-align: 0.18em; }
 
   /* botão-cápsula (mesmo do site) */
   .btn {
@@ -96,15 +96,23 @@
   .btn:hover .arrow svg { transform: rotate(0); }
   .btn-solid { background: var(--dourado); color: var(--noite); border-color: var(--dourado); }
   .btn-solid .arrow { background: var(--noite); color: var(--dourado-claro); }
-  .btn-solid::before { background: var(--areia); }
-  .light .btn { color: var(--grafite); }
-  .light .btn-solid { color: var(--noite); }
+  .btn-solid::before { background: var(--grafite); }
+  .btn-solid:hover { color: var(--areia); }
+  .papel .btn { color: var(--grafite); }
+  .papel .btn-solid { color: var(--noite); }
+  .papel .btn-solid:hover { color: var(--areia); }
 
-  /* transições claro↔escuro: curva cosseno em OKLab, mesmas paradas do site */
-  .to-light, .to-dark { height: clamp(170px, 22vw, 320px); }
-  .to-light, .to-dark { background: linear-gradient(var(--dir), #0B0A08 0%, #0D0C09 6.25%, #12100E 12.5%, #1A1916 18.75%, #262421 25%, #353330 31.25%, #484541 37.5%, #5C5A55 43.75%, #73706A 50%, #8A8780 56.25%, #A29E96 62.5%, #B7B3AB 68.75%, #CBC7BD 75%, #DBD7CD 81.25%, #E8E3D8 87.5%, #EFEAE0 93.75%, #F2EDE2 100%); }
-  .to-light { --dir: to bottom; }
-  .to-dark { --dir: to top; }
+  /* ---------- esqueleto das seções: título 5/12 · prova 7/12 ---------- */
+  .sec { padding-block: var(--respiro); }
+  .sec + .sec { border-top: 1px solid var(--fio); }
+  .grade { display: grid; gap: clamp(34px, 5vw, 88px); }
+  .cab { display: grid; gap: 22px; align-content: start; }
+  .cab > p { font-size: var(--t-lead); color: var(--texto-suave); max-width: 44ch; line-height: 1.65; }
+  @media (min-width: 1024px) {
+    .grade { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
+    .grade.meio { align-items: center; }
+    .grade:not(.meio) > .cab { position: sticky; top: clamp(48px, 12vh, 120px); }
+  }
 
   /* ---------- carregando / erro ---------- */
   .estado { min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 40px var(--gutter); }
@@ -112,13 +120,13 @@
   .estado .linha { width: 120px; height: 1px; margin: 26px auto 0; background: linear-gradient(90deg, transparent, var(--dourado), transparent); background-size: 200% 100%; animation: carregar 1.4s ease-in-out infinite; }
   @keyframes carregar { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
   .estado h1 { font-size: clamp(1.8rem, 6vw, 2.8rem); margin-top: 30px; }
-  .estado p { margin: 16px auto 30px; max-width: 42ch; color: rgba(242, 237, 226, 0.7); }
+  .estado p { margin: 16px auto 30px; max-width: 42ch; color: var(--texto-suave); }
 
   .previa { position: fixed; z-index: 70; left: 50%; top: 14px; transform: translateX(-50%); display: flex; gap: 14px; align-items: center; padding: 8px 10px 8px 18px; border-radius: 999px; background: rgba(11, 10, 8, 0.86); backdrop-filter: blur(8px); border: 1px solid rgba(201, 162, 75, 0.6); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dourado-claro); white-space: nowrap; }
   .previa a { text-decoration: none; padding: 6px 12px; border-radius: 999px; background: var(--dourado); color: var(--noite); font-weight: 600; }
 
   /* ---------- capa ---------- */
-  .capa { position: relative; min-height: 100svh; display: grid; align-items: end; overflow: hidden; background: var(--noite); isolation: isolate; }
+  .capa { position: relative; min-height: 100svh; display: grid; align-items: end; overflow: hidden; isolation: isolate; }
   .capa-wall { position: absolute; inset: 0; z-index: -2; display: grid; grid-template-columns: 1fr; }
   .capa-wall .col { position: relative; overflow: hidden; }
   .capa-wall video { width: 100%; height: 100%; object-fit: cover; }
@@ -126,164 +134,149 @@
   @media (min-width: 821px) {
     .capa-wall { grid-template-columns: 1fr 1fr 1fr; gap: 3px; background: var(--noite); }
     .capa-wall .lado { display: block; }
-    .capa-wall .lado video { filter: saturate(0.7) brightness(0.75); }
+    .capa-wall .lado video { filter: saturate(0.7) brightness(0.72); }
   }
-  .capa::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, var(--noite) 4%, rgba(11, 10, 8, 0.72) 40%, rgba(11, 10, 8, 0.3) 70%, rgba(11, 10, 8, 0.78) 100%); }
-  .capa-top { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: max(20px, env(safe-area-inset-top)) var(--gutter) 0; }
-  .capa-top img { width: clamp(96px, 12vw, 140px); }
-  .capa-top span { font-size: var(--t-mini); letter-spacing: 0.3em; text-transform: uppercase; color: var(--dourado-claro); }
-  .capa-inner { padding: 0 var(--gutter) clamp(44px, 8vh, 90px); max-width: 1320px; width: 100%; margin-inline: auto; }
-  .capa h1 { font-size: clamp(3rem, 10.5vw, 8.6rem); line-height: 0.98; margin-top: 18px; overflow-wrap: anywhere; }
-  .capa h1 em { text-transform: none; }
-  .capa-meta { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 6px 26px; font-size: clamp(0.74rem, 0.62rem + 0.3vw, 0.92rem); letter-spacing: 0.2em; text-transform: uppercase; color: rgba(242, 237, 226, 0.78); }
-  .capa-meta span::before { content: "◆"; color: var(--dourado); font-size: 0.55rem; margin-right: 10px; vertical-align: 2px; }
-  .capa-acoes { margin-top: clamp(30px, 5vh, 52px); display: flex; flex-wrap: wrap; align-items: center; gap: 18px 32px; }
-  .capa-cue { display: inline-flex; align-items: center; gap: 14px; font-size: var(--t-mini); letter-spacing: 0.3em; text-transform: uppercase; color: var(--dourado-claro); text-decoration: none; }
+  .capa::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, var(--noite) 3%, rgba(11, 10, 8, 0.74) 40%, rgba(11, 10, 8, 0.3) 70%, rgba(11, 10, 8, 0.78) 100%); }
+  .capa-top { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: max(22px, env(safe-area-inset-top)) var(--gutter) 0; }
+  .capa-top img { width: clamp(96px, 11vw, 136px); }
+  .capa-inner { width: 100%; max-width: 1280px; margin-inline: auto; padding: 0 var(--gutter) clamp(46px, 9vh, 96px); }
+  .capa h1 { font-size: clamp(3rem, 8.6vw, 6rem); line-height: 0.98; margin-top: 18px; overflow-wrap: anywhere; }
+  .capa h1 em, [data-t="inter.h2"] em { text-transform: none; }   /* nomes próprios: casal e país */
+  .capa-meta { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px 30px; font-size: clamp(0.74rem, 0.64rem + 0.26vw, 0.9rem); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(242, 237, 226, 0.82); }
+  .capa-cue { margin-top: clamp(34px, 6vh, 56px); display: inline-flex; align-items: center; gap: 14px; font-size: var(--t-mini); letter-spacing: 0.3em; text-transform: uppercase; color: var(--dourado-claro); text-decoration: none; }
   .capa-cue i { width: 1px; height: 46px; background: linear-gradient(var(--dourado), transparent); animation: cue 2.2s var(--ease) infinite; transform-origin: top; }
   @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
 
-  /* ---------- mensagem pessoal ---------- */
-  .mensagem { padding: clamp(80px, 12vw, 160px) 0 clamp(60px, 8vw, 110px); }
-  .mensagem .wrap { max-width: 980px; }
-  .mensagem blockquote { margin-top: 28px; font-family: var(--serif); font-style: italic; font-size: clamp(1.6rem, 3.6vw, 2.6rem); line-height: 1.32; white-space: pre-line; }
-  .mensagem small { display: block; margin-top: 30px; font-size: var(--t-mini); letter-spacing: 0.3em; text-transform: uppercase; color: var(--dourado-claro); }
+  /* ---------- carta (mensagem pessoal) ---------- */
+  .carta { max-width: 860px; margin-inline: auto; text-align: center; }
+  .carta blockquote { font-family: var(--serif); font-style: italic; font-size: clamp(1.6rem, 2.7vw, 2.4rem); line-height: 1.36; white-space: pre-line; }
+  .assina { margin-top: 34px; display: inline-flex; align-items: center; gap: 14px; font-size: var(--t-mini); letter-spacing: 0.3em; text-transform: uppercase; color: var(--dourado-claro); }
+  .assina::before { content: ""; width: 40px; height: 1px; background: var(--dourado); }
 
-  /* ---------- sobre ---------- */
-  .sobre { padding: clamp(40px, 6vw, 80px) 0 clamp(70px, 9vw, 120px); }
-  .sobre-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(40px, 7vw, 110px); align-items: center; }
-  .sobre-foto { position: relative; isolation: isolate; width: min(100%, 460px); aspect-ratio: 3 / 4; }
-  .sobre-foto img { width: 100%; height: 100%; object-fit: cover; box-shadow: 0 34px 70px rgba(38, 34, 29, 0.3); }
-  .sobre-foto::after { content: ""; position: absolute; inset: 0; z-index: -1; border: 1px solid rgba(201, 162, 75, 0.7); transform: translate(18px, 18px); }
-  .sobre-copy { display: grid; gap: 22px; }
-  .sobre-copy p { color: #4A443B; max-width: 54ch; font-size: var(--t-lead); line-height: 1.65; }
-  .fatos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 18px; margin-top: 10px; padding-top: 24px; border-top: 1px solid rgba(201, 162, 75, 0.5); }
-  .fatos b { display: block; font-weight: 800; text-transform: uppercase; font-size: clamp(1.35rem, 1.1rem + 0.6vw, 1.8rem); line-height: 1.15; }
-  .fatos small { display: block; margin-top: 4px; font-size: var(--t-mini); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); line-height: 1.6; }
-  @media (max-width: 860px) { .sobre-grid { grid-template-columns: 1fr; } .sobre-foto { justify-self: center; width: min(84%, 380px); margin-bottom: 18px; } }
+  /* ---------- quem sou ---------- */
+  .foto-moldura { position: relative; isolation: isolate; width: min(100%, 480px); aspect-ratio: 3 / 4; justify-self: end; }
+  .foto-moldura img { width: 100%; height: 100%; object-fit: cover; box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5); }
+  .foto-moldura::after { content: ""; position: absolute; inset: 0; z-index: -1; border: 1px solid rgba(201, 162, 75, 0.6); transform: translate(18px, 18px); }
+  @media (max-width: 1023px) { .foto-moldura { justify-self: start; width: min(86%, 420px); } }
 
   /* ---------- palcos ---------- */
-  .palcos { padding: clamp(40px, 6vw, 80px) 0 clamp(60px, 8vw, 110px); }
-  .nomes { list-style: none; margin-top: clamp(22px, 3vw, 36px); border-top: 1px solid rgba(201, 162, 75, 0.3); }
-  .nomes li { padding: clamp(10px, 1.6vw, 18px) 0 clamp(12px, 1.8vw, 20px); border-bottom: 1px solid rgba(201, 162, 75, 0.3); font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; font-size: clamp(2.3rem, 7vw, 6.2rem); line-height: 1.02; overflow-wrap: anywhere; }
-  .nomes li:nth-child(even) { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--dourado-claro); font-size: clamp(2.7rem, 8vw, 7rem); text-align: right; }
-  .palcos-p { margin-top: clamp(26px, 4vw, 40px); max-width: 52ch; font-size: var(--t-lead); color: rgba(242, 237, 226, 0.72); }
+  .nomes { list-style: none; border-top: 1px solid var(--fio); }
+  .nomes li { padding: clamp(14px, 1.8vw, 22px) 0; border-bottom: 1px solid var(--fio); font-weight: 800; text-transform: uppercase; letter-spacing: -0.015em; font-size: clamp(2rem, 4.2vw, 3.7rem); line-height: 1.04; overflow-wrap: anywhere; }
+  .nomes li:nth-child(even) { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--dourado-claro); font-size: clamp(2.3rem, 4.8vw, 4.2rem); }
 
-  /* ---------- internacional ---------- */
-  .inter { padding: clamp(40px, 6vw, 80px) 0 clamp(70px, 9vw, 120px); }
-  .inter-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(40px, 7vw, 110px); align-items: center; }
-  .inter-video { position: relative; width: min(100%, 400px); aspect-ratio: 9 / 16; justify-self: center; background: var(--carvao); outline: 1px solid rgba(201, 162, 75, 0.55); outline-offset: 12px; }
-  .inter-video video { width: 100%; height: 100%; object-fit: cover; }
-  .som { position: absolute; left: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(231, 206, 147, 0.6); background: rgba(11, 10, 8, 0.55); backdrop-filter: blur(6px); color: var(--dourado-claro); font: inherit; font-size: var(--t-mini); font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; }
+  /* ---------- além do Brasil: dois vídeos lado a lado ---------- */
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(10px, 1.6vw, 20px); }
+  .duo figure { display: grid; gap: 14px; }
+  .duo .tela { position: relative; aspect-ratio: 9 / 16; overflow: hidden; background: var(--carvao); }
+  .duo video { width: 100%; height: 100%; object-fit: cover; }
+  .duo figcaption b { display: block; font-weight: 700; text-transform: uppercase; font-size: clamp(0.92rem, 0.84rem + 0.25vw, 1.1rem); letter-spacing: 0.02em; }
+  .duo figcaption span { font-size: var(--t-mini); letter-spacing: 0.22em; text-transform: uppercase; color: var(--dourado-claro); }
+  .som { position: absolute; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 10px; padding: 9px 15px; border-radius: 999px; border: 1px solid rgba(231, 206, 147, 0.6); background: rgba(11, 10, 8, 0.55); backdrop-filter: blur(6px); color: var(--dourado-claro); font: inherit; font-size: var(--t-mini); font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; }
   .som[aria-pressed="true"] { background: var(--dourado); color: var(--noite); border-color: var(--dourado); }
   .bars { display: inline-flex; align-items: flex-end; gap: 2px; height: 11px; }
   .bars i { width: 2px; height: 30%; background: currentColor; }
   .som[aria-pressed="true"] .bars i { animation: eq 900ms ease-in-out infinite; }
   .som[aria-pressed="true"] .bars i:nth-child(2) { animation-delay: -300ms; } .som[aria-pressed="true"] .bars i:nth-child(3) { animation-delay: -600ms; }
   @keyframes eq { 0%, 100% { height: 25%; } 50% { height: 100%; } }
-  .inter-copy { display: grid; gap: 20px; }
-  .inter h2 em { text-transform: none; }   /* nome de país */
-  .inter-copy > p:not(.eyebrow) { color: rgba(242, 237, 226, 0.75); max-width: 52ch; font-size: var(--t-lead); }
-  .lugares { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px 24px; margin-top: 8px; padding-top: 22px; border-top: 1px solid rgba(201, 162, 75, 0.35); }
-  .lugares b { display: block; font-weight: 800; text-transform: uppercase; font-size: clamp(1.2rem, 1rem + 0.5vw, 1.6rem); line-height: 1.2; }
-  .lugares small { font-size: var(--t-mini); letter-spacing: 0.22em; text-transform: uppercase; color: var(--dourado-claro); }
-  @media (max-width: 860px) { .inter-grid { grid-template-columns: 1fr; } .inter-video { width: min(78%, 340px); margin-bottom: 14px; } }
-  .sec-p { max-width: 54ch; color: rgba(242, 237, 226, 0.72); font-size: var(--t-lead); }
 
-  /* ---------- formatos ---------- */
-  .formatos { padding: clamp(40px, 6vw, 80px) 0 clamp(70px, 9vw, 120px); }
-  .sec-head { display: grid; gap: 14px; margin-bottom: clamp(36px, 5vw, 60px); }
-  .forms { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-  .form { position: relative; display: grid; gap: 14px; align-content: start; }
-  .form figure { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--carvao); }
-  .form img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease); }
-  .form:hover img { transform: scale(1.04); }
-  .form h3 { font-size: clamp(1.15rem, 1rem + 0.3vw, 1.4rem); line-height: 1.15; }
-  .form h3 em { text-transform: none; }
-  .form p { font-family: var(--serif); font-style: italic; font-size: clamp(1.1rem, 1rem + 0.25vw, 1.32rem); line-height: 1.35; color: rgba(242, 237, 226, 0.72); }
-  .selo { position: absolute; top: 12px; left: 12px; padding: 6px 12px; border-radius: 999px; background: var(--dourado); color: var(--noite); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
-  .selo.opc { background: rgba(11, 10, 8, 0.78); color: var(--dourado-claro); border: 1px solid rgba(231, 206, 147, 0.6); }
-  .form.na-proposta figure { outline: 1px solid var(--dourado); outline-offset: 6px; }
-  @media (max-width: 1020px) {
-    .forms { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: min(74vw, 320px); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 14px; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scrollbar-width: none; }
-    .forms::-webkit-scrollbar { display: none; }
-    .form { scroll-snap-align: start; }
+  /* ---------- grandes casamentos ---------- */
+  .casam-cab { display: grid; gap: 22px; margin-bottom: clamp(36px, 4vw, 56px); }
+  .casam-cab p { font-size: var(--t-lead); color: var(--texto-suave); max-width: 44ch; }
+  @media (min-width: 1024px) { .casam-cab { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(34px, 5vw, 88px); align-items: end; } }
+  .cards { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(8px, 1vw, 14px); }
+  @media (max-width: 1023px) {
+    .cards { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(62vw, 260px); overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(-1 * var(--gutter)); padding: 0 var(--gutter) 12px; scrollbar-width: none; }
+    .cards::-webkit-scrollbar { display: none; }
+    .card { scroll-snap-align: start; }
   }
-
-  /* ---------- vídeos ---------- */
-  .videos { padding: clamp(20px, 3vw, 40px) 0 clamp(70px, 9vw, 120px); }
-  .strip { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(220px, 23vw, 300px); gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--gutter) 14px; scrollbar-width: none; }
-  .strip::-webkit-scrollbar { display: none; }
-  @media (min-width: 1320px) { .strip { padding-inline: calc((100vw - 1320px) / 2 + var(--gutter)); } }
-  .card { position: relative; aspect-ratio: 9 / 16; overflow: hidden; background: var(--carvao); scroll-snap-align: start; border: 0; padding: 0; cursor: pointer; color: var(--areia); font: inherit; text-align: left; }
+  .card { position: relative; aspect-ratio: 9 / 16; overflow: hidden; background: var(--carvao); cursor: pointer; }
   .card img, .card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(11, 10, 8, 0.85), transparent 45%); pointer-events: none; transition: opacity 300ms; }
-  .card .play { cursor: pointer; padding: 0; color: inherit; position: absolute; top: 50%; left: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; border: 1px solid var(--dourado-claro); display: grid; place-items: center; background: rgba(11, 10, 8, 0.3); backdrop-filter: blur(4px); z-index: 2; transition: transform 400ms var(--ease); }
+  .card img { transition: transform 1.2s var(--ease); }
+  .card:hover img { transform: scale(1.04); }
+  .card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(11, 10, 8, 0.88), transparent 48%); pointer-events: none; transition: opacity 300ms; }
+  .card .play { cursor: pointer; padding: 0; color: inherit; position: absolute; top: 50%; left: 50%; width: 58px; height: 58px; margin: -29px 0 0 -29px; border-radius: 50%; border: 1px solid var(--dourado-claro); display: grid; place-items: center; background: rgba(11, 10, 8, 0.3); backdrop-filter: blur(4px); z-index: 2; transition: transform 400ms var(--ease); }
   .card:hover .play { transform: scale(1.08); }
-  .card .info { position: absolute; left: 16px; right: 16px; bottom: 16px; z-index: 2; }
-  .card .info b { display: block; font-weight: 700; text-transform: uppercase; font-size: clamp(0.86rem, 0.8rem + 0.15vw, 1rem); letter-spacing: 0.04em; line-height: 1.2; }
-  .card .info small { font-size: var(--t-mini); letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado-claro); }
+  .card .info { position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 2; }
+  .card .info b { display: block; font-weight: 700; text-transform: uppercase; font-size: clamp(0.84rem, 0.78rem + 0.15vw, 0.96rem); letter-spacing: 0.03em; line-height: 1.22; }
+  .card .info small { display: block; margin-top: 4px; font-size: var(--t-mini); letter-spacing: 0.18em; text-transform: uppercase; color: var(--dourado-claro); line-height: 1.5; }
   .card.tocando::after, .card.tocando .play, .card.tocando .info { opacity: 0; pointer-events: none; }
-  .card .fechar { position: absolute; z-index: 4; top: 12px; right: 12px; display: none; background: rgba(11, 10, 8, 0.7); border: 1px solid rgba(231, 206, 147, 0.6); border-radius: 999px; color: var(--areia); font: inherit; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 7px 12px; cursor: pointer; }
+  .card .fechar { position: absolute; z-index: 4; top: 10px; right: 10px; display: none; background: rgba(11, 10, 8, 0.7); border: 1px solid rgba(231, 206, 147, 0.6); border-radius: 999px; color: var(--areia); font: inherit; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 7px 12px; cursor: pointer; }
   .card.tocando .fechar { display: block; }
 
-  /* ---------- prova + depoimentos ---------- */
-  .prova { padding: clamp(40px, 6vw, 80px) 0 clamp(60px, 8vw, 100px); }
-  .selos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: rgba(201, 162, 75, 0.3); border-block: 1px solid rgba(201, 162, 75, 0.3); margin-bottom: clamp(70px, 9vw, 120px); }
-  .selos div { background: var(--noite); padding: 26px 8px; text-align: center; display: grid; align-content: center; }
-  .selos b { display: block; font-weight: 800; font-size: clamp(1.5rem, 3.2vw, 2.3rem); line-height: 1.1; color: var(--dourado-claro); text-transform: uppercase; }
-  .selos b.serif { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; font-size: clamp(1.45rem, 3vw, 2.2rem); }
-  .selos small { display: block; margin-top: 6px; font-size: var(--t-mini); letter-spacing: 0.2em; text-transform: uppercase; color: rgba(242, 237, 226, 0.6); }
-  @media (min-width: 900px) { .selos { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-  .depos { display: grid; gap: clamp(46px, 6vw, 70px); max-width: 1000px; }
-  .depo { position: relative; padding: clamp(30px, 4vw, 20px) 0 0 clamp(0px, 4vw, 60px); }
-  .depo::before { content: "“"; position: absolute; left: -0.1em; top: -0.32em; font-family: var(--serif); font-size: clamp(5.5rem, 10vw, 8rem); line-height: 1; color: var(--dourado); opacity: 0.35; }
-  .depo blockquote { font-family: var(--serif); font-style: italic; font-size: clamp(1.35rem, 2.6vw, 1.95rem); line-height: 1.38; }
-  .depo figcaption { margin-top: 16px; font-size: var(--t-mini); letter-spacing: 0.26em; text-transform: uppercase; color: var(--dourado-claro); }
+  /* ---------- prova: credenciais + depoimentos ---------- */
+  .credenciais { list-style: none; border-top: 1px solid var(--fio); margin-top: 8px; }
+  .credenciais li { padding: 16px 0; border-bottom: 1px solid var(--fio); display: grid; gap: 2px; }
+  .credenciais b { font-weight: 700; font-size: clamp(1rem, 0.92rem + 0.3vw, 1.22rem); color: var(--areia); }
+  .credenciais b.serif { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1.25rem, 1.1rem + 0.4vw, 1.55rem); color: var(--dourado-claro); line-height: 1.2; }
+  .credenciais span { font-size: var(--t-mini); letter-spacing: 0.18em; text-transform: uppercase; color: var(--texto-suave); }
+  .depos { display: grid; }
+  .depo { padding: clamp(26px, 3vw, 40px) 0; border-bottom: 1px solid var(--fio); }
+  .depo:first-child { padding-top: 0; }
+  .depo:last-child { border-bottom: 0; padding-bottom: 0; }
+  .depo blockquote { font-family: var(--serif); font-style: italic; font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.7rem); line-height: 1.4; }
+  .depo blockquote::before { content: "“"; color: var(--dourado); margin-right: 0.08em; }
+  .depo blockquote::after { content: "”"; color: var(--dourado); margin-left: 0.04em; }
+  .depo figcaption { margin-top: 14px; font-size: var(--t-mini); letter-spacing: 0.24em; text-transform: uppercase; color: var(--dourado-claro); }
 
-  /* ---------- investimento (o "papel" da proposta) ---------- */
-  .invest { padding: clamp(40px, 6vw, 80px) 0 clamp(80px, 10vw, 140px); }
-  .doc { max-width: 980px; margin-inline: auto; padding-inline: var(--gutter); }
-  .resumo { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px 28px; margin: clamp(30px, 5vw, 50px) 0 clamp(46px, 6vw, 70px); padding: 22px 0; border-block: 1px solid rgba(160, 126, 47, 0.45); }
-  .resumo small { display: block; font-size: var(--t-mini); letter-spacing: 0.24em; text-transform: uppercase; color: var(--dourado-escuro); }
+  /* ---------- formatos (opcional) ---------- */
+  .forms { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 26px); }
+  .form { display: grid; gap: 12px; align-content: start; }
+  .form figure { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--carvao); }
+  .form img { width: 100%; height: 100%; object-fit: cover; }
+  .form h3 { font-size: clamp(1.05rem, 0.95rem + 0.3vw, 1.3rem); line-height: 1.15; }
+  .form h3 em { text-transform: none; }
+  .form p { font-family: var(--serif); font-style: italic; font-size: clamp(1.05rem, 0.98rem + 0.2vw, 1.22rem); line-height: 1.35; color: var(--texto-suave); }
+  .selo { position: absolute; top: 12px; left: 12px; padding: 6px 12px; border-radius: 999px; background: var(--dourado); color: var(--noite); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+  .selo.opc { background: rgba(11, 10, 8, 0.78); color: var(--dourado-claro); border: 1px solid rgba(231, 206, 147, 0.6); }
+
+  /* ---------- a folha da proposta (creme sobre o preto) ---------- */
+  .papel {
+    position: relative; max-width: 1040px; margin-inline: auto; background: var(--areia); color: var(--grafite);
+    padding: clamp(40px, 6.5vw, 96px) clamp(24px, 6.5vw, 100px);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.55), 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+  .papel::before { content: ""; position: absolute; inset: clamp(10px, 1.2vw, 16px); border: 1px solid rgba(160, 126, 47, 0.45); pointer-events: none; }
+  .papel h2 em { color: var(--dourado-escuro); }
+  .resumo { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 16px 20px; margin: clamp(28px, 4vw, 44px) 0 clamp(40px, 5vw, 60px); padding: 20px 0; border-block: 1px solid rgba(143, 111, 39, 0.4); }
+  .resumo small { display: block; font-size: var(--t-mini); letter-spacing: 0.22em; text-transform: uppercase; color: var(--dourado-escuro); }
   .resumo span { display: block; margin-top: 4px; font-weight: 500; line-height: 1.4; }
-  .bloco { margin-bottom: clamp(44px, 6vw, 64px); }
-  .bloco > h3 { font-size: var(--t-eyebrow); font-weight: 600; letter-spacing: 0.3em; color: var(--dourado-escuro); padding-bottom: 14px; border-bottom: 1px solid var(--dourado); margin-bottom: 6px; }
-  .linha { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 6px 18px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid rgba(38, 34, 29, 0.12); }
-  .linha .n { font-family: var(--serif); font-style: italic; font-size: 1.25rem; color: var(--dourado-escuro); min-width: 1.6em; }
-  .linha b { display: block; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; font-size: clamp(1.02rem, 0.92rem + 0.3vw, 1.24rem); line-height: 1.3; }
-  .linha p { margin-top: 4px; color: #5B5448; font-size: clamp(0.98rem, 0.9rem + 0.25vw, 1.14rem); line-height: 1.6; white-space: pre-line; }
-  .linha .v { font-weight: 600; white-space: nowrap; font-size: clamp(1.02rem, 0.92rem + 0.3vw, 1.24rem); }
+  .bloco { margin-bottom: clamp(36px, 4.5vw, 54px); }
+  .bloco > h3 { font-size: var(--t-mini); font-weight: 600; letter-spacing: 0.26em; color: var(--dourado-escuro); padding-bottom: 12px; border-bottom: 1px solid var(--dourado); }
+  .linha { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 24px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid rgba(38, 34, 29, 0.12); }
+  .linha b { display: block; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; font-size: clamp(1rem, 0.92rem + 0.28vw, 1.2rem); line-height: 1.3; }
+  .linha p { margin-top: 4px; color: var(--tinta-suave); font-size: clamp(0.96rem, 0.9rem + 0.22vw, 1.1rem); line-height: 1.55; white-space: pre-line; }
+  .linha .v { font-weight: 600; white-space: nowrap; font-size: clamp(1rem, 0.92rem + 0.28vw, 1.2rem); }
   .opc .v { color: var(--dourado-escuro); }
-  @media (max-width: 560px) { .linha { grid-template-columns: auto minmax(0, 1fr); } .linha .v { grid-column: 2; } }
-  .total { margin-bottom: clamp(44px, 6vw, 64px); padding: clamp(28px, 4vw, 40px) clamp(22px, 4vw, 44px); background: var(--noite); color: var(--areia); position: relative; overflow: hidden; }
-  .total::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 120% at 90% 0%, rgba(201, 162, 75, 0.22), transparent 70%); pointer-events: none; }
-  .total small { position: relative; display: block; font-size: var(--t-eyebrow); letter-spacing: 0.3em; text-transform: uppercase; color: var(--dourado-claro); }
-  .total strong { position: relative; display: block; margin-top: 10px; font-weight: 800; font-size: clamp(2.6rem, 8vw, 5.2rem); line-height: 1.12; letter-spacing: -0.02em; color: var(--dourado-claro); overflow-wrap: anywhere; }
-  .total p { position: relative; margin-top: 10px; font-size: clamp(0.9rem, 0.84rem + 0.2vw, 1.04rem); color: rgba(242, 237, 226, 0.7); }
+  .total { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 24px; padding: clamp(22px, 3vw, 32px) 0; margin-bottom: clamp(36px, 4.5vw, 54px); border-block: 2px solid var(--dourado); }
+  .total small { font-size: var(--t-mini); font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--dourado-escuro); }
+  .total strong { font-weight: 800; font-size: clamp(2.5rem, 5.4vw, 4.4rem); line-height: 1.1; letter-spacing: -0.025em; color: var(--grafite); overflow-wrap: anywhere; }
+  .total p { flex-basis: 100%; font-size: clamp(0.9rem, 0.85rem + 0.18vw, 1rem); color: var(--tinta-suave); }
   .condicoes { list-style: none; }
-  .condicoes li { padding: 14px 0 14px 26px; border-bottom: 1px solid rgba(38, 34, 29, 0.12); position: relative; }
-  .condicoes li::before { content: "◆"; position: absolute; left: 0; top: 15px; font-size: 0.55rem; color: var(--dourado); }
-  .validade { font-family: var(--serif); font-style: italic; font-size: clamp(1.3rem, 2.4vw, 1.6rem); line-height: 1.4; }
-  .expirou { padding: 20px 24px; border: 1px solid var(--dourado-escuro); background: rgba(201, 162, 75, 0.12); font-size: var(--t-corpo); }
-  .obs { color: #5B5448; font-size: clamp(0.95rem, 0.88rem + 0.22vw, 1.1rem); white-space: pre-line; }
-  .acoes { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; margin-top: clamp(40px, 6vw, 60px); }
+  .condicoes li { padding: 14px 0; border-bottom: 1px solid rgba(38, 34, 29, 0.12); }
+  .validade { font-family: var(--serif); font-style: italic; font-size: clamp(1.3rem, 1.1rem + 0.6vw, 1.65rem); line-height: 1.4; }
+  .expirou { padding: 18px 22px; border: 1px solid var(--dourado-escuro); background: rgba(201, 162, 75, 0.14); }
+  .obs { color: var(--tinta-suave); font-size: clamp(0.94rem, 0.88rem + 0.2vw, 1.06rem); white-space: pre-line; }
+  .acoes { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; margin-top: clamp(8px, 2vw, 20px); }
+  @media (max-width: 560px) {
+    .papel { margin-inline: calc(10px - var(--gutter)); padding-inline: 22px; }
+    .acoes .btn { width: 100%; justify-content: space-between; white-space: nowrap; font-size: 0.7rem; letter-spacing: 0.1em; padding-left: 20px; }
+  }
 
   /* ---------- fecho ---------- */
-  .fecho { padding: clamp(50px, 8vw, 100px) 0 0; text-align: center; }
-  .fecho blockquote { font-family: var(--serif); font-style: italic; font-size: clamp(2rem, 6vw, 4.4rem); line-height: 1.1; }
+  .fecho { text-align: center; padding-bottom: 0; }
+  .fecho blockquote { font-family: var(--serif); font-style: italic; font-size: clamp(1.9rem, 4vw, 3.2rem); line-height: 1.15; }
   .fecho blockquote span { color: var(--dourado-claro); }
-  .fecho small { display: block; margin-top: 24px; font-size: var(--t-mini); letter-spacing: 0.3em; text-transform: uppercase; color: var(--dourado-claro); }
-  .fecho .btn { margin-top: 44px; }
-  footer { margin-top: clamp(80px, 10vw, 130px); padding: 34px var(--gutter) max(34px, env(safe-area-inset-bottom)); border-top: 1px solid rgba(201, 162, 75, 0.3); display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 30px; font-size: var(--t-mini); letter-spacing: 0.22em; text-transform: uppercase; color: rgba(242, 237, 226, 0.55); }
+  .fecho .assina { margin-top: 22px; }
+  footer { margin-top: var(--respiro); padding: 30px var(--gutter) max(30px, env(safe-area-inset-bottom)); border-top: 1px solid var(--fio); display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 30px; font-size: var(--t-mini); letter-spacing: 0.22em; text-transform: uppercase; color: rgba(242, 237, 226, 0.55); }
   footer a { text-decoration: none; }
   footer a:hover { color: var(--dourado-claro); }
 
-  .wa-float { position: fixed; right: 18px; bottom: max(18px, env(safe-area-inset-bottom)); z-index: 45; width: 56px; height: 56px; border-radius: 50%; background: rgba(11, 10, 8, 0.85); backdrop-filter: blur(8px); color: var(--areia); display: grid; place-items: center; border: 1px solid rgba(201, 162, 75, 0.55); transition: background-color 250ms, transform 250ms var(--ease), opacity 300ms; }
+  .wa-float { position: fixed; right: 18px; bottom: max(18px, env(safe-area-inset-bottom)); z-index: 45; width: 56px; height: 56px; border-radius: 50%; background: rgba(11, 10, 8, 0.85); backdrop-filter: blur(8px); color: var(--areia); display: grid; place-items: center; border: 1px solid rgba(201, 162, 75, 0.55); transition: background-color 250ms, transform 250ms var(--ease); }
   .wa-float:hover { background: var(--dourado); color: var(--noite); transform: scale(1.06); }
 
-  .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity 900ms var(--ease), transform 900ms var(--ease); }
+  .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity 900ms var(--ease), transform 900ms var(--ease); }
   .js .reveal.in { opacity: 1; transform: none; }
-  .js .reveal.d1 { transition-delay: 120ms; } .js .reveal.d2 { transition-delay: 240ms; } .js .reveal.d3 { transition-delay: 360ms; }
+  .js .reveal.d1 { transition-delay: 120ms; } .js .reveal.d2 { transition-delay: 240ms; }
   @media (prefers-reduced-motion: reduce) {
     .grain, .capa-cue i, .estado .linha { animation: none; }
     .js .reveal { opacity: 1; transform: none; transition: none; }
@@ -322,117 +315,101 @@
     </div>
     <div class="capa-top">
       <img src="../media/logo-full.png" alt="Bruno Daner Sax" width="960" height="540">
-      <span data-t="capa.tag">Proposta comercial</span>
+      <span class="rotulo" data-t="capa.tag">Proposta comercial</span>
     </div>
     <div class="capa-inner">
-      <p class="eyebrow" data-t="capa.eyebrow">Proposta exclusiva para</p>
+      <p class="rotulo" data-t="capa.eyebrow">Proposta exclusiva para</p>
       <h1 id="pCliente"></h1>
       <p class="capa-meta" id="pMeta"></p>
-      <div class="capa-acoes">
-        <a class="capa-cue" href="#inicio"><i></i><span data-t="capa.cue">Role para conhecer</span></a>
-      </div>
+      <a class="capa-cue" href="#inicio"><i></i><span data-t="capa.cue">Role para conhecer</span></a>
     </div>
   </section>
 
   <span id="inicio"></span>
 
-  <!-- MENSAGEM PESSOAL -->
-  <section class="mensagem" id="secMensagem" aria-label="Mensagem do Bruno" hidden>
-    <div class="wrap">
-      <p class="eyebrow reveal" data-t="msg.eyebrow">Antes de tudo</p>
-      <blockquote class="reveal d1" id="pMensagem"></blockquote>
-      <small class="reveal d2">— Bruno Daner</small>
+  <!-- CARTA (mensagem pessoal, opcional) -->
+  <section class="sec" id="secMensagem" aria-label="Mensagem do Bruno" hidden>
+    <div class="wrap carta">
+      <blockquote class="reveal" id="pMensagem"></blockquote>
+      <p class="assina reveal d1">Bruno Daner</p>
     </div>
   </section>
-
-  <div class="to-light" aria-hidden="true"></div>
 
   <!-- QUEM SOU — só autoridade; a história completa fica no site -->
-  <section class="sobre light" aria-label="Sobre o Bruno">
-    <div class="wrap sobre-grid">
-      <figure class="sobre-foto reveal"><img src="../media/fotos/sobre-bruno.jpg" alt="Bruno Daner de blazer claro, braços abertos, com o saxofone iluminado em dourado" width="826" height="1144" loading="lazy"></figure>
-      <div class="sobre-copy">
-        <p class="eyebrow reveal" data-t="sobre.eyebrow">Quem conduz a sua festa</p>
-        <h2 class="reveal d1" data-t="sobre.h2">Do Rio para o <em>mundo</em>.</h2>
-        <p class="reveal d2" data-t="sobre.p1">Sou Bruno Daner, saxofonista e DJ formado pela Escola de Música Villa-Lobos. Comecei nos palcos do pagode e, há cinco anos, levo para casamentos e eventos a união do sax ao vivo com a condução de um DJ — no Brasil e fora dele.</p>
-        <div class="fatos reveal d3">
-          <div><b>+500</b><small data-t="fato1">apresentações realizadas</small></div>
-          <div><b>5.0</b><small data-t="fato2">casamentos.com.br · 100% recomendam</small></div>
-          <div><b data-t="fato3b">NY &amp; Flórida</b><small data-t="fato3">turnê internacional</small></div>
-          <div><b>EMVL</b><small data-t="fato4">Escola de Música Villa-Lobos</small></div>
-        </div>
+  <section class="sec" aria-label="Sobre o Bruno">
+    <div class="wrap grade meio">
+      <div class="cab">
+        <h2 class="reveal" data-t="sobre.h2">Do Rio para o <em>mundo</em>.</h2>
+        <p class="reveal d1" data-t="sobre.p1">Sou Bruno Daner, saxofonista e DJ formado pela Escola de Música Villa-Lobos. Comecei nos palcos do pagode e, há cinco anos, levo para casamentos e eventos a união do sax ao vivo com a condução de um DJ — no Brasil e fora dele.</p>
       </div>
+      <figure class="foto-moldura reveal d1"><img src="../media/fotos/sobre-bruno.jpg" alt="Bruno Daner de blazer claro, braços abertos, com o saxofone iluminado em dourado" width="826" height="1144" loading="lazy"></figure>
     </div>
   </section>
-
-  <div class="to-dark" aria-hidden="true"></div>
 
   <!-- PALCOS — artistas com quem ele já tocou (lista a completar com o Bruno) -->
-  <section class="palcos" aria-label="Artistas com quem o Bruno dividiu o palco">
-    <div class="wrap">
-      <p class="eyebrow reveal" data-t="palcos.eyebrow">Já dividi o palco com</p>
-      <ul class="nomes">
-        <li class="reveal">Pique Novo</li>
-        <li class="reveal d1">Gustavo Lins</li>
-        <li class="reveal d2">Renato da Rocinha</li>
+  <section class="sec" aria-label="Artistas com quem o Bruno dividiu o palco">
+    <div class="wrap grade meio">
+      <div class="cab">
+        <h2 class="reveal" data-t="palcos.h2">Já dividi o <em>palco</em> com</h2>
+        <p class="reveal d1" data-t="palcos.p">Dos palcos do samba e do pagode para mais de 500 apresentações em casamentos, eventos corporativos e celebrações exclusivas.</p>
+      </div>
+      <ul class="nomes reveal d1">
+        <li>Pique Novo</li>
+        <li>Gustavo Lins</li>
+        <li>Renato da Rocinha</li>
       </ul>
-      <p class="palcos-p reveal" data-t="palcos.p">Dos palcos do samba e do pagode para mais de 500 apresentações em casamentos, eventos corporativos e celebrações exclusivas.</p>
     </div>
   </section>
 
-  <!-- INTERNACIONAL / DESTINATION -->
-  <section class="inter" aria-label="Internacional e destination weddings">
-    <div class="wrap inter-grid">
-      <div class="inter-video reveal">
-        <video muted loop playsinline preload="none" poster="../media/videos/poster-eua.jpg" data-src="../media/videos/v-eua.mp4" id="interVideo"></video>
-        <button class="som" type="button" id="interSom" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span data-t="inter.som">Ouvir com som</span></button>
+  <!-- ALÉM DO BRASIL -->
+  <section class="sec" aria-label="Internacional e destination weddings">
+    <div class="wrap grade meio">
+      <div class="cab">
+        <h2 class="reveal" data-t="inter.h2">Além do <em>Brasil</em>.</h2>
+        <p class="reveal d1" data-t="inter.p">Uma turnê me levou a Nova York e à Flórida — e destination weddings fazem parte do meu trabalho. A experiência vai junto, para onde a celebração for.</p>
       </div>
-      <div class="inter-copy">
-        <p class="eyebrow reveal" data-t="inter.eyebrow">Destination &amp; internacional</p>
-        <h2 class="reveal d1" data-t="inter.h2">Além do <em>Brasil</em>.</h2>
-        <p class="reveal d2" data-t="inter.p">Uma turnê me levou a Nova York e à Flórida — e destination weddings fazem parte do meu trabalho. A experiência vai junto, para onde a celebração for.</p>
-        <ul class="lugares reveal d3">
-          <li><b>Nova York</b><small data-t="eua">Estados Unidos</small></li>
-          <li><b data-t="fl">Flórida</b><small data-t="eua">Estados Unidos</small></li>
-          <li><b>Cristo Redentor</b><small>Rio de Janeiro</small></li>
-          <!-- Tiradentes (MG): entra quando o Bruno mandar os vídeos do casamento -->
-        </ul>
+      <div class="duo reveal d1">
+        <figure>
+          <div class="tela"><video muted loop playsinline preload="none" poster="../media/videos/poster-eua.jpg" data-src="../media/videos/v-eua.mp4"></video><button class="som" type="button" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span data-t="som">Ouvir</span></button></div>
+          <figcaption><b data-t="ny">Nova York</b><span data-t="eua">Estados Unidos</span></figcaption>
+        </figure>
+        <figure>
+          <div class="tela"><video muted loop playsinline preload="none" poster="../media/videos/poster-cristo.jpg" data-src="../media/videos/v-cristo.mp4"></video><button class="som" type="button" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span data-t="som">Ouvir</span></button></div>
+          <figcaption><b data-t="cristo">Cristo Redentor</b><span data-t="rio">Rio de Janeiro</span></figcaption>
+        </figure>
+        <!-- Tiradentes (MG): entra quando o Bruno mandar os vídeos do casamento -->
       </div>
     </div>
   </section>
 
   <!-- GRANDES CASAMENTOS (vídeos) -->
-  <section class="videos" id="secVideos" aria-label="Casamentos em vídeo">
-    <div class="wrap sec-head">
-      <p class="eyebrow reveal" data-t="vid.eyebrow">Grandes casamentos</p>
-      <h2 class="reveal d1" data-t="vid.h2">Cenas <em>reais</em>.</h2>
-      <p class="sec-p reveal d2" data-t="vid.p">Nada aqui é ensaio ou banco de imagem — é o que os seus convidados vão viver. Toque e assista com som.</p>
-    </div>
-    <div class="strip">
-      <div class="card reveal" data-video="../media/videos/v-pista.mp4"><img src="../media/videos/poster-pista.jpg" alt="" loading="lazy"><button class="play" type="button" data-t-aria="assistir" aria-label="Assistir"><svg width="16" height="20" viewBox="0 0 18 22" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button><span class="info"><b data-t="v1">A pista responde</b><small data-t="v1s">Casamento · a festa termina lotada</small></span></div>
-      <div class="card reveal d1" data-video="../media/videos/v-bw.mp4"><img src="../media/videos/poster-hero-c.jpg" alt="" loading="lazy"><button class="play" type="button" data-t-aria="assistir" aria-label="Assistir"><svg width="16" height="20" viewBox="0 0 18 22" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button><span class="info"><b data-t="v6">Salão de lustres</b><small data-t="v6s">Sax no meio da multidão</small></span></div>
-      <div class="card reveal d2" data-video="../media/videos/v-cerimonia-igreja.mp4"><img src="../media/videos/poster-cerimonia-igreja.jpg" alt="" loading="lazy"><button class="play" type="button" data-t-aria="assistir" aria-label="Assistir"><svg width="16" height="20" viewBox="0 0 18 22" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button><span class="info"><b data-t="v3">A entrada da noiva</b><small data-t="v3s">Clarinada na igreja</small></span></div>
-      <div class="card reveal d3" data-video="../media/videos/v-festa.mp4"><img src="../media/videos/poster-festa.jpg" alt="" loading="lazy"><button class="play" type="button" data-t-aria="assistir" aria-label="Assistir"><svg width="16" height="20" viewBox="0 0 18 22" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button><span class="info"><b data-t="v5">Contra o telão</b><small data-t="v5s">Set, sax e LED</small></span></div>
-      <div class="card reveal d3" data-video="../media/videos/v-energia.mp4"><img src="../media/videos/poster-energia.jpg" alt="" loading="lazy"><button class="play" type="button" data-t-aria="assistir" aria-label="Assistir"><svg width="16" height="20" viewBox="0 0 18 22" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button><span class="info"><b data-t="v7">Essa energia</b><small data-t="v7s">Festa ao ar livre · noiva na pista</small></span></div>
-      <div class="card reveal d3" data-video="../media/videos/v-cristo.mp4"><img src="../media/videos/poster-cristo.jpg" alt="" loading="lazy"><button class="play" type="button" data-t-aria="assistir" aria-label="Assistir"><svg width="16" height="20" viewBox="0 0 18 22" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button><span class="info"><b data-t="v2">Aos pés do Cristo</b><small>Rio de Janeiro</small></span></div>
+  <section class="sec" id="secVideos" aria-label="Casamentos em vídeo">
+    <div class="wrap">
+      <div class="casam-cab">
+        <h2 class="reveal" data-t="vid.h2">Grandes <em>casamentos</em>.</h2>
+        <p class="reveal d1" data-t="vid.p">Nada aqui é ensaio ou banco de imagem — é o que os seus convidados vão viver. Toque e assista com som.</p>
+      </div>
+      <div class="cards">
+        <div class="card reveal" data-video="../media/videos/v-pista.mp4"><img src="../media/videos/poster-pista.jpg" alt="" loading="lazy"><button class="play" type="button" data-t-aria="assistir" aria-label="Assistir"><svg width="15" height="18" viewBox="0 0 18 22" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button><span class="info"><b data-t="v1">A pista responde</b><small data-t="v1s">A festa termina lotada</small></span></div>
+        <div class="card reveal" data-video="../media/videos/v-bw.mp4"><img src="../media/videos/poster-hero-c.jpg" alt="" loading="lazy"><button class="play" type="button" data-t-aria="assistir" aria-label="Assistir"><svg width="15" height="18" viewBox="0 0 18 22" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button><span class="info"><b data-t="v6">Salão de lustres</b><small data-t="v6s">Sax no meio da multidão</small></span></div>
+        <div class="card reveal" data-video="../media/videos/v-cerimonia-igreja.mp4"><img src="../media/videos/poster-cerimonia-igreja.jpg" alt="" loading="lazy"><button class="play" type="button" data-t-aria="assistir" aria-label="Assistir"><svg width="15" height="18" viewBox="0 0 18 22" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button><span class="info"><b data-t="v3">A entrada da noiva</b><small data-t="v3s">Clarinada na igreja</small></span></div>
+        <div class="card reveal" data-video="../media/videos/v-festa.mp4"><img src="../media/videos/poster-festa.jpg" alt="" loading="lazy"><button class="play" type="button" data-t-aria="assistir" aria-label="Assistir"><svg width="15" height="18" viewBox="0 0 18 22" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button><span class="info"><b data-t="v5">Contra o telão</b><small data-t="v5s">Set, sax e LED</small></span></div>
+        <div class="card reveal" data-video="../media/videos/v-energia.mp4"><img src="../media/videos/poster-energia.jpg" alt="" loading="lazy"><button class="play" type="button" data-t-aria="assistir" aria-label="Assistir"><svg width="15" height="18" viewBox="0 0 18 22" aria-hidden="true"><path d="M0 0L18 11L0 22V0Z" fill="#E7CE93"/></svg></button><span class="info"><b data-t="v7">Essa energia</b><small data-t="v7s">Noiva na pista</small></span></div>
+      </div>
     </div>
   </section>
 
-  <!-- RECONHECIMENTO + DEPOIMENTOS -->
-  <section class="prova" id="secDepoimentos" aria-label="Reconhecimento e depoimentos">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow reveal" data-t="rec.eyebrow">Reconhecimento</p>
-      </div>
-      <div class="selos reveal">
-        <div><b>Awards 2026</b><small data-t="selo1">Casamentos Awards · Música RJ</small></div>
-        <div><b class="serif">Constance Zahn</b><small data-t="selo2">Parceiro · Guia de Fornecedores</small></div>
-        <div><b>5.0</b><small data-t="selo3">casamentos.com.br · 100% recomendam</small></div>
-        <div><b>+500</b><small data-t="selo4">apresentações</small></div>
-      </div>
-      <div class="sec-head">
-        <p class="eyebrow reveal" data-t="depo.eyebrow">Depoimentos</p>
-        <h2 class="reveal d1" data-t="depo.h2">A palavra de quem <em>viveu</em>.</h2>
+  <!-- PROVA: credenciais + depoimentos -->
+  <section class="sec" id="secDepoimentos" aria-label="Reconhecimento e depoimentos">
+    <div class="wrap grade">
+      <div class="cab">
+        <h2 class="reveal" data-t="depo.h2">A palavra de quem <em>viveu</em>.</h2>
+        <ul class="credenciais reveal d1">
+          <li><b>Casamentos Awards 2026</b><span data-t="cred1">Música · Rio de Janeiro</span></li>
+          <li><b class="serif">Constance Zahn</b><span data-t="cred2">Parceiro · Guia de Fornecedores</span></li>
+          <li><b data-t="cred3b">5.0 no casamentos.com.br</b><span data-t="cred3">100% dos casais recomendam</span></li>
+          <li><b data-t="cred4b">+500 apresentações</b><span data-t="cred4">Casamentos, eventos corporativos e celebrações</span></li>
+        </ul>
       </div>
       <div class="depos">
         <figure class="depo reveal"><blockquote data-t="q1">O Bruno foi absolutamente sensacional! ... Assim que começou a performance, a pista não parava de encher. Depois da festa, só recebemos elogios e uma lista enorme de convidados pedindo o contato dele.</blockquote><figcaption>Fernanda <span data-t="noiva">— noiva · casamentos.com.br</span></figcaption></figure>
@@ -444,12 +421,11 @@
 
   <!-- FAMÍLIA: entra quando o Bruno mandar a foto (pra humanizar, pedido dele) -->
 
-  <!-- FORMATOS — opcional (desligado por padrão): serve quando o cliente ainda não conhece os formatos -->
-  <section class="formatos" id="secFormatos" aria-label="Formatos" hidden>
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow reveal" data-t="form.eyebrow">O que eu entrego</p>
-        <h2 class="reveal d1" data-t="form.h2">Quatro <em>atos</em>.</h2>
+  <!-- FORMATOS — opcional (desligado por padrão): pra quem ainda não conhece o trabalho -->
+  <section class="sec" id="secFormatos" aria-label="Formatos" hidden>
+    <div class="wrap grade">
+      <div class="cab">
+        <h2 class="reveal" data-t="form.h2">Quatro <em>atos</em>.</h2>
       </div>
       <div class="forms">
         <article class="form reveal" data-formato="djsax">
@@ -457,17 +433,17 @@
           <h3>DJ &amp; Live Sax <em>Experience</em></h3>
           <p data-t="form1">Para quem tem medo de pista vazia.</p>
         </article>
-        <article class="form reveal d1" data-formato="cerimonia">
+        <article class="form reveal" data-formato="cerimonia">
           <figure><img src="../media/fotos/serv-cerimonia.jpg" alt="Formação de cerimônia com violino, saxofone e piano" width="1536" height="1713" loading="lazy"></figure>
           <h3 data-t="form2h">Cerimônia</h3>
           <p data-t="form2">Para quem não abre mão da emoção do "sim".</p>
         </article>
-        <article class="form reveal d2" data-formato="livesax">
+        <article class="form reveal" data-formato="livesax">
           <figure><img src="../media/fotos/serv-livesax.jpg" alt="Bruno Daner tocando saxofone entre convidados" width="1365" height="1820" loading="lazy"></figure>
           <h3>Live Sax</h3>
           <p data-t="form3">Para quem quer os convidados dentro da festa, não assistindo a ela.</p>
         </article>
-        <article class="form reveal d3" data-formato="colordrums">
+        <article class="form reveal" data-formato="colordrums">
           <figure><img src="../media/fotos/serv-colordrums.jpg" alt="Noivos tocando tambores de LED com jato de CO2" width="1800" height="1200" loading="lazy" style="object-position: 60% center"></figure>
           <h3>Color Drums <em>+ CO₂</em></h3>
           <p data-t="form4">Para quem quer que o fim da festa seja o ponto alto.</p>
@@ -476,37 +452,33 @@
     </div>
   </section>
 
-  <div class="to-light" aria-hidden="true"></div>
+  <!-- INVESTIMENTO: a folha da proposta -->
+  <section class="sec" id="investimento" aria-label="Proposta comercial">
+    <div class="wrap">
+      <article class="papel reveal">
+        <h2 data-t="inv.h2">O seu <em>investimento</em>.</h2>
+        <div class="resumo" id="pResumo"></div>
 
-  <!-- INVESTIMENTO -->
-  <section class="invest light" id="investimento" aria-label="Proposta comercial">
-    <div class="doc">
-      <p class="eyebrow reveal" data-t="inv.eyebrow">Proposta comercial</p>
-      <h2 class="reveal d1" data-t="inv.h2">O seu <em>investimento</em>.</h2>
-      <div class="resumo reveal d2" id="pResumo"></div>
+        <div class="bloco" id="blocoItens"><h3 data-t="inv.itens">O que está incluso</h3><div id="pItens"></div></div>
+        <div class="total" id="blocoTotal"><small data-t="inv.total">Investimento</small><strong id="pTotal"></strong><p id="pTotalNota" hidden></p></div>
+        <div class="bloco opc" id="blocoOpc"><h3 data-t="inv.opc">Para somar à experiência</h3><div id="pOpc"></div></div>
+        <div class="bloco" id="blocoCond"><h3 data-t="inv.cond">Condições de pagamento</h3><ul class="condicoes" id="pCond"></ul></div>
+        <div class="bloco" id="blocoValidade"><p class="validade" id="pValidade"></p></div>
+        <div class="bloco" id="blocoObs"><h3 data-t="inv.obs">Observações</h3><p class="obs" id="pObs"></p></div>
 
-      <div class="bloco reveal" id="blocoItens"><h3 data-t="inv.itens">O que está incluso</h3><div id="pItens"></div></div>
-      <div class="total reveal" id="blocoTotal"><small data-t="inv.total">Investimento</small><strong id="pTotal"></strong><p id="pTotalNota" hidden></p></div>
-      <div class="bloco opc reveal" id="blocoOpc"><h3 data-t="inv.opc">Para somar à experiência</h3><div id="pOpc"></div></div>
-      <div class="bloco reveal" id="blocoCond"><h3 data-t="inv.cond">Condições de pagamento</h3><ul class="condicoes" id="pCond"></ul></div>
-      <div class="bloco reveal" id="blocoValidade"><p class="validade" id="pValidade"></p></div>
-      <div class="bloco reveal" id="blocoObs"><h3 data-t="inv.obs">Observações</h3><p class="obs" id="pObs"></p></div>
-
-      <div class="acoes reveal">
-        <a class="btn btn-solid" id="waReservar" href="#" target="_blank" rel="noopener"><span data-t="cta.reservar">Quero reservar minha data</span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-        <a class="btn" id="waDuvida" href="#" target="_blank" rel="noopener"><span data-t="cta.duvida">Tirar uma dúvida</span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-      </div>
+        <div class="acoes">
+          <a class="btn btn-solid" id="waReservar" href="#" target="_blank" rel="noopener"><span data-t="cta.reservar">Quero reservar minha data</span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+          <a class="btn" id="waDuvida" href="#" target="_blank" rel="noopener"><span data-t="cta.duvida">Tirar uma dúvida</span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        </div>
+      </article>
     </div>
   </section>
 
-  <div class="to-dark" aria-hidden="true"></div>
-
   <!-- FECHO -->
-  <section class="fecho" aria-label="Encerramento">
+  <section class="sec fecho" aria-label="Encerramento">
     <div class="wrap">
       <blockquote class="reveal" data-t="fecho">A música acontece. <span>A pista responde.</span></blockquote>
-      <small class="reveal d1">— Bruno Daner</small>
-      <a class="btn btn-solid reveal d2" id="waFecho" href="#" target="_blank" rel="noopener"><span data-t="cta.reservar">Quero reservar minha data</span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <p class="assina reveal d1">Bruno Daner</p>
     </div>
     <footer>
       <a href="https://brunodanersax.com" target="_blank" rel="noopener">brunodanersax.com</a>
@@ -524,76 +496,54 @@
   var WA = '5521994227045';
   var CHAVE_SESSAO = 'bd_painel_sessao';
 
-  // ---------- textos fixos por idioma ----------
+  // ---------- textos fixos por idioma (o português é o próprio HTML) ----------
   var T = {
     en: {
       'erro.h1': 'Proposal unavailable', 'erro.p': 'This link is not active right now. Message me on WhatsApp and I\'ll send you the updated proposal.', 'erro.btn': 'Talk to Bruno',
       'capa.tag': 'Proposal', 'capa.eyebrow': 'An exclusive proposal for', 'capa.cue': 'Scroll to get to know me',
-      'msg.eyebrow': 'First of all',
-      'sobre.eyebrow': 'Who leads your party', 
-      'fato1': 'performances delivered', 'fato2': 'casamentos.com.br · 100% recommend', 'fato3b': 'NY &amp; Florida', 'fato3': 'international tour', 
-      'form.eyebrow': 'What I deliver', 'form.h2': 'Four <em>acts</em>.',
-      'form1': 'For those afraid of an empty dance floor.', 'form2h': 'Ceremony', 'form2': 'For those who won\'t give up the emotion of the "I do".', 'form3': 'For those who want guests inside the party, not watching it.', 'form4': 'For those who want the end of the party to be the peak.',
-      'vid.h2': 'Real <em>scenes</em>.',
-      'v1': 'The floor answers', 'v1s': 'Wedding', 'v2': 'At the feet of Christ the Redeemer', 'v3': 'The bride\'s entrance', 'v3s': 'Ceremony', 'v4': 'New York skyline', 'v4s': 'United States', 'v5': 'Against the LED wall', 'v5s': 'Set, sax and LED',
-      'selo4': 'performances',
-      'depo.eyebrow': 'Reviews', 'depo.h2': 'The word of those who <em>lived it</em>.',
+      'sobre.h2': 'From Rio to the <em>world</em>.',
+      'sobre.p1': 'I\'m Bruno Daner, a saxophonist and DJ trained at the Villa-Lobos School of Music. I started on Brazil\'s pagode stages and, for five years now, I\'ve been bringing live sax combined with a DJ\'s direction to weddings and events — in Brazil and abroad.',
+      'palcos.h2': 'I\'ve shared the <em>stage</em> with', 'palcos.p': 'From samba and pagode stages to more than 500 performances at weddings, corporate events and exclusive celebrations.',
+      'inter.h2': 'Beyond <em>Brazil</em>.', 'inter.p': 'A tour took me to New York and Florida — and destination weddings are part of my work. The experience travels with you, wherever the celebration goes.',
+      'som': 'Sound on', 'ny': 'New York', 'eua': 'United States', 'cristo': 'Christ the Redeemer', 'rio': 'Rio de Janeiro',
+      'vid.h2': 'Grand <em>weddings</em>.', 'vid.p': 'Nothing here is a rehearsal or stock footage — it\'s what your guests will live. Tap and watch with sound.',
+      'v1': 'The floor answers', 'v1s': 'The party ends packed', 'v6': 'Chandelier ballroom', 'v6s': 'Sax in the middle of the crowd', 'v3': 'The bride\'s entrance', 'v3s': 'Fanfare at the church', 'v5': 'Against the LED wall', 'v5s': 'Set, sax and LED', 'v7': 'That energy', 'v7s': 'Bride on the dance floor',
+      'depo.h2': 'The word of those who <em>lived it</em>.',
+      'cred1': 'Music · Rio de Janeiro', 'cred2': 'Partner · Vendor Guide', 'cred3b': '5.0 on casamentos.com.br', 'cred3': '100% of couples recommend', 'cred4b': '500+ performances', 'cred4': 'Weddings, corporate events and celebrations',
       'q1': 'Bruno was absolutely sensational! ... The moment the performance started, the floor never stopped filling up. After the party, we only got compliments and a huge list of guests asking for his contact.',
       'q2': 'We wanted to create a more intimate, cozy and elegant atmosphere… and you delivered exactly that. ... You didn\'t just perform — you created an experience.',
       'q3': 'We had the musicians and singers at the church ceremony, making everything even more emotional and special. And at the end of the party, the sax with the drum was simply sensational! ... We closed our wedding on a high note!',
       'noiva': '— bride · casamentos.com.br',
-      'inv.eyebrow': 'Proposal', 'inv.h2': 'Your <em>investment</em>.', 'inv.itens': 'What\'s included', 'inv.total': 'Investment', 'inv.opc': 'Optional add-ons', 'inv.cond': 'Payment terms', 'inv.obs': 'Notes',
+      'form.h2': 'Four <em>acts</em>.', 'form1': 'For those afraid of an empty dance floor.', 'form2h': 'Ceremony', 'form2': 'For those who won\'t give up the emotion of the "I do".', 'form3': 'For those who want guests inside the party, not watching it.', 'form4': 'For those who want the end of the party to be the peak.',
+      'inv.h2': 'Your <em>investment</em>.', 'inv.itens': 'What\'s included', 'inv.total': 'Investment', 'inv.opc': 'Optional add-ons', 'inv.cond': 'Payment terms', 'inv.obs': 'Notes',
       'cta.reservar': 'I want to book my date', 'cta.duvida': 'Ask a question',
       'fecho': 'The music happens. <span>The floor answers.</span>', 'rk': 'Website by RK Performance',
-      // dinâmicos
       'r.cliente': 'For', 'r.evento': 'Event', 'r.data': 'Date', 'r.local': 'Venue',
       'soma': 'Sum of the items above.', 'valida': 'This proposal is valid until {d}.',
       'expirou': 'This proposal expired on {d}. Message me and I\'ll update it for you.',
       'wa.reservar': 'Hi Bruno! I saw the proposal ({p}) and I\'d like to book the date.',
       'wa.duvida': 'Hi Bruno! I saw the proposal ({p}) and I have a question:',
       'wa.erro': 'Hi Bruno! I tried to open a proposal link and it didn\'t work.',
-      'sobre.h2': 'From Rio to the <em>world</em>.',
-      'sobre.p1': 'I\'m Bruno Daner, a saxophonist and DJ trained at the Villa-Lobos School of Music. I started on Brazil\'s pagode stages and, for five years now, I\'ve been bringing live sax combined with a DJ\'s direction to weddings and events — in Brazil and abroad.',
-      'fato4': 'Villa-Lobos School of Music',
-      'palcos.eyebrow': 'I\'ve shared the stage with',
-      'palcos.p': 'From samba and pagode stages to more than 500 performances at weddings, corporate events and exclusive celebrations.',
-      'inter.eyebrow': 'Destination &amp; international',
-      'inter.h2': 'Beyond <em>Brazil</em>.',
-      'inter.som': 'Play with sound',
-      'inter.p': 'A tour took me to New York and Florida — and destination weddings are part of my work. The experience travels with you, wherever the celebration goes.',
-      'eua': 'United States',
-      'fl': 'Florida',
-      'vid.eyebrow': 'Weddings',
-      'vid.p': 'Nothing here is a rehearsal or stock footage — it\'s what your guests will live. Tap and watch with sound.',
-      'v1s': 'Wedding · the party ends packed',
-      'v6': 'Chandelier ballroom',
-      'v6s': 'Sax in the middle of the crowd',
-      'v3s': 'Fanfare at the church',
-      'v7': 'That energy',
-      'v7s': 'Outdoor party · bride on the floor',
-      'rec.eyebrow': 'Recognition',
-      'selo1': 'Casamentos Awards · Music RJ',
-      'selo2': 'Partner · Vendor Guide',
-      'selo3': 'casamentos.com.br · 100% recommend',
-      'titulo': 'Proposal', 'assistir': 'Watch'
+      'titulo': 'Proposal', 'assistir': 'Watch', 'fechar': 'Close', 'inc': 'In your proposal', 'opc': 'Optional'
     },
     es: {
       'erro.h1': 'Propuesta no disponible', 'erro.p': 'Este enlace no está activo en este momento. Escríbeme por WhatsApp y te envío la propuesta actualizada.', 'erro.btn': 'Hablar con Bruno',
       'capa.tag': 'Propuesta', 'capa.eyebrow': 'Una propuesta exclusiva para', 'capa.cue': 'Desliza para conocerme',
-      'msg.eyebrow': 'Antes que nada',
-      'sobre.eyebrow': 'Quién conduce tu fiesta', 
-      'fato1': 'presentaciones realizadas', 'fato2': 'casamentos.com.br · 100% recomiendan', 'fato3b': 'NY y Florida', 'fato3': 'gira internacional', 
-      'form.eyebrow': 'Lo que entrego', 'form.h2': 'Cuatro <em>actos</em>.',
-      'form1': 'Para quien teme una pista vacía.', 'form2h': 'Ceremonia', 'form2': 'Para quien no renuncia a la emoción del "sí".', 'form3': 'Para quien quiere a los invitados dentro de la fiesta, no viéndola.', 'form4': 'Para quien quiere que el final de la fiesta sea el punto máximo.',
-      'vid.h2': 'Escenas <em>reales</em>.',
-      'v1': 'La pista responde', 'v1s': 'Boda', 'v2': 'A los pies del Cristo Redentor', 'v3': 'La entrada de la novia', 'v3s': 'Ceremonia', 'v4': 'Skyline de Nueva York', 'v4s': 'Estados Unidos', 'v5': 'Frente a la pantalla', 'v5s': 'Set, sax y LED',
-      'selo4': 'presentaciones',
-      'depo.eyebrow': 'Reseñas', 'depo.h2': 'La palabra de quien lo <em>vivió</em>.',
+      'sobre.h2': 'De Río al <em>mundo</em>.',
+      'sobre.p1': 'Soy Bruno Daner, saxofonista y DJ formado en la Escuela de Música Villa-Lobos. Empecé en los escenarios del pagode y, desde hace cinco años, llevo a bodas y eventos la unión del sax en vivo con la conducción de un DJ — en Brasil y fuera de él.',
+      'palcos.h2': 'Compartí el <em>escenario</em> con', 'palcos.p': 'De los escenarios del samba y del pagode a más de 500 presentaciones en bodas, eventos corporativos y celebraciones exclusivas.',
+      'inter.h2': 'Más allá de <em>Brasil</em>.', 'inter.p': 'Una gira me llevó a Nueva York y a Florida — y las destination weddings forman parte de mi trabajo. La experiencia va contigo, adonde vaya la celebración.',
+      'som': 'Con sonido', 'ny': 'Nueva York', 'eua': 'Estados Unidos', 'cristo': 'Cristo Redentor', 'rio': 'Río de Janeiro',
+      'vid.h2': 'Grandes <em>bodas</em>.', 'vid.p': 'Nada aquí es un ensayo ni banco de imágenes — es lo que tus invitados van a vivir. Toca y míralo con sonido.',
+      'v1': 'La pista responde', 'v1s': 'La fiesta termina llena', 'v6': 'Salón de lámparas', 'v6s': 'Sax en medio de la multitud', 'v3': 'La entrada de la novia', 'v3s': 'Fanfarria en la iglesia', 'v5': 'Frente a la pantalla', 'v5s': 'Set, sax y LED', 'v7': 'Esa energía', 'v7s': 'La novia en la pista',
+      'depo.h2': 'La palabra de quien lo <em>vivió</em>.',
+      'cred1': 'Música · Río de Janeiro', 'cred2': 'Aliado · Guía de Proveedores', 'cred3b': '5.0 en casamentos.com.br', 'cred3': '100% de las parejas recomiendan', 'cred4b': '+500 presentaciones', 'cred4': 'Bodas, eventos corporativos y celebraciones',
       'q1': '¡Bruno fue absolutamente sensacional! ... En cuanto empezó la actuación, la pista no paraba de llenarse. Después de la fiesta, solo recibimos elogios y una lista enorme de invitados pidiendo su contacto.',
       'q2': 'Queríamos crear un ambiente más íntimo, acogedor y elegante… y lograste entregar exactamente eso. ... No solo te presentaste — creaste una experiencia.',
       'q3': 'Tuvimos a los músicos y cantantes en la ceremonia de la iglesia, haciendo todo aún más emocionante y especial. Y, al final de la fiesta, ¡el sax con el tambor fue simplemente sensacional! ... ¡Cerramos nuestra boda con broche de oro!',
       'noiva': '— novia · casamentos.com.br',
-      'inv.eyebrow': 'Propuesta comercial', 'inv.h2': 'Tu <em>inversión</em>.', 'inv.itens': 'Qué incluye', 'inv.total': 'Inversión', 'inv.opc': 'Para sumar a la experiencia', 'inv.cond': 'Condiciones de pago', 'inv.obs': 'Observaciones',
+      'form.h2': 'Cuatro <em>actos</em>.', 'form1': 'Para quien teme una pista vacía.', 'form2h': 'Ceremonia', 'form2': 'Para quien no renuncia a la emoción del "sí".', 'form3': 'Para quien quiere a los invitados dentro de la fiesta, no viéndola.', 'form4': 'Para quien quiere que el final de la fiesta sea el punto máximo.',
+      'inv.h2': 'Tu <em>inversión</em>.', 'inv.itens': 'Qué incluye', 'inv.total': 'Inversión', 'inv.opc': 'Para sumar a la experiencia', 'inv.cond': 'Condiciones de pago', 'inv.obs': 'Observaciones',
       'cta.reservar': 'Quiero reservar mi fecha', 'cta.duvida': 'Hacer una pregunta',
       'fecho': 'La música sucede. <span>La pista responde.</span>', 'rk': 'Sitio por RK Performance',
       'r.cliente': 'Para', 'r.evento': 'Evento', 'r.data': 'Fecha', 'r.local': 'Lugar',
@@ -602,30 +552,7 @@
       'wa.reservar': '¡Hola, Bruno! Vi la propuesta ({p}) y quiero reservar la fecha.',
       'wa.duvida': '¡Hola, Bruno! Vi la propuesta ({p}) y tengo una pregunta:',
       'wa.erro': '¡Hola, Bruno! Intenté abrir un enlace de propuesta y no funcionó.',
-      'sobre.h2': 'De Río al <em>mundo</em>.',
-      'sobre.p1': 'Soy Bruno Daner, saxofonista y DJ formado en la Escuela de Música Villa-Lobos. Empecé en los escenarios del pagode y, desde hace cinco años, llevo a bodas y eventos la unión del sax en vivo con la conducción de un DJ — en Brasil y fuera de él.',
-      'fato4': 'Escuela de Música Villa-Lobos',
-      'palcos.eyebrow': 'Compartí escenario con',
-      'palcos.p': 'De los escenarios del samba y del pagode a más de 500 presentaciones en bodas, eventos corporativos y celebraciones exclusivas.',
-      'inter.eyebrow': 'Destination &amp; internacional',
-      'inter.h2': 'Más allá de <em>Brasil</em>.',
-      'inter.som': 'Escuchar con sonido',
-      'inter.p': 'Una gira me llevó a Nueva York y a Florida — y las destination weddings forman parte de mi trabajo. La experiencia va contigo, adonde vaya la celebración.',
-      'eua': 'Estados Unidos',
-      'fl': 'Florida',
-      'vid.eyebrow': 'Grandes bodas',
-      'vid.p': 'Nada aquí es un ensayo ni banco de imágenes — es lo que tus invitados van a vivir. Toca y míralo con sonido.',
-      'v1s': 'Boda · la fiesta termina llena',
-      'v6': 'Salón de lámparas',
-      'v6s': 'Sax en medio de la multitud',
-      'v3s': 'Fanfarria en la iglesia',
-      'v7': 'Esa energía',
-      'v7s': 'Fiesta al aire libre · la novia en la pista',
-      'rec.eyebrow': 'Reconocimiento',
-      'selo1': 'Casamentos Awards · Música RJ',
-      'selo2': 'Aliado · Guía de Proveedores',
-      'selo3': 'casamentos.com.br · 100% recomiendan',
-      'titulo': 'Propuesta', 'assistir': 'Ver'
+      'titulo': 'Propuesta', 'assistir': 'Ver', 'fechar': 'Cerrar', 'inc': 'En tu propuesta', 'opc': 'Opcional'
     },
     pt: {
       'r.cliente': 'Para', 'r.evento': 'Evento', 'r.data': 'Data', 'r.local': 'Local',
@@ -634,7 +561,7 @@
       'wa.reservar': 'Oi, Bruno! Vi a proposta ({p}) e quero reservar a data.',
       'wa.duvida': 'Oi, Bruno! Vi a proposta ({p}) e fiquei com uma dúvida:',
       'wa.erro': 'Oi, Bruno! Tentei abrir um link de proposta e não funcionou.',
-      'titulo': 'Proposta'
+      'titulo': 'Proposta', 'fechar': 'Fechar', 'inc': 'Na sua proposta', 'opc': 'Opcional'
     }
   };
   var LOCALE = { pt: 'pt-BR', en: 'en-US', es: 'es-ES' };
@@ -680,7 +607,9 @@
     document.getElementById('erro').hidden = false;
     document.getElementById('erroWa').href = waLink(t('wa.erro'));
   }
-
+  function publica() {
+    return fetch(API + '/p/' + slug).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  }
   function buscar() {
     if (!slug) return Promise.reject(new Error('sem link'));
     // Bruno logado vê a prévia (inclusive rascunho) e não conta como abertura do cliente
@@ -691,9 +620,6 @@
       });
     }
     return publica();
-  }
-  function publica() {
-    return fetch(API + '/p/' + slug).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
   }
 
   buscar().then(render).catch(function () {
@@ -710,9 +636,8 @@
     document.title = t('titulo') + (cliente ? ' · ' + cliente : '') + ' — Bruno Daner Sax';
 
     if (p._previa) {
-      var pv = document.getElementById('previa');
-      pv.hidden = false;
-      document.getElementById('previaTxt').textContent = (p.status === 'publicada' ? 'Publicada' : 'Rascunho — o cliente ainda não vê') + ' · prévia não conta abertura';
+      document.getElementById('previa').hidden = false;
+      document.getElementById('previaTxt').textContent = (p.status === 'publicada' ? 'Prévia' : 'Rascunho — o cliente ainda não vê') + ' · não conta como abertura';
     }
 
     // capa: nome do cliente, com o "&" (ou "e") em itálico dourado
@@ -726,9 +651,8 @@
       h1.textContent = cliente || 'Bruno Daner';
     }
     var meta = document.getElementById('pMeta');
-    [d.data && dataLonga(d.data), d.local, d.tipo].forEach(function (x) { if (x) meta.appendChild(el('span', null, x)); });
+    [d.data && dataLonga(d.data), d.local, d.tipo].forEach(function (x) { if (x) meta.appendChild(el('span', 'losango', x)); });
 
-    // mensagem pessoal
     if (d.mensagem && d.mensagem.trim()) {
       document.getElementById('secMensagem').hidden = false;
       document.getElementById('pMensagem').textContent = d.mensagem.trim();
@@ -752,13 +676,9 @@
     var selos = {};
     (d.itens || []).forEach(function (i) { var f = formatoDe(i.nome); if (f) selos[f] = 'inc'; });
     (d.opcionais || []).forEach(function (i) { var f = formatoDe(i.nome); if (f && !selos[f]) selos[f] = 'opc'; });
-    var rotuloInc = { pt: 'Na sua proposta', en: 'In your proposal', es: 'En tu propuesta' }[idioma];
-    var rotuloOpc = { pt: 'Opcional', en: 'Optional', es: 'Opcional' }[idioma];
     document.querySelectorAll('[data-formato]').forEach(function (card) {
       var tipo = selos[card.getAttribute('data-formato')];
-      if (!tipo) return;
-      card.classList.toggle('na-proposta', tipo === 'inc');
-      card.querySelector('figure').appendChild(el('span', 'selo' + (tipo === 'opc' ? ' opc' : ''), tipo === 'inc' ? rotuloInc : rotuloOpc));
+      if (tipo) card.querySelector('figure').appendChild(el('span', 'selo' + (tipo === 'opc' ? ' opc' : ''), t(tipo)));
     });
 
     // resumo
@@ -770,10 +690,8 @@
     if (!resumo.children.length) resumo.hidden = true;
 
     function linhas(lista, alvo, opcional) {
-      lista.forEach(function (it, i) {
-        var row = el('div', 'linha');
-        row.appendChild(el('span', 'n', String(i + 1).padStart(2, '0')));
-        var c = el('div');
+      lista.forEach(function (it) {
+        var row = el('div', 'linha'), c = el('div');
         if (it.nome) c.appendChild(el('b', null, it.nome));
         if (it.descricao) c.appendChild(el('p', null, it.descricao));
         row.appendChild(c);
@@ -796,9 +714,9 @@
       if (d.total == null && comValor.length > 1) { var nota = document.getElementById('pTotalNota'); nota.hidden = false; nota.textContent = t('soma'); }
     }
 
-    var cond = (d.condicoes || '').split('\n').map(function (x) { return x.replace(/^[-–•\s]+/, '').trim(); }).filter(Boolean);
     var ul = document.getElementById('pCond');
-    cond.forEach(function (x) { ul.appendChild(el('li', null, x)); });
+    var cond = (d.condicoes || '').split('\n').map(function (x) { return x.replace(/^[-–•\s]+/, '').trim(); }).filter(Boolean);
+    cond.forEach(function (x) { ul.appendChild(el('li', 'losango', x)); });
     if (!cond.length) document.getElementById('blocoCond').hidden = true;
 
     var val = document.getElementById('pValidade');
@@ -813,18 +731,19 @@
     // WhatsApp com a proposta identificada
     var ref = [cliente, d.data && dataLonga(d.data)].filter(Boolean).join(' · ') || slug;
     var reservar = waLink(t('wa.reservar').replace('{p}', ref));
-    ['waReservar', 'waFecho', 'waFloat'].forEach(function (id) { document.getElementById(id).href = reservar; });
+    document.getElementById('waReservar').href = reservar;
+    document.getElementById('waFloat').href = reservar;
     document.getElementById('waDuvida').href = waLink(t('wa.duvida').replace('{p}', ref));
 
     document.getElementById('carregando').hidden = true;
     document.getElementById('proposta').hidden = false;
     iniciarCapa();
-    iniciarInter();
-    iniciarVideos();
+    iniciarDuo();
+    iniciarCards();
     iniciarReveal();
   }
 
-  // ---------- capa: carrega os vídeos que estão visíveis ----------
+  // ---------- capa: carrega só os vídeos visíveis ----------
   function iniciarCapa() {
     document.querySelectorAll('.capa-wall video').forEach(function (v) {
       if (getComputedStyle(v.parentNode).display === 'none') return;
@@ -833,27 +752,33 @@
     });
   }
 
-  // ---------- vídeo de Nova York ----------
-  function iniciarInter() {
-    var v = document.getElementById('interVideo'), b = document.getElementById('interSom');
-    if (!v) return;
-    var carregado = false;
-    var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (e.isIntersecting) { if (!carregado) { v.src = v.getAttribute('data-src'); carregado = true; } v.play().catch(function () {}); }
-        else v.pause();
+  // ---------- Nova York + Cristo: rodam mudos quando aparecem; "Ouvir" liga o som de um por vez ----------
+  var duo = [];
+  function silenciarDuo(exceto) {
+    duo.forEach(function (x) { if (x.v !== exceto && !x.v.muted) { x.v.muted = true; x.b.setAttribute('aria-pressed', 'false'); } });
+  }
+  function iniciarDuo() {
+    document.querySelectorAll('.duo .tela').forEach(function (tela) {
+      var v = tela.querySelector('video'), b = tela.querySelector('.som'), carregado = false;
+      function carregar() { if (!carregado) { v.src = v.getAttribute('data-src'); carregado = true; } }
+      duo.push({ v: v, b: b });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { carregar(); v.play().catch(function () {}); } else v.pause(); });
+        }, { threshold: 0.35 }).observe(v);
+      } else carregar();
+      b.addEventListener('click', function () {
+        carregar();
+        var ligar = v.muted;
+        silenciarDuo(v);
+        v.muted = !ligar; b.setAttribute('aria-pressed', String(ligar));
+        if (ligar) { v.currentTime = 0; v.play().catch(function () {}); }
       });
-    }, { threshold: 0.35 }) : null;
-    if (io) io.observe(v); else { v.src = v.getAttribute('data-src'); }
-    b.addEventListener('click', function () {
-      if (!carregado) { v.src = v.getAttribute('data-src'); carregado = true; }
-      v.muted = !v.muted; b.setAttribute('aria-pressed', String(!v.muted));
-      if (!v.muted) { v.currentTime = 0; v.play().catch(function () {}); }
     });
   }
 
-  // ---------- vídeos dentro do próprio card ----------
-  function iniciarVideos() {
+  // ---------- casamentos: o vídeo toca dentro do próprio card ----------
+  function iniciarCards() {
     var atual = null;
     function fechar(card) {
       if (!card) return;
@@ -867,14 +792,13 @@
         if (e.target.closest('.fechar')) { e.stopPropagation(); fechar(card); return; }
         if (card.classList.contains('tocando')) return;
         fechar(atual);
+        silenciarDuo(null);
         var v = document.createElement('video');
         v.src = card.getAttribute('data-video'); v.controls = true; v.playsInline = true; v.autoplay = true;
         card.appendChild(v);
-        var f = el('span', 'fechar', idioma === 'pt' ? 'Fechar' : idioma === 'es' ? 'Cerrar' : 'Close');
-        f.setAttribute('role', 'button'); f.tabIndex = 0;
+        var f = el('button', 'fechar', t('fechar')); f.type = 'button';
         card.appendChild(f);
         card.classList.add('tocando'); atual = card;
-        var ny = document.getElementById('interVideo'); if (ny && !ny.muted) { ny.muted = true; document.getElementById('interSom').setAttribute('aria-pressed', 'false'); }
         v.play().catch(function () {});
         v.addEventListener('ended', function () { fechar(card); });
       });
