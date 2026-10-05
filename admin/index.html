@@ -2,8 +2,9 @@
 <html lang="pt-BR">
 <head>
 <!-- ============================================================
-     PAINEL DE PROPOSTAS — Bruno Daner Sax
-     Cria, edita, duplica e publica as propostas de /proposta/?p=<link>
+     PAINEL DE PROPOSTAS — Bruno Daner Sax (versão simples)
+     4 perguntas → salvar → link pronto pra mandar no WhatsApp.
+     O resto (condições, validade, idioma…) vem do modelo, em "Mais opções".
      API: Cloudflare Worker "bruno-propostas" (D1). RK Performance · out/2026
      ============================================================ -->
 <meta charset="utf-8">
@@ -19,109 +20,124 @@
 <style>
   :root {
     --noite: #0B0A08; --carvao: #161310; --campo: #1C1915; --areia: #F2EDE2;
-    --dourado: #C9A24B; --dourado-claro: #E7CE93; --suave: rgba(242, 237, 226, 0.62);
+    --dourado: #C9A24B; --dourado-claro: #E7CE93; --suave: rgba(242, 237, 226, 0.6);
     --linha: rgba(201, 162, 75, 0.28); --erro: #E38B76; --ok: #9FC79A;
     --sans: "Archivo", "Segoe UI", system-ui, sans-serif; --serif: "Instrument Serif", Georgia, serif;
     --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { -webkit-text-size-adjust: 100%; }
-  body { background: var(--noite); color: var(--areia); font-family: var(--sans); font-weight: 400; font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; min-height: 100svh; }
+  body { background: var(--noite); color: var(--areia); font-family: var(--sans); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; min-height: 100svh; }
   [hidden] { display: none !important; }
   a { color: inherit; }
   img { display: block; max-width: 100%; height: auto; }
   button, input, select, textarea { font: inherit; color: inherit; }
   :focus-visible { outline: 2px solid var(--dourado); outline-offset: 2px; }
-  .tela { max-width: 760px; margin: 0 auto; padding: 0 18px calc(120px + env(safe-area-inset-bottom)); }
+  .tela { max-width: 640px; margin: 0 auto; padding: 0 18px calc(110px + env(safe-area-inset-bottom)); }
 
-  /* ---------- botões ---------- */
-  .b { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 999px; border: 1px solid var(--linha); background: none; cursor: pointer; text-decoration: none; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; transition: background-color 200ms, border-color 200ms, color 200ms; white-space: nowrap; }
+  .b { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 10px 20px; border-radius: 999px; border: 1px solid var(--linha); background: none; cursor: pointer; text-decoration: none; font-size: 0.82rem; font-weight: 600; transition: background-color 200ms, border-color 200ms; white-space: nowrap; }
   .b:hover { border-color: var(--dourado); }
   .b-ouro { background: var(--dourado); border-color: var(--dourado); color: var(--noite); }
   .b-ouro:hover { background: var(--dourado-claro); border-color: var(--dourado-claro); }
-  .b-pq { min-height: 36px; padding: 7px 13px; font-size: 0.64rem; }
-  .b-perigo { color: var(--erro); border-color: rgba(227, 139, 118, 0.4); }
+  .b-zap { background: #1FA855; border-color: #1FA855; color: #fff; }
+  .b-zap:hover { background: #25C062; border-color: #25C062; }
+  .b-cheio { width: 100%; min-height: 54px; font-size: 0.95rem; }
+  .b-pq { min-height: 38px; padding: 8px 14px; font-size: 0.76rem; }
   .b:disabled { opacity: 0.5; cursor: default; }
-  .icone { width: 38px; min-height: 38px; padding: 0; }
+  .texto-link { background: none; border: 0; color: var(--dourado-claro); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; font-size: 0.9rem; padding: 8px 0; }
 
   /* ---------- login ---------- */
   .login { min-height: 100svh; display: grid; place-items: center; padding: 30px 22px; }
-  .login form { width: min(100%, 360px); display: grid; gap: 16px; text-align: center; }
-  .login img { width: 150px; margin: 0 auto 6px; }
+  .login form { width: min(100%, 340px); display: grid; gap: 16px; text-align: center; }
+  .login img { width: 140px; margin: 0 auto 4px; }
   .login h1 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 2rem; line-height: 1.1; }
-  .login p { color: var(--suave); font-size: 0.9rem; }
 
   /* ---------- topo ---------- */
-  .topo { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 10px; padding: calc(12px + env(safe-area-inset-top)) 0 12px; background: linear-gradient(var(--noite) 75%, rgba(11, 10, 8, 0)); }
-  .topo img { width: 74px; }
-  .topo h1 { flex: 1; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dourado-claro); }
-  .topo .voltar { padding-left: 12px; }
-
-  .titulo { margin: 18px 0 20px; display: flex; align-items: end; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
-  .titulo h2 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(2.1rem, 8vw, 2.8rem); line-height: 1; }
-  .titulo p { color: var(--suave); font-size: 0.88rem; margin-top: 6px; }
+  .topo { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 10px; padding: calc(12px + env(safe-area-inset-top)) 0 12px; background: linear-gradient(var(--noite) 78%, rgba(11, 10, 8, 0)); }
+  .topo img { width: 70px; }
+  .topo .espaco { flex: 1; }
+  h2.titulo { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(2.2rem, 9vw, 2.8rem); line-height: 1.05; margin: 14px 0 18px; }
 
   /* ---------- lista ---------- */
-  .cards { display: grid; gap: 12px; }
-  .pcard { background: var(--carvao); border: 1px solid rgba(201, 162, 75, 0.16); border-radius: 16px; padding: 16px; display: grid; gap: 12px; }
-  .pcard .cab { display: flex; gap: 12px; justify-content: space-between; align-items: start; }
-  .pcard h3 { font-size: 1.12rem; font-weight: 700; line-height: 1.25; }
-  .pcard .sub { color: var(--suave); font-size: 0.85rem; margin-top: 2px; }
+  .cards { display: grid; gap: 12px; margin-top: 18px; }
+  .pcard { background: var(--carvao); border: 1px solid rgba(201, 162, 75, 0.18); border-radius: 18px; padding: 16px; display: grid; gap: 12px; }
+  .pcard .abrir { display: grid; gap: 4px; text-align: left; background: none; border: 0; padding: 0; cursor: pointer; }
+  .pcard .linha-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .pcard h3 { font-size: 1.15rem; font-weight: 700; line-height: 1.25; }
   .pcard .valor { font-weight: 700; color: var(--dourado-claro); white-space: nowrap; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--linha); color: var(--suave); }
-  .chip.pub { color: var(--ok); border-color: rgba(159, 199, 154, 0.45); }
-  .chip.pub::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ok); }
-  .chip.exp { color: var(--erro); border-color: rgba(227, 139, 118, 0.45); }
-  .chip.vista { color: var(--dourado-claro); }
-  .acoes-card { display: flex; flex-wrap: wrap; gap: 8px; }
-  .vazio { text-align: center; padding: 50px 20px; border: 1px dashed var(--linha); border-radius: 16px; color: var(--suave); }
+  .pcard .sub { color: var(--suave); font-size: 0.88rem; }
+  .pcard .vista { font-size: 0.82rem; color: var(--suave); }
+  .pcard .vista.sim { color: var(--ok); }
+  .pcard .acoes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .vazio { text-align: center; padding: 46px 20px; border: 1px dashed var(--linha); border-radius: 18px; color: var(--suave); }
   .vazio b { display: block; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.6rem; color: var(--areia); margin-bottom: 6px; }
+  .rodape-lista { text-align: center; margin-top: 26px; }
 
-  /* ---------- formulário ---------- */
-  .grupo { background: var(--carvao); border: 1px solid rgba(201, 162, 75, 0.16); border-radius: 16px; padding: 18px 16px; margin-bottom: 14px; display: grid; gap: 14px; }
-  .grupo > h3 { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--dourado-claro); }
-  .grupo > .dica { color: var(--suave); font-size: 0.84rem; margin-top: -8px; }
+  /* ---------- editor ---------- */
+  .passo { background: var(--carvao); border: 1px solid rgba(201, 162, 75, 0.18); border-radius: 18px; padding: 18px 16px; margin-bottom: 12px; display: grid; gap: 14px; }
+  .passo > h3 { display: flex; align-items: center; gap: 10px; font-size: 1.05rem; font-weight: 700; }
+  .passo > h3 .n { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--dourado); color: var(--noite); font-size: 0.85rem; flex: none; }
+  .passo > h3 small { font-weight: 400; color: var(--suave); font-size: 0.85rem; }
   .campo { display: grid; gap: 6px; }
-  .campo > span { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--suave); }
+  .campo > span { font-size: 0.84rem; font-weight: 500; color: var(--suave); }
   .campo small { color: var(--suave); font-size: 0.8rem; }
   .duas { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 480px) { .duas.quebra { grid-template-columns: 1fr; } }
   input[type=text], input[type=password], input[type=date], input[type=number], select, textarea {
-    width: 100%; min-height: 46px; padding: 11px 13px; border-radius: 10px; border: 1px solid rgba(201, 162, 75, 0.3);
-    background: var(--campo); font-size: 16px; line-height: 1.4; transition: border-color 200ms;
+    width: 100%; min-height: 50px; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(201, 162, 75, 0.3);
+    background: var(--campo); font-size: 16px; line-height: 1.4;
   }
   input:focus, select:focus, textarea:focus { outline: none; border-color: var(--dourado); }
-  textarea { resize: vertical; min-height: 92px; }
+  textarea { resize: vertical; min-height: 96px; }
   input[type=date] { color-scheme: dark; }
   select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--dourado) 50%), linear-gradient(135deg, var(--dourado) 50%, transparent 50%); background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 34px; }
-  .check { display: flex; align-items: center; gap: 10px; min-height: 40px; cursor: pointer; }
-  .check input { width: 20px; height: 20px; accent-color: var(--dourado); }
 
-  .itens { display: grid; gap: 10px; }
-  .item { border: 1px solid rgba(201, 162, 75, 0.2); border-radius: 12px; padding: 12px; display: grid; gap: 10px; background: rgba(11, 10, 8, 0.35); }
-  .item .linha1 { display: grid; grid-template-columns: minmax(0, 1fr) 128px; gap: 10px; }
-  @media (max-width: 420px) { .item .linha1 { grid-template-columns: 1fr; } }
-  .item textarea { min-height: 64px; }
-  .item .ctrl { display: flex; gap: 6px; justify-content: flex-end; }
-  .add { border-style: dashed; width: 100%; }
-
-  .linkbox { display: grid; gap: 8px; padding: 14px; border-radius: 12px; background: rgba(201, 162, 75, 0.08); border: 1px solid var(--linha); }
-  .linkbox code { font-family: ui-monospace, Consolas, monospace; font-size: 0.82rem; word-break: break-all; color: var(--dourado-claro); }
-  .linkbox small { color: var(--suave); font-size: 0.8rem; }
-
-  /* barra fixa de salvar */
-  .barra { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 12px 18px calc(12px + env(safe-area-inset-bottom)); background: rgba(11, 10, 8, 0.92); backdrop-filter: blur(10px); border-top: 1px solid var(--linha); }
-  .barra .in { max-width: 760px; margin: 0 auto; display: flex; gap: 10px; align-items: center; }
-  .seg { display: inline-flex; padding: 3px; border-radius: 999px; border: 1px solid var(--linha); flex: none; }
-  .seg button { border: 0; background: none; padding: 8px 12px; border-radius: 999px; font-size: 0.64rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--suave); cursor: pointer; min-height: 34px; }
+  /* serviços: Não / Incluso / Extra */
+  .serv { display: grid; gap: 10px; padding: 12px 0; border-top: 1px solid rgba(201, 162, 75, 0.14); }
+  .serv:first-of-type { border-top: 0; padding-top: 0; }
+  .serv b { font-weight: 700; font-size: 1rem; }
+  .serv p { color: var(--suave); font-size: 0.84rem; margin-top: 2px; }
+  .seg { display: grid; grid-template-columns: repeat(3, 1fr); padding: 4px; gap: 4px; border-radius: 14px; background: var(--campo); border: 1px solid rgba(201, 162, 75, 0.2); }
+  .seg button { border: 0; background: none; border-radius: 10px; min-height: 40px; font-size: 0.86rem; font-weight: 600; color: var(--suave); cursor: pointer; }
   .seg button[aria-pressed="true"] { background: var(--areia); color: var(--noite); }
-  .seg button.pub[aria-pressed="true"] { background: var(--ok); }
-  .barra .b-ouro { flex: 1; }
+  .seg button[data-v="inc"][aria-pressed="true"] { background: var(--dourado); }
+  .serv .extra-valor { display: none; }
+  .serv.e-extra .extra-valor { display: grid; }
 
-  .aviso { padding: 12px 14px; border-radius: 12px; font-size: 0.88rem; }
-  .aviso.erro { background: rgba(227, 139, 118, 0.12); border: 1px solid rgba(227, 139, 118, 0.4); color: var(--erro); }
-  .toast { position: fixed; left: 50%; bottom: calc(92px + env(safe-area-inset-bottom)); transform: translate(-50%, 20px); z-index: 50; padding: 12px 20px; border-radius: 999px; background: var(--areia); color: var(--noite); font-weight: 600; font-size: 0.86rem; opacity: 0; pointer-events: none; transition: opacity 250ms, transform 250ms var(--ease); max-width: calc(100vw - 32px); text-align: center; }
+  .dinheiro { display: flex; align-items: center; border-radius: 12px; border: 1px solid rgba(201, 162, 75, 0.3); background: var(--campo); }
+  .dinheiro:focus-within { border-color: var(--dourado); }
+  .dinheiro span { padding: 0 4px 0 14px; color: var(--dourado-claro); font-weight: 600; }
+  .dinheiro input { border: 0; background: none; min-height: 50px; }
+  .valor-grande .dinheiro span { font-size: 1.3rem; }
+  .valor-grande .dinheiro input { font-size: 1.6rem; font-weight: 700; min-height: 62px; }
+
+  details.mais { margin: 6px 0 12px; border: 1px solid rgba(201, 162, 75, 0.18); border-radius: 18px; background: var(--carvao); }
+  details.mais > summary { list-style: none; cursor: pointer; padding: 16px; display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+  details.mais > summary::-webkit-details-marker { display: none; }
+  details.mais > summary small { display: block; font-weight: 400; color: var(--suave); font-size: 0.82rem; }
+  details.mais > summary::after { content: "+"; font-size: 1.5rem; font-weight: 300; color: var(--dourado); }
+  details.mais[open] > summary::after { content: "–"; }
+  details.mais .dentro { padding: 0 16px 18px; display: grid; gap: 16px; }
+  .check { display: flex; align-items: center; gap: 10px; min-height: 40px; cursor: pointer; font-size: 0.95rem; }
+  .check input { width: 20px; height: 20px; accent-color: var(--dourado); }
+  .perigo { color: var(--erro); border-color: rgba(227, 139, 118, 0.4); }
+
+  .envio { display: grid; gap: 8px; grid-template-columns: 1fr 1fr; margin-bottom: 14px; }
+  .envio .b-zap { grid-column: 1 / -1; }
+
+  .barra { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 12px 18px calc(12px + env(safe-area-inset-bottom)); background: rgba(11, 10, 8, 0.94); backdrop-filter: blur(10px); border-top: 1px solid var(--linha); }
+  .barra .in { max-width: 640px; margin: 0 auto; }
+
+  /* folha "proposta pronta" */
+  .folha-fundo { position: fixed; inset: 0; z-index: 40; background: rgba(0, 0, 0, 0.6); display: flex; align-items: flex-end; justify-content: center; }
+  .folha { width: min(100%, 640px); background: var(--carvao); border: 1px solid var(--linha); border-bottom: 0; border-radius: 22px 22px 0 0; padding: 22px 18px calc(22px + env(safe-area-inset-bottom)); display: grid; gap: 12px; animation: sobe 300ms var(--ease); }
+  @keyframes sobe { from { transform: translateY(40px); opacity: 0; } }
+  .folha h3 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.9rem; line-height: 1.1; }
+  .folha p { color: var(--suave); font-size: 0.9rem; }
+  .folha code { font-family: ui-monospace, Consolas, monospace; font-size: 0.82rem; word-break: break-all; color: var(--dourado-claro); padding: 10px 12px; border-radius: 10px; background: rgba(201, 162, 75, 0.08); }
+  .folha .duas .b { width: 100%; }
+
+  .aviso { padding: 12px 14px; border-radius: 12px; font-size: 0.9rem; background: rgba(227, 139, 118, 0.12); border: 1px solid rgba(227, 139, 118, 0.4); color: var(--erro); }
+  .toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); transform: translate(-50%, 20px); z-index: 50; padding: 12px 20px; border-radius: 999px; background: var(--areia); color: var(--noite); font-weight: 600; font-size: 0.9rem; opacity: 0; pointer-events: none; transition: opacity 250ms, transform 250ms var(--ease); max-width: calc(100vw - 32px); text-align: center; }
   .toast.on { opacity: 1; transform: translate(-50%, 0); }
   .carregando { text-align: center; color: var(--suave); padding: 40px 0; }
 </style>
@@ -132,11 +148,10 @@
 <section class="login" id="vLogin" hidden>
   <form id="fLogin">
     <img src="../media/logo-full.png" alt="Bruno Daner Sax" width="960" height="540">
-    <h1>Painel de propostas</h1>
-    <p>Entre com a senha do painel.</p>
-    <input type="password" id="senha" autocomplete="current-password" placeholder="Senha" required aria-label="Senha">
-    <div class="aviso erro" id="loginErro" hidden></div>
-    <button class="b b-ouro" type="submit" id="btEntrar">Entrar</button>
+    <h1>Suas propostas</h1>
+    <input type="password" id="senha" autocomplete="current-password" placeholder="Senha do painel" required aria-label="Senha">
+    <div class="aviso" id="loginErro" hidden></div>
+    <button class="b b-ouro b-cheio" type="submit" id="btEntrar">Entrar</button>
   </form>
 </section>
 
@@ -144,122 +159,98 @@
 <section class="tela" id="vLista" hidden>
   <div class="topo">
     <img src="../media/logo-full.png" alt="Bruno Daner Sax" width="960" height="540">
-    <h1>Painel</h1>
-    <button class="b b-pq" type="button" id="btModelo">Modelo</button>
+    <span class="espaco"></span>
     <button class="b b-pq" type="button" id="btSair">Sair</button>
   </div>
-  <div class="titulo">
-    <div><h2>Propostas</h2><p id="resumoLista"></p></div>
-    <button class="b b-ouro" type="button" id="btNova">+ Nova proposta</button>
-  </div>
+  <h2 class="titulo">Suas propostas</h2>
+  <button class="b b-ouro b-cheio" type="button" id="btNova">+ Nova proposta</button>
   <div class="cards" id="lista"><p class="carregando">Carregando…</p></div>
+  <div class="rodape-lista"><button class="texto-link" type="button" id="btModelo">Ajustar o modelo padrão</button></div>
 </section>
 
-<!-- EDITOR (proposta ou modelo) -->
+<!-- EDITOR -->
 <section class="tela" id="vEditor" hidden>
   <div class="topo">
-    <button class="b b-pq voltar" type="button" id="btVoltar">← Propostas</button>
-    <h1 id="edTitulo">Proposta</h1>
+    <button class="b b-pq" type="button" id="btVoltar">← Voltar</button>
+    <span class="espaco"></span>
   </div>
-  <div class="titulo"><div><h2 id="edNome">Nova proposta</h2><p id="edSub"></p></div></div>
+  <h2 class="titulo" id="edTitulo">Nova proposta</h2>
 
-  <div class="linkbox" id="edLinkBox" data-so="proposta" style="margin-bottom:14px">
-    <small>Link desta proposta</small>
-    <code id="edLink"></code>
-    <div class="acoes-card">
-      <button class="b b-pq" type="button" id="edCopiar">Copiar link</button>
-      <button class="b b-pq" type="button" id="edWhats">Enviar no WhatsApp</button>
-      <a class="b b-pq" id="edPrevia" href="#" target="_blank" rel="noopener">Ver como o cliente vê</a>
-    </div>
-    <small id="edLinkNota"></small>
+  <div class="envio" id="edEnvio" hidden>
+    <button class="b b-zap" type="button" data-acao="whats">Enviar no WhatsApp</button>
+    <button class="b" type="button" data-acao="copiar">Copiar link</button>
+    <a class="b" id="edVer" href="#" target="_blank" rel="noopener">Ver proposta</a>
   </div>
 
   <form id="fEd" autocomplete="off">
-    <div class="grupo" data-so="proposta">
-      <h3>Cliente e evento</h3>
-      <label class="campo"><span>Nome do cliente</span><input type="text" id="fCliente" maxlength="120" placeholder="Ex.: Ana &amp; João"><small>Aparece grande na capa. Use “&amp;” entre os nomes do casal.</small></label>
-      <div class="duas quebra">
-        <label class="campo"><span>Tipo de evento</span><input type="text" id="fTipo" list="tipos" maxlength="80"></label>
-        <label class="campo"><span>Data do evento</span><input type="date" id="fData"></label>
-      </div>
-      <label class="campo"><span>Local</span><input type="text" id="fLocal" maxlength="200" placeholder="Ex.: Casa de Pedra · Rio de Janeiro"></label>
-    </div>
-    <div class="grupo" data-so="modelo">
-      <h3>Padrões</h3>
-      <p class="dica">Toda proposta nova começa com o que estiver aqui. Mudar o modelo não altera propostas que já existem.</p>
-      <label class="campo"><span>Tipo de evento</span><input type="text" id="mTipo" list="tipos" maxlength="80"></label>
-      <label class="campo"><span>Validade (dias a partir da criação)</span><input type="number" id="mDias" min="1" max="365" inputmode="numeric"></label>
-    </div>
-    <datalist id="tipos"><option value="Casamento"><option value="Evento corporativo"><option value="Aniversário"><option value="Festa"><option value="Destination wedding"></datalist>
-
-    <div class="grupo">
-      <h3>Idioma e moeda</h3>
-      <p class="dica">Para cliente de fora: a página inteira muda de idioma. Os textos que você escrever aparecem como você escreveu.</p>
+    <div class="passo" data-so="proposta">
+      <h3><span class="n">1</span> Para quem é?</h3>
+      <label class="campo"><span>Nome do cliente</span><input type="text" id="fCliente" maxlength="120" placeholder="Ana &amp; João"></label>
       <div class="duas">
-        <label class="campo"><span>Idioma</span><select id="fIdioma"><option value="pt">Português</option><option value="en">English</option><option value="es">Español</option></select></label>
-        <label class="campo"><span>Moeda</span><select id="fMoeda"><option value="BRL">R$ (real)</option><option value="USD">US$ (dólar)</option><option value="EUR">€ (euro)</option></select></label>
+        <label class="campo"><span>Data do evento</span><input type="date" id="fData"></label>
+        <label class="campo"><span>Local</span><input type="text" id="fLocal" maxlength="200" placeholder="Cidade ou espaço"></label>
       </div>
     </div>
 
-    <div class="grupo">
-      <h3>Mensagem pessoal</h3>
-      <p class="dica">Opcional. Aparece logo depois da capa, assinada por você. Vazio = não aparece.</p>
-      <textarea id="fMensagem" maxlength="2000" rows="4" placeholder="Ex.: Ana e João, foi um prazer conhecer a história de vocês…"></textarea>
+    <div class="passo">
+      <h3><span class="n" data-so="proposta">2</span> O que vai ter?</h3>
+      <div id="fServicos"></div>
     </div>
 
-    <div class="grupo">
-      <h3>O que está incluso</h3>
-      <p class="dica">Valor por item é opcional. Se usar, o total soma sozinho.</p>
-      <div class="itens" id="fItens"></div>
-      <button class="b add" type="button" data-add="fItens">+ Adicionar item</button>
+    <div class="passo valor-grande" data-so="proposta">
+      <h3><span class="n">3</span> Qual o valor?</h3>
+      <div class="dinheiro"><span class="moeda-sim">R$</span><input type="text" id="fTotal" inputmode="decimal" placeholder="0" aria-label="Valor total"></div>
     </div>
 
-    <div class="grupo">
-      <h3>Investimento</h3>
-      <label class="campo"><span>Valor total</span><input type="text" id="fTotal" inputmode="decimal" placeholder="Ex.: 12.500"><small id="fTotalDica">Vazio = soma dos itens com valor.</small></label>
+    <div class="passo" data-so="proposta">
+      <h3><span class="n">4</span> Quer deixar um recado? <small>(opcional)</small></h3>
+      <textarea id="fMensagem" maxlength="2000" rows="4" placeholder="Ex.: Ana e Matheus, foi um prazer conhecer a história de vocês…" aria-label="Recado"></textarea>
     </div>
 
-    <div class="grupo">
-      <h3>Opcionais</h3>
-      <p class="dica">Extras que o cliente pode somar (não entram no total). Ex.: Color Drums + CO₂.</p>
-      <div class="itens" id="fOpc"></div>
-      <button class="b add" type="button" data-add="fOpc">+ Adicionar opcional</button>
-    </div>
-
-    <div class="grupo">
-      <h3>Condições e validade</h3>
-      <label class="campo"><span>Condições de pagamento</span><textarea id="fCondicoes" maxlength="1500" rows="3"></textarea><small>Uma condição por linha.</small></label>
-      <label class="campo" data-so="proposta"><span>Proposta válida até</span><input type="date" id="fValidade"><small>Depois dessa data a página avisa que expirou.</small></label>
-      <label class="campo"><span>Observações</span><textarea id="fObs" maxlength="1500" rows="3"></textarea></label>
-    </div>
-
-    <div class="grupo">
-      <h3>Seções da página</h3>
-      <p class="dica">Sempre aparecem: capa, quem você é, artistas, internacional e o investimento.</p>
-      <label class="check"><input type="checkbox" id="sVideos"> Vídeos dos casamentos</label>
-      <label class="check"><input type="checkbox" id="sDepoimentos"> Reconhecimento e depoimentos</label>
-      <label class="check"><input type="checkbox" id="sFormatos"> Os 4 formatos (pra quem ainda não conhece o seu trabalho)</label>
-    </div>
-
-    <div class="grupo" data-so="proposta">
-      <h3>Outras ações</h3>
-      <div class="acoes-card">
-        <button class="b b-pq" type="button" id="edDuplicar">Duplicar esta proposta</button>
-        <button class="b b-pq b-perigo" type="button" id="edExcluir">Excluir</button>
+    <details class="mais" id="maisOpcoes">
+      <summary><span>Mais opções <small>Pagamento, validade, idioma…</small></span></summary>
+      <div class="dentro">
+        <label class="campo"><span>Condições de pagamento</span><textarea id="fCondicoes" maxlength="1500" rows="3"></textarea><small>Uma por linha.</small></label>
+        <label class="campo" data-so="proposta"><span>Proposta válida até</span><input type="date" id="fValidade"></label>
+        <label class="campo" data-so="modelo"><span>Validade (dias depois de criar)</span><input type="number" id="mDias" min="1" max="365" inputmode="numeric"></label>
+        <label class="campo"><span>Observações</span><textarea id="fObs" maxlength="1500" rows="3"></textarea></label>
+        <label class="campo"><span>Outros itens incluídos</span><textarea id="fOutros" maxlength="1000" rows="2" placeholder="Um por linha. Ex.: Hora extra"></textarea></label>
+        <label class="campo"><span>Tipo de evento</span><input type="text" id="fTipo" list="tipos" maxlength="80"></label>
+        <datalist id="tipos"><option value="Casamento"><option value="Evento corporativo"><option value="Aniversário"><option value="Festa"><option value="Destination wedding"></datalist>
+        <div class="duas">
+          <label class="campo"><span>Idioma da página</span><select id="fIdioma"><option value="pt">Português</option><option value="en">English</option><option value="es">Español</option></select></label>
+          <label class="campo"><span>Moeda</span><select id="fMoeda"><option value="BRL">R$</option><option value="USD">US$</option><option value="EUR">€</option></select></label>
+        </div>
+        <div class="campo"><span>Mostrar na página</span>
+          <label class="check"><input type="checkbox" id="sVideos"> Vídeos dos casamentos</label>
+          <label class="check"><input type="checkbox" id="sDepoimentos"> Reconhecimento e depoimentos</label>
+          <label class="check"><input type="checkbox" id="sFormatos"> Os 4 formatos (pra quem não conhece seu trabalho)</label>
+        </div>
+        <div class="duas" data-so="existente">
+          <button class="b" type="button" id="edDuplicar">Duplicar</button>
+          <button class="b perigo" type="button" id="edExcluir">Excluir</button>
+        </div>
       </div>
-    </div>
+    </details>
   </form>
 
-  <div class="barra">
-    <div class="in">
-      <div class="seg" id="edStatus" data-so="proposta" role="group" aria-label="Status">
-        <button type="button" data-status="rascunho" aria-pressed="true">Rascunho</button>
-        <button type="button" class="pub" data-status="publicada" aria-pressed="false">Publicada</button>
-      </div>
-      <button class="b b-ouro" type="button" id="btSalvar">Salvar</button>
-    </div>
-  </div>
+  <div class="barra"><div class="in"><button class="b b-ouro b-cheio" type="button" id="btSalvar">Salvar e gerar link</button></div></div>
 </section>
+
+<!-- PROPOSTA PRONTA -->
+<div class="folha-fundo" id="folha" hidden>
+  <div class="folha" role="dialog" aria-modal="true" aria-labelledby="folhaTit">
+    <h3 id="folhaTit">Proposta pronta</h3>
+    <p>Agora é só mandar pro cliente:</p>
+    <code id="folhaLink"></code>
+    <button class="b b-zap b-cheio" type="button" data-acao="whats">Enviar no WhatsApp</button>
+    <div class="duas">
+      <button class="b" type="button" data-acao="copiar">Copiar link</button>
+      <a class="b" id="folhaVer" href="#" target="_blank" rel="noopener">Ver proposta</a>
+    </div>
+    <button class="texto-link" type="button" id="folhaFechar">Fechar</button>
+  </div>
+</div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -270,6 +261,18 @@
   var CHAVE = 'bd_painel_sessao';
   var $ = function (id) { return document.getElementById(id); };
 
+  // Serviços do Bruno: nome e descrição prontos nos 3 idiomas (a página da proposta usa o idioma escolhido)
+  var SERVICOS = [
+    { k: 'djsax', nome: { pt: 'DJ & Live Sax Experience', en: 'DJ & Live Sax Experience', es: 'DJ & Live Sax Experience' },
+      desc: { pt: 'DJ e sax ao vivo na festa, com a curadoria musical feita junto com vocês.', en: 'DJ and live sax at the party, with the music curation done together with you.', es: 'DJ y sax en vivo en la fiesta, con la curaduría musical hecha junto con ustedes.' } },
+    { k: 'cerimonia', nome: { pt: 'Cerimônia', en: 'Ceremony', es: 'Ceremonia' },
+      desc: { pt: 'Sax, piano e violino ao vivo no momento do “sim” — formação personalizável.', en: 'Live sax, piano and violin for the “I do” — the lineup can be customized.', es: 'Sax, piano y violín en vivo en el momento del “sí” — formación personalizable.' } },
+    { k: 'livesax', nome: { pt: 'Live Sax', en: 'Live Sax', es: 'Live Sax' },
+      desc: { pt: 'O sax circula entre os convidados no coquetel e no jantar.', en: 'The sax moves among the guests during cocktails and dinner.', es: 'El sax circula entre los invitados durante el cóctel y la cena.' } },
+    { k: 'colordrums', nome: { pt: 'Color Drums + CO₂', en: 'Color Drums + CO₂', es: 'Color Drums + CO₂' },
+      desc: { pt: 'Tambores de LED e jatos de CO₂ no ponto alto da festa.', en: 'LED drums and CO₂ jets at the peak of the party.', es: 'Tambores LED y chorros de CO₂ en el punto máximo de la fiesta.' } }
+  ];
+
   // ---------- sessão ----------
   var sessao = null;
   try { sessao = JSON.parse(localStorage.getItem(CHAVE) || 'null'); } catch (e) {}
@@ -279,53 +282,39 @@
     mostrar('vLogin');
     if (msg) { $('loginErro').textContent = msg; $('loginErro').hidden = false; }
   }
-
   function api(metodo, caminho, corpo) {
     var h = { 'content-type': 'application/json' };
     if (logado()) h.authorization = 'Bearer ' + sessao.token;
-    return fetch(API + caminho, { method: metodo, headers: h, body: corpo ? JSON.stringify(corpo) : undefined })
-      .then(function (r) {
-        return r.json().catch(function () { return {}; }).then(function (j) {
-          if (r.status === 401 && caminho !== '/login') { sair(j.erro || 'Sessão expirada. Entre de novo.'); throw new Error('401'); }
-          if (!r.ok) throw new Error(j.erro || ('Erro ' + r.status));
-          return j;
-        });
-      }, function () { throw new Error('Sem conexão com o servidor. Tente de novo.'); });
+    return fetch(API + caminho, { method: metodo, headers: h, body: corpo ? JSON.stringify(corpo) : undefined }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (r.status === 401 && caminho !== '/login') { sair(j.erro || 'Sessão expirada. Entre de novo.'); throw new Error('401'); }
+        if (!r.ok) throw new Error(j.erro || ('Erro ' + r.status));
+        return j;
+      });
+    }, function () { throw new Error('Sem conexão. Tente de novo.'); });
   }
 
-  // ---------- telas ----------
-  var editando = null;     // proposta aberta no editor (ou {modelo:true})
-  var sujo = false;
-  function mostrar(id) {
-    ['vLogin', 'vLista', 'vEditor'].forEach(function (v) { $(v).hidden = v !== id; });
-    window.scrollTo(0, 0);
-  }
-  var toastT;
-  function toast(msg) { var t = $('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('on'); }, 2600); }
-  function falhou(e) { if (e && e.message !== '401') toast(e.message || 'Algo deu errado.'); }
-
-  // ---------- formatação ----------
+  // ---------- utilidades ----------
   var MOEDA = { BRL: 'R$', USD: 'US$', EUR: '€' };
   function numero(v) { var i = Math.round(v * 100) % 100 === 0; return new Intl.NumberFormat('pt-BR', { minimumFractionDigits: i ? 0 : 2, maximumFractionDigits: 2 }).format(v); }
   function dinheiro(v, m) { return (MOEDA[m] || 'R$') + ' ' + numero(v); }
   function parseValor(s) {
     s = String(s || '').replace(/[^\d.,]/g, '');
     if (!s) return null;
-    var ultimo = Math.max(s.lastIndexOf(','), s.lastIndexOf('.'));
-    var sep = ultimo >= 0 ? s[ultimo] : null;
-    var n;
-    if (sep === '.' && s.indexOf(',') < 0 && /^\d{1,3}(\.\d{3})+$/.test(s)) n = Number(s.replace(/\./g, ''));      // 12.500
-    else if (sep && s.length - ultimo - 1 <= 2) n = Number(s.slice(0, ultimo).replace(/[.,]/g, '') + '.' + s.slice(ultimo + 1)); // 12.500,50 · 99,9
-    else n = Number(s.replace(/[.,]/g, ''));                                                                       // 12,500 · 12500
+    var ultimo = Math.max(s.lastIndexOf(','), s.lastIndexOf('.')), n;
+    if (s[ultimo] === '.' && s.indexOf(',') < 0 && /^\d{1,3}(\.\d{3})+$/.test(s)) n = Number(s.replace(/\./g, ''));
+    else if (ultimo >= 0 && s.length - ultimo - 1 <= 2) n = Number(s.slice(0, ultimo).replace(/[.,]/g, '') + '.' + s.slice(ultimo + 1));
+    else n = Number(s.replace(/[.,]/g, ''));
     return isFinite(n) ? Math.round(n * 100) / 100 : null;
   }
   function dataCurta(iso) { if (!iso) return ''; var p = iso.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
   function quando(iso) {
-    if (!iso) return '';
-    var d = new Date(iso);
-    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }) + ' ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    var d = new Date(iso), hoje = new Date(), ontem = new Date(Date.now() - 864e5);
+    var h = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    if (d.toDateString() === hoje.toDateString()) return 'hoje ' + h;
+    if (d.toDateString() === ontem.toDateString()) return 'ontem ' + h;
+    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }) + ' ' + h;
   }
-  function hojeISO() { var d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); }
   function totalDe(d) {
     if (d.total != null) return d.total;
     var c = (d.itens || []).filter(function (i) { return i.valor != null; });
@@ -333,6 +322,27 @@
   }
   function el(tag, cls, texto) { var e = document.createElement(tag); if (cls) e.className = cls; if (texto != null) e.textContent = texto; return e; }
   function linkDe(p) { return BASE_LINK + p.slug; }
+  var toastT;
+  function toast(msg) { var t = $('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('on'); }, 2600); }
+  function falhou(e) { if (e && e.message !== '401') toast(e.message || 'Algo deu errado.'); }
+  function mostrar(id) { ['vLogin', 'vLista', 'vEditor'].forEach(function (v) { $(v).hidden = v !== id; }); window.scrollTo(0, 0); }
+
+  // escolhas de serviço de uma proposta antiga (sem "servicos"): deduz pelos nomes dos itens
+  function chaveDe(nome) {
+    var n = (nome || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    if (/color ?drum/.test(n)) return 'colordrums';
+    if (/cerimon|ceremon/.test(n)) return 'cerimonia';
+    if (/experience/.test(n) || /^dj\b/.test(n)) return 'djsax';
+    if (/live sax/.test(n)) return 'livesax';
+    return null;
+  }
+  function escolhasDe(d) {
+    if (d.servicos) return { servicos: d.servicos, extras: d.extras_valor || {}, outros: d.outros || '' };
+    var s = {}, ex = {}, outros = [];
+    (d.itens || []).forEach(function (i) { var k = chaveDe(i.nome); if (k) s[k] = 'inc'; else if (i.nome) outros.push(i.nome); });
+    (d.opcionais || []).forEach(function (i) { var k = chaveDe(i.nome); if (k && !s[k]) { s[k] = 'extra'; ex[k] = i.valor; } });
+    return { servicos: s, extras: ex, outros: outros.join('\n') };
+  }
 
   // ---------- login ----------
   $('fLogin').addEventListener('submit', function (ev) {
@@ -340,11 +350,9 @@
     $('loginErro').hidden = true; $('btEntrar').disabled = true;
     api('POST', '/login', { senha: $('senha').value }).then(function (j) {
       sessao = j; try { localStorage.setItem(CHAVE, JSON.stringify(j)); } catch (e) {}
-      $('senha').value = '';
-      abrirLista();
-    }).catch(function (e) {
-      $('loginErro').textContent = e.message; $('loginErro').hidden = false;
-    }).then(function () { $('btEntrar').disabled = false; });
+      $('senha').value = ''; abrirLista();
+    }).catch(function (e) { $('loginErro').textContent = e.message; $('loginErro').hidden = false; })
+      .then(function () { $('btEntrar').disabled = false; });
   });
   $('btSair').addEventListener('click', function () { sair(); });
 
@@ -353,50 +361,33 @@
   function abrirLista() {
     mostrar('vLista');
     $('lista').innerHTML = '<p class="carregando">Carregando…</p>';
-    api('GET', '/admin/propostas').then(function (lista) { propostas = lista; desenharLista(); }).catch(falhou);
+    api('GET', '/admin/propostas').then(function (l) { propostas = l; desenharLista(); }).catch(falhou);
   }
   function desenharLista() {
     var box = $('lista'); box.innerHTML = '';
-    var pub = propostas.filter(function (p) { return p.status === 'publicada'; }).length;
-    $('resumoLista').textContent = propostas.length ? propostas.length + (propostas.length === 1 ? ' proposta' : ' propostas') + ' · ' + pub + (pub === 1 ? ' publicada' : ' publicadas') : '';
     if (!propostas.length) {
       var v = el('div', 'vazio'); v.appendChild(el('b', null, 'Nenhuma proposta ainda'));
-      v.appendChild(el('span', null, 'Toque em “+ Nova proposta”. Ela já vem preenchida com o seu modelo.'));
+      v.appendChild(el('span', null, 'Toque em “+ Nova proposta”: são 4 perguntas e o link sai pronto.'));
       box.appendChild(v); return;
     }
     propostas.forEach(function (p) {
       var d = p.dados, c = el('article', 'pcard');
-      var cab = el('div', 'cab'), t = el('div');
-      t.appendChild(el('h3', null, d.cliente || 'Sem nome'));
-      t.appendChild(el('div', 'sub', [d.tipo, d.data && dataCurta(d.data), d.local].filter(Boolean).join(' · ') || 'Evento sem data'));
-      cab.appendChild(t);
-      var tot = totalDe(d); if (tot != null) cab.appendChild(el('span', 'valor', dinheiro(tot, d.moeda)));
-      c.appendChild(cab);
-
-      var chips = el('div', 'chips');
-      chips.appendChild(el('span', 'chip' + (p.status === 'publicada' ? ' pub' : ''), p.status === 'publicada' ? 'Publicada' : 'Rascunho'));
-      if (d.validade && d.validade < hojeISO()) chips.appendChild(el('span', 'chip exp', 'Expirada'));
-      if (d.idioma && d.idioma !== 'pt') chips.appendChild(el('span', 'chip', d.idioma.toUpperCase()));
-      if (p.views) chips.appendChild(el('span', 'chip vista', 'Aberta ' + p.views + '× · última ' + quando(p.ultima_vista)));
-      else if (p.status === 'publicada') chips.appendChild(el('span', 'chip', 'Ainda não aberta'));
-      c.appendChild(chips);
-
-      var ac = el('div', 'acoes-card');
-      var bEd = el('button', 'b b-pq b-ouro', 'Editar'); bEd.type = 'button'; bEd.onclick = function () { abrirEditor(p); };
-      var bCp = el('button', 'b b-pq', 'Copiar link'); bCp.type = 'button'; bCp.onclick = function () { compartilhar(p, 'copiar'); };
-      var bWa = el('button', 'b b-pq', 'WhatsApp'); bWa.type = 'button'; bWa.onclick = function () { compartilhar(p, 'whats'); };
-      var bVer = el('a', 'b b-pq', 'Ver'); bVer.href = linkDe(p); bVer.target = '_blank'; bVer.rel = 'noopener';
-      [bEd, bCp, bWa, bVer].forEach(function (b) { ac.appendChild(b); });
+      var abrir = el('button', 'abrir'); abrir.type = 'button'; abrir.onclick = function () { abrirEditor(p); };
+      var top = el('div', 'linha-top');
+      top.appendChild(el('h3', null, d.cliente || 'Sem nome'));
+      var tot = totalDe(d); if (tot != null) top.appendChild(el('span', 'valor', dinheiro(tot, d.moeda)));
+      abrir.appendChild(top);
+      abrir.appendChild(el('span', 'sub', [d.data && dataCurta(d.data), d.local].filter(Boolean).join(' · ') || 'Sem data'));
+      abrir.appendChild(el('span', 'vista' + (p.views ? ' sim' : ''), p.views ? '● Aberta ' + p.views + (p.views === 1 ? ' vez' : ' vezes') + ' · última ' + quando(p.ultima_vista) : 'Ainda não aberta pelo cliente'));
+      c.appendChild(abrir);
+      var ac = el('div', 'acoes');
+      var bWa = el('button', 'b b-pq b-zap', 'WhatsApp'); bWa.type = 'button'; bWa.onclick = function () { enviar(p, 'whats'); };
+      var bCp = el('button', 'b b-pq', 'Copiar link'); bCp.type = 'button'; bCp.onclick = function () { enviar(p, 'copiar'); };
+      ac.appendChild(bWa); ac.appendChild(bCp);
       c.appendChild(ac);
       box.appendChild(c);
     });
   }
-
-  $('btNova').addEventListener('click', function () {
-    $('btNova').disabled = true;
-    api('POST', '/admin/propostas', {}).then(function (p) { abrirEditor(p); toast('Proposta criada a partir do modelo'); })
-      .catch(falhou).then(function () { $('btNova').disabled = false; });
-  });
 
   // ---------- enviar ----------
   function mensagemEnvio(p) {
@@ -405,218 +396,219 @@
     if (d.idioma === 'es') return '¡Hola' + (nome ? ', ' + nome : '') + '! Aquí está la propuesta que preparé para ustedes: ' + linkDe(p);
     return 'Oi' + (nome ? ', ' + nome : '') + '! Segue a proposta que preparei pra vocês: ' + linkDe(p);
   }
-  function compartilhar(p, como) {
-    if (p.status !== 'publicada') {
-      if (!confirm('Esta proposta ainda é rascunho: o cliente não consegue abrir o link.\n\nPublicar agora?')) return;
-      return api('PUT', '/admin/propostas/' + p.id, { dados: p.dados, status: 'publicada' }).then(function (np) {
-        atualizarNaLista(np);
-        if (editando && editando.id === np.id) { editando = np; marcarStatus('publicada'); preencherLink(np); }
-        compartilhar(np, como);
-      }).catch(falhou);
+  function enviar(p, como) {
+    if (p.status !== 'publicada') {   // proposta antiga em rascunho: publica antes de mandar
+      return api('PUT', '/admin/propostas/' + p.id, { dados: p.dados, status: 'publicada' }).then(function (np) { atualizarNaLista(np); enviar(np, como); }).catch(falhou);
     }
     if (como === 'whats') { window.open('https://wa.me/?text=' + encodeURIComponent(mensagemEnvio(p)), '_blank', 'noopener'); return; }
-    copiar(linkDe(p));
-  }
-  function copiar(txt) {
-    var ok = function () { toast('Link copiado'); };
-    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(ok, function () { prompt('Copie o link:', txt); });
+    var txt = linkDe(p);
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(function () { toast('Link copiado'); }, function () { prompt('Copie o link:', txt); });
     else prompt('Copie o link:', txt);
   }
+  document.querySelectorAll('[data-acao]').forEach(function (b) {
+    b.addEventListener('click', function () { if (editando && editando.id) enviar(editando, b.getAttribute('data-acao')); });
+  });
   function atualizarNaLista(np) {
     var i = propostas.findIndex(function (x) { return x.id === np.id; });
     if (i >= 0) propostas[i] = np; else propostas.unshift(np);
-    if (!$('vLista').hidden) desenharLista();
   }
 
   // ---------- editor ----------
-  function campos(modo) {
-    document.querySelectorAll('[data-so]').forEach(function (e) { e.hidden = e.getAttribute('data-so') !== modo; });
+  var editando = null, modelo = null, sujo = false;
+
+  function modo(m) { // 'proposta' (nova ou existente) | 'modelo'
+    document.querySelectorAll('[data-so]').forEach(function (e) {
+      var so = e.getAttribute('data-so');
+      e.hidden = so === 'existente' ? !(m === 'proposta' && editando && editando.id) : so !== m;
+    });
   }
-  function abrirEditor(p) {
-    editando = p; sujo = false;
-    campos('proposta');
-    $('edTitulo').textContent = 'Proposta';
-    preencher(p.dados);
-    marcarStatus(p.status);
-    preencherLink(p);
-    mostrar('vEditor');
+
+  function desenharServicos(esc) {
+    var box = $('fServicos'); box.innerHTML = '';
+    SERVICOS.forEach(function (s) {
+      var estado = esc.servicos[s.k] || 'nao';
+      var r = el('div', 'serv' + (estado === 'extra' ? ' e-extra' : '')); r.setAttribute('data-k', s.k);
+      var t = el('div'); t.appendChild(el('b', null, s.nome.pt)); t.appendChild(el('p', null, s.desc.pt)); r.appendChild(t);
+      var seg = el('div', 'seg'); seg.setAttribute('role', 'group'); seg.setAttribute('aria-label', s.nome.pt);
+      [['nao', 'Não'], ['inc', 'Incluso'], ['extra', 'Extra']].forEach(function (o) {
+        var b = el('button', null, o[1]); b.type = 'button'; b.setAttribute('data-v', o[0]); b.setAttribute('aria-pressed', String(o[0] === estado));
+        b.onclick = function () {
+          seg.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+          r.classList.toggle('e-extra', o[0] === 'extra'); sujo = true;
+          if (o[0] === 'extra') r.querySelector('.extra-valor input').focus();
+        };
+        seg.appendChild(b);
+      });
+      r.appendChild(seg);
+      var ev = el('label', 'campo extra-valor'); ev.appendChild(el('span', null, 'Valor do extra (opcional)'));
+      var din = el('div', 'dinheiro'); din.appendChild(el('span', 'moeda-sim', MOEDA[$('fMoeda').value] || 'R$'));
+      var inp = el('input'); inp.type = 'text'; inp.inputMode = 'decimal'; inp.placeholder = '0';
+      var v = esc.extras[s.k]; inp.value = v != null ? numero(v) : '';
+      inp.addEventListener('blur', function () { var x = parseValor(inp.value); inp.value = x != null ? numero(x) : ''; });
+      din.appendChild(inp); ev.appendChild(din); r.appendChild(ev);
+      box.appendChild(r);
+    });
   }
-  function preencherLink(p) {
-    $('edNome').textContent = p.dados.cliente || 'Nova proposta';
-    $('edSub').textContent = 'Criada em ' + quando(p.criado_em) + (p.views ? ' · aberta ' + p.views + '× pelo cliente (última ' + quando(p.ultima_vista) + ')' : '');
-    $('edLink').textContent = linkDe(p);
-    $('edPrevia').href = linkDe(p);
-    $('edLinkNota').textContent = (p.publicada_alguma_vez || p.views)
-      ? 'Este link é fixo: quem já recebeu continua abrindo a versão mais recente.'
-      : 'Enquanto for rascunho, o link acompanha o nome do cliente. Ao publicar, ele fica fixo.';
+  function lerServicos() {
+    var s = {}, ex = {};
+    document.querySelectorAll('#fServicos .serv').forEach(function (r) {
+      var k = r.getAttribute('data-k');
+      s[k] = r.querySelector('.seg [aria-pressed="true"]').getAttribute('data-v');
+      ex[k] = s[k] === 'extra' ? parseValor(r.querySelector('.extra-valor input').value) : null;
+    });
+    return { servicos: s, extras: ex };
   }
-  function marcarStatus(s) {
-    document.querySelectorAll('#edStatus button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-status') === s)); });
-  }
-  function statusAtual() { var b = document.querySelector('#edStatus button[aria-pressed="true"]'); return b ? b.getAttribute('data-status') : 'rascunho'; }
-  document.querySelectorAll('#edStatus button').forEach(function (b) {
-    b.addEventListener('click', function () { marcarStatus(b.getAttribute('data-status')); sujo = true; });
-  });
 
   function preencher(d) {
     $('fCliente').value = d.cliente || '';
-    $('fTipo').value = d.tipo || '';
     $('fData').value = d.data || '';
     $('fLocal').value = d.local || '';
-    $('mTipo').value = d.tipo || '';
-    $('mDias').value = d.validade_dias || 30;
-    $('fIdioma').value = d.idioma || 'pt';
     $('fMoeda').value = d.moeda || 'BRL';
+    $('fIdioma').value = d.idioma || 'pt';
+    $('fTotal').value = d.total != null ? numero(d.total) : (totalDe(d) != null ? numero(totalDe(d)) : '');
     $('fMensagem').value = d.mensagem || '';
-    $('fTotal').value = d.total != null ? numero(d.total) : '';
     $('fCondicoes').value = d.condicoes || '';
     $('fValidade').value = d.validade || '';
+    $('mDias').value = d.validade_dias || 30;
     $('fObs').value = d.observacoes || '';
+    $('fTipo').value = d.tipo || '';
     var s = d.secoes || {};
-    $('sFormatos').checked = s.formatos === true; $('sVideos').checked = s.videos !== false; $('sDepoimentos').checked = s.depoimentos !== false;
-    desenharItens('fItens', d.itens || []);
-    desenharItens('fOpc', d.opcionais || []);
-    dicaTotal();
+    $('sVideos').checked = s.videos !== false; $('sDepoimentos').checked = s.depoimentos !== false; $('sFormatos').checked = s.formatos === true;
+    var esc = escolhasDe(d);
+    $('fOutros').value = esc.outros;
+    desenharServicos(esc);
+    atualizarMoeda();
   }
-
-  function desenharItens(alvo, lista) {
-    var box = $(alvo); box.innerHTML = '';
-    lista.forEach(function (it) { box.appendChild(linhaItem(it, alvo)); });
-  }
-  function linhaItem(it, alvo) {
-    var r = el('div', 'item');
-    var l1 = el('div', 'linha1');
-    var nome = el('input'); nome.type = 'text'; nome.maxLength = 120; nome.placeholder = 'Nome (ex.: DJ & Live Sax Experience)'; nome.value = it.nome || ''; nome.className = 'i-nome'; nome.setAttribute('aria-label', 'Nome do item');
-    var valor = el('input'); valor.type = 'text'; valor.inputMode = 'decimal'; valor.placeholder = 'Valor'; valor.value = it.valor != null ? numero(it.valor) : ''; valor.className = 'i-valor'; valor.setAttribute('aria-label', 'Valor do item');
-    valor.addEventListener('blur', function () { var v = parseValor(valor.value); valor.value = v != null ? numero(v) : ''; dicaTotal(); });
-    l1.appendChild(nome); l1.appendChild(valor);
-    var desc = el('textarea'); desc.maxLength = 600; desc.rows = 2; desc.placeholder = 'Descrição (opcional)'; desc.value = it.descricao || ''; desc.className = 'i-desc'; desc.setAttribute('aria-label', 'Descrição do item');
-    var ctrl = el('div', 'ctrl');
-    [['↑', 'Subir', -1], ['↓', 'Descer', 1]].forEach(function (x) {
-      var b = el('button', 'b icone', x[0]); b.type = 'button'; b.title = x[1]; b.setAttribute('aria-label', x[1]);
-      b.onclick = function () {
-        var irmao = x[2] < 0 ? r.previousElementSibling : r.nextElementSibling;
-        if (!irmao) return;
-        x[2] < 0 ? r.parentNode.insertBefore(r, irmao) : r.parentNode.insertBefore(irmao, r);
-        sujo = true;
-      };
-      ctrl.appendChild(b);
-    });
-    var rm = el('button', 'b b-pq b-perigo', 'Remover'); rm.type = 'button';
-    rm.onclick = function () { r.remove(); sujo = true; dicaTotal(); };
-    ctrl.appendChild(rm);
-    r.appendChild(l1); r.appendChild(desc); r.appendChild(ctrl);
-    return r;
-  }
-  document.querySelectorAll('[data-add]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var alvo = b.getAttribute('data-add'), r = linhaItem({}, alvo);
-      $(alvo).appendChild(r); r.querySelector('.i-nome').focus(); sujo = true;
-    });
-  });
-  function lerItens(alvo) {
-    return Array.prototype.map.call($(alvo).querySelectorAll('.item'), function (r) {
-      return { nome: r.querySelector('.i-nome').value.trim(), descricao: r.querySelector('.i-desc').value.trim(), valor: parseValor(r.querySelector('.i-valor').value) };
-    }).filter(function (i) { return i.nome || i.descricao || i.valor != null; });
-  }
-  function dicaTotal() {
-    var itens = lerItens('fItens').filter(function (i) { return i.valor != null; });
-    var m = $('fMoeda').value;
-    $('fTotalDica').textContent = itens.length
-      ? 'Vazio = soma dos itens: ' + dinheiro(itens.reduce(function (a, i) { return a + i.valor; }, 0), m) + '.'
-      : 'Vazio = sem valor na página (nenhum item tem valor).';
-  }
+  function atualizarMoeda() { document.querySelectorAll('.moeda-sim').forEach(function (e) { e.textContent = MOEDA[$('fMoeda').value] || 'R$'; }); }
+  $('fMoeda').addEventListener('change', atualizarMoeda);
   $('fTotal').addEventListener('blur', function () { var v = parseValor($('fTotal').value); $('fTotal').value = v != null ? numero(v) : ''; });
-  $('fMoeda').addEventListener('change', dicaTotal);
   $('fEd').addEventListener('input', function () { sujo = true; });
   $('fEd').addEventListener('submit', function (e) { e.preventDefault(); salvar(); });
 
+  // monta os dados que a página da proposta usa (itens e extras saem das escolhas, no idioma da proposta)
   function lerForm() {
-    var modelo = editando && editando.modelo;
+    var lang = $('fIdioma').value, esc = lerServicos();
+    var itens = [], opcionais = [];
+    SERVICOS.forEach(function (s) {
+      var e = esc.servicos[s.k];
+      if (e === 'inc') itens.push({ nome: s.nome[lang], descricao: s.desc[lang], valor: null });
+      if (e === 'extra') opcionais.push({ nome: s.nome[lang], descricao: s.desc[lang], valor: esc.extras[s.k] });
+    });
+    $('fOutros').value.split('\n').map(function (x) { return x.trim(); }).filter(Boolean).forEach(function (x) { itens.push({ nome: x, descricao: '', valor: null }); });
     var d = {
-      cliente: $('fCliente').value.trim(),
-      tipo: modelo ? $('mTipo').value.trim() : $('fTipo').value.trim(),
-      data: $('fData').value,
-      local: $('fLocal').value.trim(),
-      idioma: $('fIdioma').value,
-      moeda: $('fMoeda').value,
-      mensagem: $('fMensagem').value,
-      itens: lerItens('fItens'),
-      opcionais: lerItens('fOpc'),
-      total: parseValor($('fTotal').value),
-      condicoes: $('fCondicoes').value,
-      validade: $('fValidade').value,
-      observacoes: $('fObs').value,
-      secoes: { formatos: $('sFormatos').checked, videos: $('sVideos').checked, depoimentos: $('sDepoimentos').checked }
+      cliente: $('fCliente').value.trim(), data: $('fData').value, local: $('fLocal').value.trim(),
+      tipo: $('fTipo').value.trim(), idioma: lang, moeda: $('fMoeda').value,
+      mensagem: $('fMensagem').value, total: parseValor($('fTotal').value),
+      servicos: esc.servicos, extras_valor: esc.extras, outros: $('fOutros').value,
+      itens: itens, opcionais: opcionais,
+      condicoes: $('fCondicoes').value, validade: $('fValidade').value, observacoes: $('fObs').value,
+      secoes: { videos: $('sVideos').checked, depoimentos: $('sDepoimentos').checked, formatos: $('sFormatos').checked }
     };
-    if (modelo) { d.validade_dias = Number($('mDias').value) || 30; delete d.cliente; delete d.data; delete d.local; delete d.validade; }
+    if (editando && editando.modelo) { d.validade_dias = Number($('mDias').value) || 30; delete d.cliente; delete d.data; delete d.local; delete d.validade; delete d.total; delete d.mensagem; }
     return d;
   }
 
+  function hojeMais(dias) { var d = new Date(Date.now() + dias * 864e5); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); }
+
+  function carregarModelo() { return modelo ? Promise.resolve(modelo) : api('GET', '/admin/modelo').then(function (m) { modelo = m; return m; }); }
+
+  function novaProposta() {
+    carregarModelo().then(function (m) {
+      editando = { novo: true }; sujo = false;
+      var d = JSON.parse(JSON.stringify(m)); d.cliente = ''; d.data = ''; d.local = ''; d.mensagem = ''; d.total = null;
+      d.validade = hojeMais(Number(m.validade_dias) || 30);
+      preencher(d);
+      $('edTitulo').textContent = 'Nova proposta';
+      $('btSalvar').textContent = 'Salvar e gerar link';
+      $('edEnvio').hidden = true; $('maisOpcoes').open = false;
+      modo('proposta'); mostrar('vEditor'); $('fCliente').focus();
+    }).catch(falhou);
+  }
+  $('btNova').addEventListener('click', novaProposta);
+
+  function abrirEditor(p) {
+    editando = p; sujo = false;
+    preencher(p.dados);
+    $('edTitulo').textContent = p.dados.cliente || 'Proposta';
+    $('btSalvar').textContent = 'Salvar alterações';
+    $('edEnvio').hidden = false; $('edVer').href = linkDe(p);
+    $('maisOpcoes').open = false;
+    modo('proposta'); mostrar('vEditor');
+  }
+
   function salvar() {
-    var bt = $('btSalvar'); bt.disabled = true; bt.textContent = 'Salvando…';
-    var req;
-    if (editando.modelo) req = api('PUT', '/admin/modelo', { dados: lerForm() }).then(function () { sujo = false; toast('Modelo salvo'); });
-    else {
-      var status = statusAtual();
-      if (status === 'publicada' && !$('fCliente').value.trim()) {
-        bt.disabled = false; bt.textContent = 'Salvar';
-        toast('Coloque o nome do cliente antes de publicar'); $('fCliente').focus(); return;
-      }
-      req = api('PUT', '/admin/propostas/' + editando.id, { dados: lerForm(), status: status }).then(function (np) {
-        editando = np; sujo = false; atualizarNaLista(np); preencherLink(np);
-        toast(np.status === 'publicada' ? 'Salvo · publicada' : 'Salvo como rascunho');
-      });
+    var bt = $('btSalvar'), texto = bt.textContent;
+    if (editando.modelo) {
+      bt.disabled = true; bt.textContent = 'Salvando…';
+      return api('PUT', '/admin/modelo', { dados: lerForm() }).then(function (m) { modelo = m; sujo = false; toast('Modelo salvo'); abrirLista(); })
+        .catch(falhou).then(function () { bt.disabled = false; bt.textContent = texto; });
     }
-    req.catch(falhou).then(function () { bt.disabled = false; bt.textContent = 'Salvar'; });
+    if (!$('fCliente').value.trim()) { toast('Coloque o nome do cliente'); $('fCliente').focus(); return; }
+    var esc = lerServicos();
+    if (!Object.keys(esc.servicos).some(function (k) { return esc.servicos[k] === 'inc'; }) && !$('fOutros').value.trim()) {
+      toast('Marque pelo menos um serviço como “Incluso”'); return;
+    }
+    bt.disabled = true; bt.textContent = 'Salvando…';
+    var req = editando.novo
+      ? api('POST', '/admin/propostas', { dados: lerForm(), status: 'publicada' })
+      : api('PUT', '/admin/propostas/' + editando.id, { dados: lerForm(), status: 'publicada' });
+    req.then(function (np) {
+      var eraNova = !!editando.novo;
+      editando = np; sujo = false; atualizarNaLista(np);
+      $('edTitulo').textContent = np.dados.cliente; $('edEnvio').hidden = false; $('edVer').href = linkDe(np);
+      $('btSalvar').textContent = 'Salvar alterações'; texto = 'Salvar alterações';
+      modo('proposta');
+      if (eraNova) abrirFolha(np); else toast('Alterações salvas — o link continua o mesmo');
+    }).catch(falhou).then(function () { bt.disabled = false; bt.textContent = texto; });
   }
   $('btSalvar').addEventListener('click', salvar);
 
-  $('edCopiar').addEventListener('click', function () { semPendencias(function () { compartilhar(editando, 'copiar'); }); });
-  $('edWhats').addEventListener('click', function () { semPendencias(function () { compartilhar(editando, 'whats'); }); });
-  $('edPrevia').addEventListener('click', function (e) { if (sujo) { e.preventDefault(); semPendencias(function () { window.open(linkDe(editando), '_blank', 'noopener'); }); } });
-  // antes de enviar/prever, salva o que foi mudado (pra não mandar versão velha)
-  function semPendencias(fn) {
-    if (!sujo) return fn();
-    api('PUT', '/admin/propostas/' + editando.id, { dados: lerForm(), status: statusAtual() }).then(function (np) {
-      editando = np; sujo = false; atualizarNaLista(np); preencherLink(np); toast('Alterações salvas'); fn();
-    }).catch(falhou);
+  function abrirFolha(p) {
+    $('folhaLink').textContent = linkDe(p); $('folhaVer').href = linkDe(p);
+    $('folha').hidden = false;
   }
+  $('folhaFechar').addEventListener('click', function () { $('folha').hidden = true; });
+  $('folha').addEventListener('click', function (e) { if (e.target === $('folha')) $('folha').hidden = true; });
 
+  // duplicar = começar uma proposta nova com as mesmas escolhas (o Bruno só troca o cliente)
   $('edDuplicar').addEventListener('click', function () {
-    semPendencias(function () {
-      api('POST', '/admin/propostas/' + editando.id + '/duplicar').then(function (np) { atualizarNaLista(np); abrirEditor(np); toast('Cópia criada (rascunho)'); }).catch(falhou);
-    });
+    var d = lerForm();
+    editando = { novo: true }; sujo = true;
+    d.cliente = ''; d.data = ''; d.local = ''; d.mensagem = '';
+    preencher(d);
+    $('edTitulo').textContent = 'Nova proposta (cópia)'; $('btSalvar').textContent = 'Salvar e gerar link';
+    $('edEnvio').hidden = true; $('maisOpcoes').open = false;
+    modo('proposta'); window.scrollTo(0, 0); $('fCliente').focus();
+    toast('Copiado — agora é só trocar o cliente');
   });
   $('edExcluir').addEventListener('click', function () {
-    var nome = editando.dados.cliente || 'sem nome';
-    if (!confirm('Excluir a proposta "' + nome + '"?\n\nO link para de funcionar e não dá pra desfazer.')) return;
+    if (!confirm('Excluir a proposta de "' + (editando.dados.cliente || 'sem nome') + '"?\n\nO link para de funcionar.')) return;
     api('DELETE', '/admin/propostas/' + editando.id).then(function () {
       propostas = propostas.filter(function (x) { return x.id !== editando.id; });
-      sujo = false; editando = null; toast('Proposta excluída'); abrirLista();
+      sujo = false; toast('Proposta excluída'); abrirLista();
     }).catch(falhou);
   });
 
   $('btVoltar').addEventListener('click', function () {
-    if (sujo && !confirm('Sair sem salvar as alterações?')) return;
+    if (sujo && !confirm('Sair sem salvar?')) return;
     sujo = false; abrirLista();
   });
   window.addEventListener('beforeunload', function (e) { if (sujo) { e.preventDefault(); e.returnValue = ''; } });
 
-  // ---------- modelo ----------
+  // ---------- modelo padrão ----------
   $('btModelo').addEventListener('click', function () {
-    api('GET', '/admin/modelo').then(function (m) {
+    modelo = null;
+    carregarModelo().then(function (m) {
       editando = { modelo: true }; sujo = false;
-      campos('modelo');
-      $('edTitulo').textContent = 'Modelo';
-      $('edNome').textContent = 'Modelo padrão';
-      $('edSub').textContent = 'Ponto de partida de toda proposta nova.';
       preencher(m);
-      mostrar('vEditor');
+      $('edTitulo').textContent = 'Modelo padrão';
+      $('btSalvar').textContent = 'Salvar modelo';
+      $('edEnvio').hidden = true; $('maisOpcoes').open = true;
+      modo('modelo'); mostrar('vEditor');
+      toast('Toda proposta nova começa assim');
     }).catch(falhou);
   });
 
-  // ---------- início ----------
   if (logado()) abrirLista(); else mostrar('vLogin');
 })();
 </script>
