@@ -247,6 +247,9 @@
   .linha p { margin-top: 4px; color: var(--tinta-suave); font-size: clamp(0.96rem, 0.9rem + 0.22vw, 1.1rem); line-height: 1.55; white-space: pre-line; }
   .linha .v { font-weight: 600; white-space: nowrap; font-size: clamp(1rem, 0.92rem + 0.28vw, 1.2rem); }
   .opc .v { color: var(--dourado-escuro); }
+  .total-extras { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 24px; margin-top: 6px; padding: clamp(18px, 2.4vw, 26px) 0 0; border-top: 2px solid var(--dourado); }
+  .total-extras small { font-size: var(--t-mini); font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--dourado-escuro); }
+  .total-extras strong { font-weight: 800; font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.6rem); line-height: 1.1; letter-spacing: -0.02em; color: var(--grafite); }
   .total { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 24px; padding: clamp(22px, 3vw, 32px) 0; margin-bottom: clamp(36px, 4.5vw, 54px); border-block: 2px solid var(--dourado); }
   .total small { font-size: var(--t-mini); font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--dourado-escuro); }
   .total strong { font-weight: 800; font-size: clamp(2.5rem, 5.4vw, 4.4rem); line-height: 1.1; letter-spacing: -0.025em; color: var(--grafite); overflow-wrap: anywhere; }
@@ -365,7 +368,7 @@
   <section class="sec" aria-label="Internacional e destination weddings">
     <div class="wrap grade meio">
       <div class="cab">
-        <h2 class="reveal" data-t="inter.h2">Além do <em>Brasil</em>.</h2>
+        <h2 class="reveal" data-t="inter.h2">Do Cristo a <em>Nova York</em>.</h2>
         <p class="reveal d1" data-t="inter.p">Uma turnê me levou a Nova York e à Flórida — e destination weddings fazem parte do meu trabalho. A experiência vai junto, para onde a celebração for.</p>
       </div>
       <div class="duo reveal d1">
@@ -374,7 +377,7 @@
           <figcaption><b data-t="ny">Nova York</b><span data-t="eua">Estados Unidos</span></figcaption>
         </figure>
         <figure>
-          <div class="tela"><video muted loop playsinline preload="none" poster="../media/videos/poster-cristo.jpg" data-src="../media/videos/v-cristo.mp4"></video><button class="som" type="button" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span data-t="som">Ouvir</span></button></div>
+          <div class="tela"><video muted loop playsinline preload="none" poster="../media/videos/poster-prop-cristo.jpg" data-src="../media/videos/prop-cristo.mp4"></video><button class="som" type="button" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span data-t="som">Ouvir</span></button></div>
           <figcaption><b data-t="cristo">Cristo Redentor</b><span data-t="rio">Rio de Janeiro</span></figcaption>
         </figure>
         <!-- Tiradentes (MG): entra quando o Bruno mandar os vídeos do casamento -->
@@ -461,7 +464,7 @@
 
         <div class="bloco" id="blocoItens"><h3 data-t="inv.itens">O que está incluso</h3><div id="pItens"></div></div>
         <div class="total" id="blocoTotal"><small data-t="inv.total">Investimento</small><strong id="pTotal"></strong><p id="pTotalNota" hidden></p></div>
-        <div class="bloco opc" id="blocoOpc"><h3 data-t="inv.opc">Para somar à experiência</h3><div id="pOpc"></div></div>
+        <div class="bloco opc" id="blocoOpc"><h3 data-t="inv.opc">Para somar à experiência</h3><div id="pOpc"></div><div class="total-extras" id="totalExtras" hidden><small data-t="inv.totalx">Total com os extras</small><strong id="pTotalX"></strong></div></div>
         <div class="bloco" id="blocoCond"><h3 data-t="inv.cond">Condições de pagamento</h3><ul class="condicoes" id="pCond"></ul></div>
         <div class="bloco" id="blocoValidade"><p class="validade" id="pValidade"></p></div>
         <div class="bloco" id="blocoObs"><h3 data-t="inv.obs">Observações</h3><p class="obs" id="pObs"></p></div>
@@ -504,7 +507,7 @@
       'sobre.h2': 'From Rio to the <em>world</em>.',
       'sobre.p1': 'I\'m Bruno Daner, a saxophonist and DJ trained at the Villa-Lobos School of Music. I started on Brazil\'s pagode stages and, for five years now, I\'ve been bringing live sax combined with a DJ\'s direction to weddings and events — in Brazil and abroad.',
       'palcos.h2': 'I\'ve shared the <em>stage</em> with', 'palcos.p': 'From samba and pagode stages to more than 500 performances at weddings, corporate events and exclusive celebrations.',
-      'inter.h2': 'Beyond <em>Brazil</em>.', 'inter.p': 'A tour took me to New York and Florida — and destination weddings are part of my work. The experience travels with you, wherever the celebration goes.',
+      'inter.h2': 'From Rio to <em>New York</em>.', 'inter.p': 'A tour took me to New York and Florida — and destination weddings are part of my work. The experience travels with you, wherever the celebration goes.',
       'som': 'Sound on', 'ny': 'New York', 'eua': 'United States', 'cristo': 'Christ the Redeemer', 'rio': 'Rio de Janeiro',
       'vid.h2': 'Grand <em>weddings</em>.', 'vid.p': 'Nothing here is a rehearsal or stock footage — it\'s what your guests will live. Tap and watch with sound.',
       'v1': 'The floor answers', 'v1s': 'The party ends packed', 'v6': 'Chandelier ballroom', 'v6s': 'Sax in the middle of the crowd', 'v3': 'The bride\'s entrance', 'v3s': 'Fanfare at the church', 'v5': 'Against the LED wall', 'v5s': 'Set, sax and LED', 'v7': 'That energy', 'v7s': 'Bride on the dance floor',
@@ -515,7 +518,7 @@
       'q3': 'We had the musicians and singers at the church ceremony, making everything even more emotional and special. And at the end of the party, the sax with the drum was simply sensational! ... We closed our wedding on a high note!',
       'noiva': '— bride · casamentos.com.br',
       'form.h2': 'Four <em>acts</em>.', 'form1': 'For those afraid of an empty dance floor.', 'form2h': 'Ceremony', 'form2': 'For those who won\'t give up the emotion of the "I do".', 'form3': 'For those who want guests inside the party, not watching it.', 'form4': 'For those who want the end of the party to be the peak.',
-      'inv.h2': 'Your <em>investment</em>.', 'inv.itens': 'What\'s included', 'inv.total': 'Investment', 'inv.opc': 'Optional add-ons', 'inv.cond': 'Payment terms', 'inv.obs': 'Notes',
+      'inv.h2': 'Your <em>investment</em>.', 'inv.itens': 'What\'s included', 'inv.total': 'Investment', 'inv.opc': 'Optional add-ons', 'inv.totalx': 'Total with add-ons', 'inv.cond': 'Payment terms', 'inv.obs': 'Notes',
       'cta.reservar': 'I want to book my date', 'cta.duvida': 'Ask a question',
       'fecho': 'The music happens. <span>The floor answers.</span>', 'rk': 'Website by RK Performance',
       'r.cliente': 'For', 'r.evento': 'Event', 'r.data': 'Date', 'r.local': 'Venue',
@@ -532,7 +535,7 @@
       'sobre.h2': 'De Río al <em>mundo</em>.',
       'sobre.p1': 'Soy Bruno Daner, saxofonista y DJ formado en la Escuela de Música Villa-Lobos. Empecé en los escenarios del pagode y, desde hace cinco años, llevo a bodas y eventos la unión del sax en vivo con la conducción de un DJ — en Brasil y fuera de él.',
       'palcos.h2': 'Compartí el <em>escenario</em> con', 'palcos.p': 'De los escenarios del samba y del pagode a más de 500 presentaciones en bodas, eventos corporativos y celebraciones exclusivas.',
-      'inter.h2': 'Más allá de <em>Brasil</em>.', 'inter.p': 'Una gira me llevó a Nueva York y a Florida — y las destination weddings forman parte de mi trabajo. La experiencia va contigo, adonde vaya la celebración.',
+      'inter.h2': 'Del Cristo a <em>Nueva York</em>.', 'inter.p': 'Una gira me llevó a Nueva York y a Florida — y las destination weddings forman parte de mi trabajo. La experiencia va contigo, adonde vaya la celebración.',
       'som': 'Con sonido', 'ny': 'Nueva York', 'eua': 'Estados Unidos', 'cristo': 'Cristo Redentor', 'rio': 'Río de Janeiro',
       'vid.h2': 'Grandes <em>bodas</em>.', 'vid.p': 'Nada aquí es un ensayo ni banco de imágenes — es lo que tus invitados van a vivir. Toca y míralo con sonido.',
       'v1': 'La pista responde', 'v1s': 'La fiesta termina llena', 'v6': 'Salón de lámparas', 'v6s': 'Sax en medio de la multitud', 'v3': 'La entrada de la novia', 'v3s': 'Fanfarria en la iglesia', 'v5': 'Frente a la pantalla', 'v5s': 'Set, sax y LED', 'v7': 'Esa energía', 'v7s': 'La novia en la pista',
@@ -543,7 +546,7 @@
       'q3': 'Tuvimos a los músicos y cantantes en la ceremonia de la iglesia, haciendo todo aún más emocionante y especial. Y, al final de la fiesta, ¡el sax con el tambor fue simplemente sensacional! ... ¡Cerramos nuestra boda con broche de oro!',
       'noiva': '— novia · casamentos.com.br',
       'form.h2': 'Cuatro <em>actos</em>.', 'form1': 'Para quien teme una pista vacía.', 'form2h': 'Ceremonia', 'form2': 'Para quien no renuncia a la emoción del "sí".', 'form3': 'Para quien quiere a los invitados dentro de la fiesta, no viéndola.', 'form4': 'Para quien quiere que el final de la fiesta sea el punto máximo.',
-      'inv.h2': 'Tu <em>inversión</em>.', 'inv.itens': 'Qué incluye', 'inv.total': 'Inversión', 'inv.opc': 'Para sumar a la experiencia', 'inv.cond': 'Condiciones de pago', 'inv.obs': 'Observaciones',
+      'inv.h2': 'Tu <em>inversión</em>.', 'inv.itens': 'Qué incluye', 'inv.total': 'Inversión', 'inv.opc': 'Para sumar a la experiencia', 'inv.totalx': 'Total con los extras', 'inv.cond': 'Condiciones de pago', 'inv.obs': 'Observaciones',
       'cta.reservar': 'Quiero reservar mi fecha', 'cta.duvida': 'Hacer una pregunta',
       'fecho': 'La música sucede. <span>La pista responde.</span>', 'rk': 'Sitio por RK Performance',
       'r.cliente': 'Para', 'r.evento': 'Evento', 'r.data': 'Fecha', 'r.local': 'Lugar',
@@ -712,6 +715,12 @@
     else {
       document.getElementById('pTotal').textContent = dinheiro(total);
       if (d.total == null && comValor.length > 1) { var nota = document.getElementById('pTotalNota'); nota.hidden = false; nota.textContent = t('soma'); }
+      // total com os extras: valor incluso + todos os extras que têm preço
+      var somaExtras = opc.reduce(function (a, i) { return a + (i.valor != null ? i.valor : 0); }, 0);
+      if (somaExtras > 0) {
+        document.getElementById('totalExtras').hidden = false;
+        document.getElementById('pTotalX').textContent = dinheiro(total + somaExtras);
+      }
     }
 
     var ul = document.getElementById('pCond');
