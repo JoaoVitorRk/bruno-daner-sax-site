@@ -100,6 +100,13 @@
   .seg button[data-v="inc"][aria-pressed="true"] { background: var(--dourado); }
   .serv .extra-valor { display: none; }
   .serv.e-extra .extra-valor { display: grid; }
+  .outros-extras { display: grid; gap: 10px; padding-top: 14px; border-top: 1px solid rgba(201, 162, 75, 0.14); }
+  .outros-extras > b { font-weight: 700; font-size: 1rem; }
+  .outros-extras > p { color: var(--suave); font-size: 0.84rem; margin-top: -6px; }
+  .extra-linha { display: grid; grid-template-columns: minmax(0, 1fr) 132px 44px; gap: 8px; align-items: center; }
+  .extra-linha .remover { min-height: 50px; padding: 0; border-radius: 12px; color: var(--erro); border-color: rgba(227, 139, 118, 0.35); }
+  .add-extra { width: 100%; border-style: dashed; }
+  .dinheiro.falta { border-color: var(--erro); box-shadow: 0 0 0 1px var(--erro); }
 
   .dinheiro { display: flex; align-items: center; border-radius: 12px; border: 1px solid rgba(201, 162, 75, 0.3); background: var(--campo); }
   .dinheiro:focus-within { border-color: var(--dourado); }
@@ -191,6 +198,12 @@
     <div class="passo">
       <h3><span class="n" data-so="proposta">2</span> O que vai ter?</h3>
       <div id="fServicos"></div>
+      <div class="outros-extras">
+        <b>Outros extras</b>
+        <p>Algo que não está na lista acima, com o preço. Ex.: Hora extra.</p>
+        <div id="fExtras" style="display:grid; gap:8px"></div>
+        <button class="b add-extra" type="button" id="btAddExtra">+ Adicionar outro extra</button>
+      </div>
     </div>
 
     <div class="passo valor-grande" data-so="proposta">
@@ -330,11 +343,14 @@
     return null;
   }
   function escolhasDe(d) {
-    if (d.servicos) return { servicos: d.servicos, extras: d.extras_valor || {}, outros: d.outros || '' };
-    var s = {}, ex = {}, outros = [];
+    if (d.servicos) return { servicos: d.servicos, extras: d.extras_valor || {}, outros: d.outros || '', extrasOutros: d.extras_outros || [] };
+    var s = {}, ex = {}, outros = [], extrasOutros = [];
     (d.itens || []).forEach(function (i) { var k = chaveDe(i.nome); if (k) s[k] = 'inc'; else if (i.nome) outros.push(i.nome); });
-    (d.opcionais || []).forEach(function (i) { var k = chaveDe(i.nome); if (k && !s[k]) { s[k] = 'extra'; ex[k] = i.valor; } });
-    return { servicos: s, extras: ex, outros: outros.join('\n') };
+    (d.opcionais || []).forEach(function (i) {
+      var k = chaveDe(i.nome);
+      if (k && !s[k]) { s[k] = 'extra'; ex[k] = i.valor; } else if (!k && i.nome) extrasOutros.push({ nome: i.nome, valor: i.valor });
+    });
+    return { servicos: s, extras: ex, outros: outros.join('\n'), extrasOutros: extrasOutros };
   }
 
   // ---------- login ----------
@@ -426,14 +442,40 @@
         seg.appendChild(b);
       });
       r.appendChild(seg);
-      var ev = el('label', 'campo extra-valor'); ev.appendChild(el('span', null, 'Valor do extra (opcional)'));
+      var ev = el('label', 'campo extra-valor'); ev.appendChild(el('span', null, 'Preço do extra'));
       var din = el('div', 'dinheiro'); din.appendChild(el('span', 'moeda-sim', MOEDA[$('fMoeda').value] || 'R$'));
       var inp = el('input'); inp.type = 'text'; inp.inputMode = 'decimal'; inp.placeholder = '0';
       var v = esc.extras[s.k]; inp.value = v != null ? numero(v) : '';
       inp.addEventListener('blur', function () { var x = parseValor(inp.value); inp.value = x != null ? numero(x) : ''; });
+      inp.addEventListener('input', function () { din.classList.remove('falta'); });
       din.appendChild(inp); ev.appendChild(din); r.appendChild(ev);
       box.appendChild(r);
     });
+    var lista = $('fExtras'); lista.innerHTML = '';
+    (esc.extrasOutros || []).forEach(function (it) { lista.appendChild(linhaExtra(it)); });
+  }
+
+  // extras fora dos 4 serviços: nome + preço
+  function linhaExtra(it) {
+    var r = el('div', 'extra-linha');
+    var nome = el('input'); nome.type = 'text'; nome.maxLength = 120; nome.placeholder = 'Ex.: Hora extra'; nome.value = it.nome || ''; nome.className = 'x-nome'; nome.setAttribute('aria-label', 'Nome do extra');
+    var din = el('div', 'dinheiro'); din.appendChild(el('span', 'moeda-sim', MOEDA[$('fMoeda').value] || 'R$'));
+    var inp = el('input'); inp.type = 'text'; inp.inputMode = 'decimal'; inp.placeholder = '0'; inp.className = 'x-valor'; inp.setAttribute('aria-label', 'Preço do extra');
+    inp.value = it.valor != null ? numero(it.valor) : '';
+    inp.addEventListener('blur', function () { var x = parseValor(inp.value); inp.value = x != null ? numero(x) : ''; });
+    inp.addEventListener('input', function () { din.classList.remove('falta'); });
+    din.appendChild(inp);
+    var rm = el('button', 'b remover'); rm.type = 'button'; rm.setAttribute('aria-label', 'Remover extra'); rm.title = 'Remover';
+    rm.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+    rm.onclick = function () { r.remove(); sujo = true; };
+    r.appendChild(nome); r.appendChild(din); r.appendChild(rm);
+    return r;
+  }
+  $('btAddExtra').addEventListener('click', function () { var r = linhaExtra({}); $('fExtras').appendChild(r); r.querySelector('.x-nome').focus(); sujo = true; });
+  function lerExtrasOutros() {
+    return Array.prototype.map.call(document.querySelectorAll('#fExtras .extra-linha'), function (r) {
+      return { nome: r.querySelector('.x-nome').value.trim(), descricao: '', valor: parseValor(r.querySelector('.x-valor').value), _linha: r };
+    }).filter(function (x) { return x.nome || x.valor != null; });
   }
   function lerServicos() {
     var s = {}, ex = {};
@@ -481,11 +523,13 @@
       if (e === 'extra') opcionais.push({ nome: s.nome[lang], descricao: s.desc[lang], valor: esc.extras[s.k] });
     });
     $('fOutros').value.split('\n').map(function (x) { return x.trim(); }).filter(Boolean).forEach(function (x) { itens.push({ nome: x, descricao: '', valor: null }); });
+    var extrasOutros = lerExtrasOutros().map(function (x) { return { nome: x.nome, descricao: '', valor: x.valor }; });
+    extrasOutros.forEach(function (x) { opcionais.push(x); });
     var d = {
       cliente: $('fCliente').value.trim(), data: $('fData').value, local: $('fLocal').value.trim(),
       tipo: $('fTipo').value.trim(), idioma: lang, moeda: $('fMoeda').value,
       mensagem: $('fMensagem').value, total: parseValor($('fTotal').value),
-      servicos: esc.servicos, extras_valor: esc.extras, outros: $('fOutros').value,
+      servicos: esc.servicos, extras_valor: esc.extras, outros: $('fOutros').value, extras_outros: extrasOutros,
       itens: itens, opcionais: opcionais,
       condicoes: $('fCondicoes').value, validade: $('fValidade').value, observacoes: $('fObs').value,
       secoes: { videos: $('sVideos').checked, depoimentos: $('sDepoimentos').checked, formatos: $('sFormatos').checked }
@@ -533,6 +577,24 @@
     var esc = lerServicos();
     if (!Object.keys(esc.servicos).some(function (k) { return esc.servicos[k] === 'inc'; }) && !$('fOutros').value.trim()) {
       toast('Marque pelo menos um serviço como “Incluso”'); return;
+    }
+    var faltam = [], primeiro = null;
+    document.querySelectorAll('#fServicos .serv').forEach(function (r) {
+      var k = r.getAttribute('data-k');
+      if (esc.servicos[k] === 'extra' && esc.extras[k] == null) {
+        var din = r.querySelector('.extra-valor .dinheiro'); din.classList.add('falta'); primeiro = primeiro || din.querySelector('input');
+        faltam.push(SERVICOS.filter(function (s) { return s.k === k; })[0].nome.pt);
+      }
+    });
+    var semNome = false;
+    lerExtrasOutros().forEach(function (x) {
+      if (!x.nome) { semNome = true; primeiro = primeiro || x._linha.querySelector('.x-nome'); }
+      else if (x.valor == null) { var din = x._linha.querySelector('.dinheiro'); din.classList.add('falta'); primeiro = primeiro || din.querySelector('input'); faltam.push(x.nome); }
+    });
+    if (faltam.length || semNome) {
+      toast(faltam.length ? 'Falta o preço de: ' + faltam.join(', ') : 'Coloque o nome do extra');
+      if (primeiro) primeiro.focus();
+      return;
     }
     bt.disabled = true; bt.textContent = 'Salvando…';
     var req = editando.novo
