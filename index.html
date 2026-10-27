@@ -421,6 +421,18 @@
     .parceria-grid { grid-template-columns: 1fr; }
     .parceria-foto { order: 0; justify-self: center; width: min(86%, 420px); margin-bottom: 18px; }
   }
+  /* faixa do Guia Inesquecível Casamento: segundo selo, logo abaixo da Constance Zahn */
+  .guia-ic { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(26px, 4vw, 56px); align-items: center; margin-top: clamp(70px, 9vw, 120px); padding-top: clamp(40px, 5vw, 60px); border-top: 1px solid rgba(201, 162, 75, 0.4); }
+  .guia-ic-selo { width: clamp(120px, 13vw, 170px); }
+  .guia-ic-selo img { width: 100%; height: auto; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.55)); }
+  .guia-ic-copy { display: grid; gap: 14px; }
+  .guia-ic-copy h3 { font-size: clamp(1.5rem, 3vw, 2.4rem); line-height: 1.1; }
+  .guia-ic-copy h3 em { text-transform: none; }
+  .guia-ic-copy p { color: rgba(242, 237, 226, 0.78); max-width: 62ch; }
+  .guia-ic-copy strong { color: var(--areia); font-weight: 500; }
+  @media (max-width: 640px) {
+    .guia-ic { grid-template-columns: 1fr; justify-items: start; }
+  }
 
   /* ---------- Depoimentos ---------- */
   .depo { background: var(--noite); padding: clamp(100px, 13vw, 180px) 0; overflow: hidden; }
@@ -548,9 +560,13 @@
         "https://www.youtube.com/@BrunoDanerSax",
         "https://www.tiktok.com/@brunodaner",
         "https://www.casamentos.com.br/musica-de-casamento/bruno-daner-sax--e450884",
-        "https://www.constancezahn.com/fornecedores/bruno-daner/"
+        "https://www.constancezahn.com/fornecedores/bruno-daner/",
+        "https://guia.inesquecivelcasamento.com.br/fornecedor/bruno-daner-sax"
       ],
-      "memberOf": { "@type": "Organization", "name": "Guia de Fornecedores Constance Zahn", "url": "https://www.constancezahn.com/" },
+      "memberOf": [
+        { "@type": "Organization", "name": "Guia de Fornecedores Constance Zahn", "url": "https://www.constancezahn.com/" },
+        { "@type": "Organization", "name": "Guia de Fornecedores Inesquecível Casamento", "url": "https://guia.inesquecivelcasamento.com.br/" }
+      ],
       "genre": ["Música para casamento", "DJ para eventos", "Saxofone ao vivo"],
       "knowsLanguage": ["pt-BR", "en", "es"],
       "founder": { "@id": "https://brunodanersax.com/#bruno" },
@@ -664,7 +680,7 @@
         <button class="sound" id="soundBtn" type="button" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span data-i18n="hero.som">Ouvir com som</span></button>
         <a class="btn" href="#momentos"><span data-i18n="hero.vervideos">Ver os vídeos</span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v11M3 8l5 5 5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
       </div>
-      <p class="hero-proof" data-i18n="hero.proof"><span><strong>5.0</strong> no casamentos.com.br · <strong>100%</strong> recomendam</span><span><strong>Casamentos Awards 2026</strong> · Música · RJ</span><span>Parceiro <strong>Constance Zahn</strong></span><span>Respondo em até <strong>24h</strong> · consulta gratuita</span></p>
+      <p class="hero-proof" data-i18n="hero.proof"><span><strong>5.0</strong> no casamentos.com.br · <strong>100%</strong> recomendam</span><span><strong>Casamentos Awards 2026</strong> · Música · RJ</span><span>Parceiro <strong>Constance Zahn</strong></span><span>Selo <strong>Inesquecível Casamento</strong> 2026</span><span>Respondo em até <strong>24h</strong> · consulta gratuita</span></p>
     </div>
   </section>
 
@@ -902,7 +918,7 @@
   <div class="to-dark" aria-hidden="true"></div>
 
   <!-- ======================= PARCERIA (Constance Zahn) ======================= -->
-  <section id="parceria" class="parceria" aria-label="Parceiro Constance Zahn">
+  <section id="parceria" class="parceria" aria-label="Parcerias: Constance Zahn e Inesquecível Casamento">
     <div class="wrap parceria-grid">
       <figure class="parceria-foto reveal"><img src="media/fotos/parceria-cz.jpg" alt="Bruno Daner no set de DJ com o saxofone, com o selo Guia de Fornecedores CZ da Constance Zahn" width="1080" height="1350" loading="lazy"></figure>
       <div class="parceria-copy">
@@ -914,6 +930,18 @@
         <p class="reveal d2" data-i18n="cz.p3">Fazer parte desse universo representa mais do que uma parceria. É estar inserido em um mercado que valoriza <strong>experiência, estética, curadoria e excelência em cada detalhe</strong>.</p>
         <p class="fecho reveal d3" data-i18n="cz.p4">É com esse mesmo propósito que Bruno Daner apresenta sua proposta de <strong>DJ &amp; Live Sax Experience</strong>: uma experiência musical pensada para transformar momentos especiais em celebrações marcantes.</p>
         <a class="parceria-link reveal d3" href="https://www.constancezahn.com/fornecedores/bruno-daner/" target="_blank" rel="noopener"><span data-i18n="cz.link">Ver o perfil no Guia CZ</span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+    <!-- Guia de Fornecedores Inesquecível Casamento -->
+    <div class="wrap">
+      <div class="guia-ic">
+        <figure class="guia-ic-selo reveal"><img src="media/fotos/selo-ic-2026.webp" alt="Selo Fornecedor Inesquecível Casamento 2026" width="480" height="480" loading="lazy"></figure>
+        <div class="guia-ic-copy">
+          <p class="eyebrow reveal" data-i18n="ic.eyebrow">Guia de Fornecedores IC</p>
+          <h3 class="reveal d1" data-i18n="ic.h3">Fornecedor <em>Inesquecível Casamento</em> 2026.</h3>
+          <p class="reveal d2" data-i18n="ic.p">Bruno Daner integra o Guia de Fornecedores <strong>Inesquecível Casamento</strong> na categoria Atração Especial e conquistou o selo de fornecedor 2026. Uma plataforma com mais de 20 anos de tradição, que reúne grandes nomes do mercado de casamentos do Brasil.</p>
+          <a class="parceria-link reveal d3" href="https://guia.inesquecivelcasamento.com.br/fornecedor/bruno-daner-sax" target="_blank" rel="noopener"><span data-i18n="ic.link">Ver o perfil no Guia IC</span><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
       </div>
     </div>
   </section>
@@ -1033,7 +1061,7 @@
       'hero.h1': `<span class="w">The music happens.</span><span class="w">The floor <em>answers</em>.</span>`,
       'hero.sub': `Live DJ and sax in a single artist. I read the floor, drive the energy and turn your celebration into a memory that echoes forever.`,
       'hero.cta': `See if my date is open`, 'hero.som': `Play with sound`, 'hero.vervideos': `Watch the videos`,
-      'hero.proof': `<span><strong>5.0</strong> on casamentos.com.br · <strong>100%</strong> recommend</span><span><strong>Casamentos Awards 2026</strong> · Music · Rio</span><span><strong>Constance Zahn</strong> partner</span><span>I reply within <strong>24h</strong> · free consultation</span>`,
+      'hero.proof': `<span><strong>5.0</strong> on casamentos.com.br · <strong>100%</strong> recommend</span><span><strong>Casamentos Awards 2026</strong> · Music · Rio</span><span><strong>Constance Zahn</strong> partner</span><span><strong>Inesquecível Casamento</strong> 2026 seal</span><span>I reply within <strong>24h</strong> · free consultation</span>`,
       'conc.eyebrow': `The experience`, 'conc.h2': `Two languages. One <em>experience</em>.`, 'conc.lead': `I don't just pick songs or play sax. I build the atmosphere of the celebration.`,
       'conc.p1t': `In the same hands`, 'conc.p1': `You've seen a saxophonist playing over a playlist. What I do is different: I mix and play live sax at the same time — the freedom and energy of a DJ combined with the presence, improvisation and personality of the sax.`,
       'conc.p2t': `Curation and reading`, 'conc.p2': `The work starts earlier: I listen to your story and design a repertoire with choices that break the obvious. On the floor comes what you can't program — sensing the room, understanding the guests and steering the energy. Lifting when the floor asks for it, breathing when the moment deserves it.`,
@@ -1064,6 +1092,9 @@
       'cz.p3': `Being part of this universe means more than a partnership. It means belonging to a market that values <strong>experience, aesthetics, curation and excellence in every detail</strong>.`,
       'cz.p4': `It is with this same purpose that Bruno Daner presents his <strong>DJ &amp; Live Sax Experience</strong>: a musical experience designed to turn special moments into unforgettable celebrations.`,
       'cz.link': `See the profile on the CZ Guide`,
+      'ic.eyebrow': `IC Vendor Guide`, 'ic.h3': `An <em>Inesquecível Casamento</em> 2026 vendor.`,
+      'ic.p': `Bruno Daner is part of the <strong>Inesquecível Casamento</strong> Vendor Guide in the Special Attraction category and earned its 2026 vendor seal. A platform with more than 20 years of tradition that brings together leading names in the Brazilian wedding market.`,
+      'ic.link': `See the profile on the IC Guide`,
       'depo.eyebrow': `Reviews`, 'depo.h2': `The word of those who <em>lived it</em>.`,
       'depo.q1': `Bruno was absolutely sensational! ... The moment the performance started, the floor never stopped filling up. After the party, we only got compliments and a huge list of guests asking for his contact. If we could recommend him, we'd do it a million times!`, 'depo.n1': `— bride · casamentos.com.br`,
       'depo.q2': `We wanted to create a more intimate, cozy and elegant atmosphere… and you delivered exactly that, in a light, sophisticated and simply enchanting way. ... You didn't just perform — you created an experience.`, 'depo.n2': `— bride · casamentos.com.br`,
@@ -1095,7 +1126,7 @@
       'hero.h1': `<span class="w">La música sucede.</span><span class="w">La pista <em>responde</em>.</span>`,
       'hero.sub': `DJ y sax en vivo en un solo artista. Leo la pista, conduzco la energía y transformo tu celebración en un recuerdo que resuena para siempre.`,
       'hero.cta': `Ver si mi fecha está libre`, 'hero.som': `Escuchar con sonido`, 'hero.vervideos': `Ver los videos`,
-      'hero.proof': `<span><strong>5.0</strong> en casamentos.com.br · <strong>100%</strong> recomiendan</span><span><strong>Casamentos Awards 2026</strong> · Música · Río</span><span>Aliado <strong>Constance Zahn</strong></span><span>Respondo en <strong>24h</strong> · consulta gratuita</span>`,
+      'hero.proof': `<span><strong>5.0</strong> en casamentos.com.br · <strong>100%</strong> recomiendan</span><span><strong>Casamentos Awards 2026</strong> · Música · Río</span><span>Aliado <strong>Constance Zahn</strong></span><span>Sello <strong>Inesquecível Casamento</strong> 2026</span><span>Respondo en <strong>24h</strong> · consulta gratuita</span>`,
       'conc.eyebrow': `La experiencia`, 'conc.h2': `Dos lenguajes. Una <em>experiencia</em>.`, 'conc.lead': `No solo selecciono música o toco el sax. Construyo la atmósfera de la celebración.`,
       'conc.p1t': `En las mismas manos`, 'conc.p1': `Ya has visto a un saxofonista tocando sobre una playlist. Lo que hago es diferente: mezclo y toco el sax en vivo al mismo tiempo — la libertad y la energía del DJ combinadas con la presencia, la improvisación y la personalidad del sax.`,
       'conc.p2t': `Curaduría y lectura`, 'conc.p2': `El trabajo empieza antes: escucho tu historia y diseño un repertorio con elecciones que huyen de lo previsible. En la pista entra lo que no se puede programar — percibir el ambiente, entender a los invitados y conducir la energía. Subir cuando la pista lo pide, respirar cuando el momento lo merece.`,
@@ -1126,6 +1157,9 @@
       'cz.p3': `Formar parte de este universo representa más que una alianza. Es estar dentro de un mercado que valora <strong>la experiencia, la estética, la curaduría y la excelencia en cada detalle</strong>.`,
       'cz.p4': `Es con este mismo propósito que Bruno Daner presenta su propuesta de <strong>DJ &amp; Live Sax Experience</strong>: una experiencia musical pensada para transformar momentos especiales en celebraciones memorables.`,
       'cz.link': `Ver el perfil en la Guía CZ`,
+      'ic.eyebrow': `Guía de Proveedores IC`, 'ic.h3': `Proveedor <em>Inesquecível Casamento</em> 2026.`,
+      'ic.p': `Bruno Daner forma parte de la Guía de Proveedores <strong>Inesquecível Casamento</strong> en la categoría Atracción Especial y obtuvo el sello de proveedor 2026. Una plataforma con más de 20 años de tradición, que reúne a grandes nombres del mercado de bodas de Brasil.`,
+      'ic.link': `Ver el perfil en la Guía IC`,
       'depo.eyebrow': `Reseñas`, 'depo.h2': `La palabra de quien lo <em>vivió</em>.`,
       'depo.q1': `¡Bruno fue absolutamente sensacional! ... En cuanto empezó la actuación, la pista no paraba de llenarse. Después de la fiesta, solo recibimos elogios y una lista enorme de invitados pidiendo su contacto. ¡Si pudiéramos recomendarlo, lo haríamos un millón de veces!`, 'depo.n1': `— novia · casamentos.com.br`,
       'depo.q2': `Queríamos crear un ambiente más íntimo, acogedor y elegante… y lograste entregar exactamente eso, de una forma ligera, sofisticada y simplemente encantadora. ... No solo te presentaste — creaste una experiencia.`, 'depo.n2': `— novia · casamentos.com.br`,
