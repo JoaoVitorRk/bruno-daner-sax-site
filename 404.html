@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- ============================================================
+     404 — Bruno Daner Sax
+     O GitHub Pages serve esta página (com status 404) para qualquer endereço que não existe.
+     Os endereços antigos da Wix (cópia-corporativo, cópia-sax-live, política-de-privacidade,
+     event-details…) ainda estavam no Google em 27/10/2026: quem clica cai aqui e segue
+     direto para o site novo. /en e /es (o multilíngue da Wix) abrem o site no idioma.
+     Para o Google continua sendo 404, então ele tira as páginas antigas do índice sozinho.
+     RK Performance · out/2026
+     ============================================================ -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Página não encontrada · Bruno Daner Sax</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B0A08">
+<link rel="icon" type="image/png" href="/media/favicon.png">
+<script>
+(function () {
+  var p = decodeURIComponent(location.pathname).toLowerCase();
+  var m = p.match(/^\/(en|es)(\/|$)/);
+  if (m) { try { localStorage.setItem('bd_lang', m[1]); } catch (e) {} }
+  var destino = /corporativ|sax-live|soundlive|servi/.test(p) ? '/#servicos' : /event|contato|contact/.test(p) ? '/#contato' : '/';
+  location.replace(destino);
+})();
+</script>
+<style>
+  :root { --noite: #0B0A08; --areia: #F2EDE2; --dourado: #C9A24B; --dourado-claro: #E7CE93; }
+  * { box-sizing: border-box; margin: 0; }
+  body { min-height: 100vh; min-height: 100svh; display: grid; place-items: center; padding: 40px 20px; text-align: center; background: var(--noite); color: var(--areia); font-family: "Segoe UI", system-ui, sans-serif; line-height: 1.6; }
+  img { width: min(70vw, 260px); height: auto; margin: 0 auto 34px; display: block; }
+  h1 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: clamp(1.9rem, 6vw, 2.6rem); line-height: 1.15; }
+  p { margin-top: 14px; color: rgba(242, 237, 226, 0.75); }
+  a { display: inline-block; margin-top: 30px; padding: 14px 30px; border-radius: 999px; background: var(--dourado); color: var(--noite); text-decoration: none; font-weight: 600; }
+  a:hover { background: var(--dourado-claro); }
+  a:focus-visible { outline: 2px solid var(--dourado-claro); outline-offset: 4px; }
+</style>
+</head>
+<body>
+  <main>
+    <img src="/media/logo-header.png" alt="Bruno Daner Sax">
+    <h1>Esta página mudou de endereço</h1>
+    <p>O site do Bruno Daner Sax está de cara nova.<br>This page has moved.</p>
+    <a href="/">Ir para o site</a>
+  </main>
+</body>
+</html>
