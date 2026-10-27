@@ -8,8 +8,8 @@
      ============================================================ -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>DJ e Sax ao Vivo para Casamentos e Eventos | Bruno Daner Sax</title>
-<meta name="description" content="Bruno Daner: DJ e saxofonista ao vivo no mesmo artista. Casamentos, eventos corporativos e celebrações em todo o Brasil e no exterior. Nota 5.0 no casamentos.com.br. Consulte sua data.">
+<title>Saxofonista e DJ para Casamento no Rio de Janeiro | Bruno Daner</title>
+<meta name="description" content="Saxofonista e DJ ao vivo no mesmo artista para casamentos e eventos no Rio de Janeiro, no Brasil e no exterior. Nota 5.0 no casamentos.com.br. Consulte sua data.">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="author" content="Bruno Daner">
 <meta name="keywords" content="saxofonista casamento, DJ e sax ao vivo, saxofonista Rio de Janeiro, DJ para casamento, música para casamento, saxofonista para eventos, destination wedding música, DJ sax Rio, live sax wedding">
@@ -22,7 +22,7 @@
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
 <meta property="og:site_name" content="Bruno Daner Sax">
-<meta property="og:title" content="Bruno Daner Sax — DJ e Sax ao Vivo">
+<meta property="og:title" content="Bruno Daner Sax · Saxofonista e DJ no Rio de Janeiro">
 <meta property="og:description" content="Duas linguagens. Uma única experiência. DJ e saxofone ao vivo para casamentos e eventos — Brasil e exterior.">
 <meta property="og:url" content="https://brunodanersax.com/">
 <meta property="og:image" content="https://brunodanersax.com/media/fotos/og-image.jpg">
@@ -32,7 +32,7 @@
 <meta property="og:image:height" content="1866">
 <meta property="og:image:alt" content="Bruno Daner com o saxofone ao lado dos noivos comemorando na festa">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Bruno Daner Sax — DJ e Sax ao Vivo">
+<meta name="twitter:title" content="Bruno Daner Sax · Saxofonista e DJ no Rio de Janeiro">
 <meta name="twitter:description" content="DJ e saxofone ao vivo num só artista, para casamentos e eventos. Brasil e exterior.">
 <meta name="twitter:image" content="https://brunodanersax.com/media/fotos/og-image.jpg">
 <meta name="twitter:image:alt" content="Bruno Daner com o saxofone ao lado dos noivos comemorando na festa">
@@ -90,9 +90,9 @@
     letter-spacing: 0.34em; text-transform: uppercase; color: var(--dourado);
   }
   /* display: caixa-alta pesada; a palavra em <em> vira serifa itálica dourada — a assinatura tipográfica */
-  h1, h2, h3 { font-family: var(--sans); font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.02; text-wrap: balance; }
+  h1, h2, h3, .hero-title { font-family: var(--sans); font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.02; text-wrap: balance; }
   h2 { font-size: clamp(2.4rem, 5.6vw, 4.8rem); }
-  h1 em, h2 em, h3 em, .em {
+  h1 em, h2 em, h3 em, .hero-title em, .em {
     font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: lowercase;
     letter-spacing: 0; color: var(--dourado-claro); font-size: 1.12em; line-height: 1;
   }
@@ -238,9 +238,10 @@
   }
   .hero-tag { display: inline-flex; align-items: center; gap: 14px; color: var(--dourado-claro); animation: rise 900ms var(--ease) 1550ms both; }
   .hero-tag .eyebrow { color: inherit; }
-  .hero h1 { font-size: clamp(3.2rem, 10.5vw, 9rem); line-height: 0.94; margin-top: 22px; max-width: 12ch; animation: rise 1100ms var(--ease) 1700ms both; }
-  .hero h1 .w { display: block; }
-  .hero h1 .w:nth-child(2) { padding-left: 0.5em; }
+  .hero-tag h1.eyebrow { margin: 0; line-height: 1.6; text-wrap: balance; }
+  .hero .hero-title { font-size: clamp(3.2rem, 10.5vw, 9rem); line-height: 0.94; margin-top: 22px; max-width: 12ch; animation: rise 1100ms var(--ease) 1700ms both; }
+  .hero .hero-title .w { display: block; }
+  .hero .hero-title .w:nth-child(2) { padding-left: 0.5em; }
   .hero-sub { margin-top: 26px; max-width: 46ch; font-size: 1.07rem; color: rgba(242, 237, 226, 0.85); animation: rise 1100ms var(--ease) 1900ms both; }
   .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px 34px; margin-top: 36px; animation: rise 1100ms var(--ease) 2050ms both; }
   .hero-proof {
@@ -264,7 +265,7 @@
     .hero-wall { grid-template-columns: 1fr; }
     .wall-col.lado { display: none; }
     .hero-inner { padding-top: 120px; padding-bottom: 84px; }
-    .hero h1 { max-width: none; }
+    .hero .hero-title { max-width: none; }
   }
 
   /* ---------- Letreiro ---------- */
@@ -517,7 +518,7 @@
   @media (max-width: 480px) {
     .btn { font-size: 0.66rem; letter-spacing: 0.16em; gap: 12px; padding-left: 20px; }
     .btn .arrow { width: 38px; height: 38px; }
-    .hero h1 { font-size: clamp(2.7rem, 14vw, 4rem); }
+    .hero .hero-title { font-size: clamp(2.7rem, 14vw, 4rem); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -544,9 +545,9 @@
     {
       "@type": ["LocalBusiness", "MusicGroup"],
       "@id": "https://brunodanersax.com/#negocio",
-      "name": "Bruno Daner Sax — DJ e Sax ao Vivo",
+      "name": "Bruno Daner Sax",
       "alternateName": "Bruno Daner",
-      "description": "DJ e saxofonista ao vivo no mesmo artista. Música para casamentos, eventos corporativos e celebrações — Brasil e exterior, incluindo destination weddings.",
+      "description": "Saxofonista e DJ ao vivo no mesmo artista, com base no Rio de Janeiro. Música para casamentos, cerimônias e eventos corporativos no Rio, no Brasil e no exterior, incluindo destination weddings.",
       "url": "https://brunodanersax.com/",
       "image": "https://brunodanersax.com/media/fotos/og-image.jpg",
       "logo": "https://brunodanersax.com/media/logo-full.png",
@@ -554,7 +555,7 @@
       "email": "brunodanersax@gmail.com",
       "priceRange": "$$$",
       "address": { "@type": "PostalAddress", "addressLocality": "Rio de Janeiro", "addressRegion": "RJ", "addressCountry": "BR" },
-      "areaServed": [{ "@type": "Country", "name": "Brasil" }, { "@type": "Place", "name": "Internacional" }],
+      "areaServed": [{ "@type": "City", "name": "Rio de Janeiro" }, { "@type": "State", "name": "Rio de Janeiro" }, { "@type": "Country", "name": "Brasil" }, { "@type": "Place", "name": "Internacional" }],
       "sameAs": [
         "https://www.instagram.com/brunodanersax",
         "https://www.youtube.com/@BrunoDanerSax",
@@ -577,7 +578,7 @@
         "ratingValue": "5.0",
         "bestRating": "5",
         "worstRating": "1",
-        "reviewCount": "8"
+        "reviewCount": "9"
       },
       "review": [
         { "@type": "Review", "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }, "author": { "@type": "Person", "name": "Fernanda" }, "reviewBody": "O Bruno foi absolutamente sensacional! Assim que começou a performance, a pista não parava de encher. Depois da festa, só recebemos elogios e uma lista enorme de convidados pedindo o contato dele." },
@@ -617,7 +618,7 @@
         { "@type": "Question", "name": "Meu evento é intimista. Funciona mesmo assim?", "acceptedAnswer": { "@type": "Answer", "text": "Funciona. O Live Sax circulando entre os convidados cria um clima elegante e envolvente sem precisar de pista cheia. A experiência se adapta ao tamanho e ao espírito do seu evento." } },
         { "@type": "Question", "name": "Posso pedir músicas específicas?", "acceptedAnswer": { "@type": "Answer", "text": "Pode e deve. A curadoria parte da personalidade do seu evento, e músicas que têm significado para vocês entram nesse desenho, do clássico ao eletrônico." } },
         { "@type": "Question", "name": "E o equipamento? O som vai funcionar no meu espaço?", "acceptedAnswer": { "@type": "Answer", "text": "O setup varia conforme o formato e a estrutura do local. Levanto essas informações antes e detalho na proposta exatamente o que levo e o que preciso do espaço. Nada de surpresa técnica no dia." } },
-        { "@type": "Question", "name": "Você toca fora do Rio? Faz destination wedding?", "acceptedAnswer": { "@type": "Answer", "text": "Atendo o Brasil todo e o exterior. Minha base é o Rio de Janeiro, mas já levei a experiência para fora do país, com turnê por Nova York e pela Flórida, e destination weddings fazem parte do meu trabalho." } },
+        { "@type": "Question", "name": "Quais regiões você atende? Faz destination wedding?", "acceptedAnswer": { "@type": "Answer", "text": "Atendo o Brasil todo e o exterior. Minha base é o Rio de Janeiro, de onde atendo a capital e o estado inteiro, de Niterói e Petrópolis a Búzios, Angra dos Reis e Paraty. Também já levei a experiência para fora do país, com turnê por Nova York e pela Flórida, e destination weddings fazem parte do meu trabalho." } },
         { "@type": "Question", "name": "Quanto tempo dura a apresentação?", "acceptedAnswer": { "@type": "Answer", "text": "Depende do formato e dos momentos que a gente escolher cobrir: cerimônia, coquetel, pista, encerramento. Isso é definido na curadoria do seu evento." } },
         { "@type": "Question", "name": "Quanto custa?", "acceptedAnswer": { "@type": "Answer", "text": "Cada proposta é montada sob medida, conforme o formato, a formação e o local do evento. Na conversa eu entendo o que vocês imaginam e devolvo uma proposta clara, sem surpresa." } },
         { "@type": "Question", "name": "Como eu reservo a minha data?", "acceptedAnswer": { "@type": "Answer", "text": "Me chama no WhatsApp com a data, a cidade e o tipo de evento. Respondo em até 24h, confirmo a disponibilidade e agendamos uma consulta gratuita para desenhar a experiência." } }
@@ -672,8 +673,8 @@
     </div>
     <div class="sweep" aria-hidden="true"><i></i></div>
     <div class="hero-inner">
-      <div class="hero-tag"><span class="bars live" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="eyebrow" data-i18n="hero.tag">Bruno Daner — DJ &amp; Sax ao vivo · Brasil e exterior</span></div>
-      <h1 data-i18n="hero.h1"><span class="w">A música acontece.</span><span class="w">A pista <em>responde</em>.</span></h1>
+      <div class="hero-tag"><span class="bars live" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><h1 class="eyebrow" data-i18n="hero.tag">Saxofonista e DJ para casamentos · Rio de Janeiro, Brasil e exterior</h1></div>
+      <p class="hero-title" data-i18n="hero.h1"><span class="w">A música acontece.</span><span class="w">A pista <em>responde</em>.</span></p>
       <p class="hero-sub" data-i18n="hero.sub">É DJ e sax ao vivo num só artista. Eu leio a pista, conduzo a energia e transformo a sua celebração numa memória que ecoa para sempre.</p>
       <div class="hero-actions">
         <a class="btn btn-solid" href="https://wa.me/5521994227045?text=Oi%2C%20Bruno%21%20Vi%20seu%20site%20e%20quero%20ver%20sua%20disponibilidade.%0AData%3A%20%0ACidade%2FLocal%3A%20%0ATipo%20de%20evento%3A%20" target="_blank" rel="noopener"><span data-i18n="hero.cta">Ver a disponibilidade da minha data</span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
@@ -998,7 +999,7 @@
         <details><summary data-i18n="faq.q3">Meu evento é intimista. Funciona mesmo assim?</summary><p data-i18n="faq.a3">Funciona. O Live Sax circulando entre os convidados cria um clima elegante e envolvente sem precisar de pista cheia. Já criei ambientes intimistas e sofisticados exatamente assim — a experiência se adapta ao tamanho e ao espírito do seu evento.</p></details>
         <details><summary data-i18n="faq.q4">Posso pedir músicas específicas?</summary><p data-i18n="faq.a4">Pode — e deve. A curadoria parte da personalidade do seu evento, e músicas que têm significado para vocês entram nesse desenho — do clássico ao eletrônico.</p></details>
         <details><summary data-i18n="faq.q5">E o equipamento? O som vai funcionar no meu espaço?</summary><p data-i18n="faq.a5">O setup varia conforme o formato e a estrutura do local — por isso eu levanto essas informações antes e detalho na proposta exatamente o que eu levo e o que preciso do espaço. Nada de surpresa técnica no dia.</p></details>
-        <details><summary data-i18n="faq.q6">Você toca fora do Rio? Faz destination wedding?</summary><p data-i18n="faq.a6">Atendo o Brasil todo e o exterior. Minha base é o Rio de Janeiro, mas já levei a experiência para fora do país — com turnê por Nova York e pela Flórida — e destination weddings fazem parte do meu trabalho. Deslocamento e logística variam conforme o destino e entram detalhados na proposta.</p></details>
+        <details><summary data-i18n="faq.q6">Quais regiões você atende? Faz destination wedding?</summary><p data-i18n="faq.a6">Atendo o Brasil todo e o exterior. Minha base é o Rio de Janeiro, de onde atendo a capital e o estado inteiro, de Niterói e Petrópolis a Búzios, Angra dos Reis e Paraty. Também já levei a experiência para fora do país, com turnê por Nova York e pela Flórida, e destination weddings fazem parte do meu trabalho. Deslocamento e logística variam conforme o destino e entram detalhados na proposta.</p></details>
         <details><summary data-i18n="faq.q7">Quanto tempo dura a apresentação?</summary><p data-i18n="faq.a7">Depende do formato e dos momentos que a gente escolher cobrir: cerimônia, coquetel, pista, encerramento. Isso é definido na curadoria do seu evento — me chama que eu monto a proposta para o seu roteiro.</p></details>
         <details><summary data-i18n="faq.q8">Quanto custa?</summary><p data-i18n="faq.a8">Cada proposta é montada sob medida, conforme o formato, a formação e o local do evento. Na conversa eu entendo o que vocês imaginam e devolvo uma proposta clara, sem surpresa.</p></details>
         <details><summary data-i18n="faq.q9">Como eu reservo a minha data?</summary><p data-i18n="faq.a9">Me chama no WhatsApp com a data, a cidade e o tipo de evento. Eu respondo em até 24h, confirmo a disponibilidade e a gente agenda uma consulta gratuita para desenhar a experiência.</p></details>
@@ -1057,7 +1058,7 @@
     en: {
       'nav.exp': `The experience`, 'nav.serv': `Formats`, 'nav.vid': `Videos`, 'nav.sobre': `About`, 'nav.depo': `Reviews`, 'nav.cta': `Check your date`,
       'marquee': `<span>DJ &amp; Live Sax Experience</span><span>Music curation</span><span>Floor reading</span><span>Weddings</span><span>Destination weddings</span><span>Corporate events</span><span>Live ceremony</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span><span>DJ &amp; Live Sax Experience</span><span>Music curation</span><span>Floor reading</span><span>Weddings</span><span>Destination weddings</span><span>Corporate events</span><span>Live ceremony</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Rio de Janeiro</span>`,
-      'hero.tag': `Bruno Daner — Live DJ &amp; Sax · Brazil &amp; abroad`,
+      'hero.tag': `Saxophonist &amp; DJ for weddings · Rio de Janeiro, Brazil &amp; abroad`,
       'hero.h1': `<span class="w">The music happens.</span><span class="w">The floor <em>answers</em>.</span>`,
       'hero.sub': `Live DJ and sax in a single artist. I read the floor, drive the energy and turn your celebration into a memory that echoes forever.`,
       'hero.cta': `See if my date is open`, 'hero.som': `Play with sound`, 'hero.vervideos': `Watch the videos`,
@@ -1113,7 +1114,7 @@
       'faq.q3': `My event is intimate. Does it still work?`, 'faq.a3': `It does. Live Sax moving among the guests creates an elegant, engaging vibe without needing a full floor. I've created intimate, sophisticated settings exactly like this — the experience adapts to the size and spirit of your event.`,
       'faq.q4': `Can I request specific songs?`, 'faq.a4': `You can — and you should. The curation starts from your event's personality, and songs that mean something to you become part of that design — from classical to electronic.`,
       'faq.q5': `What about equipment? Will the sound work in my venue?`, 'faq.a5': `The setup varies with the format and the venue's structure — that's why I gather this info beforehand and detail in the proposal exactly what I bring and what I need from the space. No technical surprises on the day.`,
-      'faq.q6': `Do you play outside Rio? Do you do destination weddings?`, 'faq.a6': `I serve all of Brazil and abroad. My base is Rio de Janeiro, but I've already taken the experience out of the country — with a tour through New York and Florida — and destination weddings are part of my work. Travel and logistics vary by destination and come detailed in the proposal.`,
+      'faq.q6': `Which regions do you serve? Do you do destination weddings?`, 'faq.a6': `I serve all of Brazil and abroad. My base is Rio de Janeiro, and from there I cover the city and the whole state, from Niterói and Petrópolis to Búzios, Angra dos Reis and Paraty. I've also taken the experience out of the country, with a tour through New York and Florida, and destination weddings are part of my work. Travel and logistics vary by destination and come detailed in the proposal.`,
       'faq.q7': `How long is the performance?`, 'faq.a7': `It depends on the format and the moments we choose to cover: ceremony, cocktail, dance floor, closing. That's defined in your event's curation — message me and I'll build the proposal for your timeline.`,
       'faq.q8': `How much does it cost?`, 'faq.a8': `Each proposal is tailor-made, based on the format, the lineup and the venue. In our conversation I understand what you have in mind and send you a clear proposal, no surprises.`,
       'faq.q9': `How do I book my date?`, 'faq.a9': `Message me on WhatsApp with the date, the city and the type of event. I reply within 24h, confirm availability and we schedule a free consultation to design the experience.`,
@@ -1122,7 +1123,7 @@
     es: {
       'nav.exp': `La experiencia`, 'nav.serv': `Formatos`, 'nav.vid': `Videos`, 'nav.sobre': `El artista`, 'nav.depo': `Reseñas`, 'nav.cta': `Consultar fecha`,
       'marquee': `<span>DJ &amp; Live Sax Experience</span><span>Curaduría musical</span><span>Lectura de pista</span><span>Bodas</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Ceremonia en vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Río de Janeiro</span><span>DJ &amp; Live Sax Experience</span><span>Curaduría musical</span><span>Lectura de pista</span><span>Bodas</span><span>Destination weddings</span><span>Eventos corporativos</span><span>Ceremonia en vivo</span><span>Afro house</span><span>Deep house</span><span>Jazz &amp; blues</span><span>Bossa nova</span><span>Pop &amp; rock</span><span>Samba</span><span>MPB</span><span>Color Drums</span><span>CO₂</span><span>Río de Janeiro</span>`,
-      'hero.tag': `Bruno Daner — DJ &amp; Sax en vivo · Brasil y exterior`,
+      'hero.tag': `Saxofonista y DJ para bodas · Río de Janeiro, Brasil y exterior`,
       'hero.h1': `<span class="w">La música sucede.</span><span class="w">La pista <em>responde</em>.</span>`,
       'hero.sub': `DJ y sax en vivo en un solo artista. Leo la pista, conduzco la energía y transformo tu celebración en un recuerdo que resuena para siempre.`,
       'hero.cta': `Ver si mi fecha está libre`, 'hero.som': `Escuchar con sonido`, 'hero.vervideos': `Ver los videos`,
@@ -1178,7 +1179,7 @@
       'faq.q3': `Mi evento es íntimo. ¿Funciona igual?`, 'faq.a3': `Funciona. El Live Sax circulando entre los invitados crea un clima elegante y envolvente sin necesidad de una pista llena. Ya he creado ambientes íntimos y sofisticados exactamente así — la experiencia se adapta al tamaño y al espíritu de tu evento.`,
       'faq.q4': `¿Puedo pedir canciones específicas?`, 'faq.a4': `Puedes — y debes. La curaduría parte de la personalidad de tu evento, y las canciones que tienen significado para ustedes entran en ese diseño — de lo clásico a lo electrónico.`,
       'faq.q5': `¿Y el equipo? ¿El sonido funcionará en mi espacio?`, 'faq.a5': `El setup varía según el formato y la estructura del lugar — por eso levanto esa información antes y detallo en la propuesta exactamente qué llevo y qué necesito del espacio. Nada de sorpresas técnicas el día del evento.`,
-      'faq.q6': `¿Tocas fuera de Río? ¿Haces destination weddings?`, 'faq.a6': `Atiendo todo Brasil y el exterior. Mi base es Río de Janeiro, pero ya llevé la experiencia fuera del país — con una gira por Nueva York y Florida — y los destination weddings son parte de mi trabajo. El traslado y la logística varían según el destino y entran detallados en la propuesta.`,
+      'faq.q6': `¿Qué regiones atiendes? ¿Haces destination weddings?`, 'faq.a6': `Atiendo todo Brasil y el exterior. Mi base es Río de Janeiro, y desde allí atiendo la ciudad y todo el estado, de Niterói y Petrópolis a Búzios, Angra dos Reis y Paraty. También llevé la experiencia fuera del país, con una gira por Nueva York y Florida, y los destination weddings son parte de mi trabajo. El traslado y la logística varían según el destino y entran detallados en la propuesta.`,
       'faq.q7': `¿Cuánto dura la presentación?`, 'faq.a7': `Depende del formato y de los momentos que elijamos cubrir: ceremonia, cóctel, pista, cierre. Eso se define en la curaduría de tu evento — escríbeme y armo la propuesta para tu itinerario.`,
       'faq.q8': `¿Cuánto cuesta?`, 'faq.a8': `Cada propuesta se arma a medida, según el formato, la formación y el lugar del evento. En la conversación entiendo lo que imaginan y les devuelvo una propuesta clara, sin sorpresas.`,
       'faq.q9': `¿Cómo reservo mi fecha?`, 'faq.a9': `Escríbeme por WhatsApp con la fecha, la ciudad y el tipo de evento. Respondo en 24h, confirmo la disponibilidad y agendamos una consulta gratuita para diseñar la experiencia.`,
@@ -1203,7 +1204,9 @@
     btns.forEach(function (b) { b.addEventListener('click', function () { aplicar(b.getAttribute('data-lang')); }); });
     var salvo; try { salvo = localStorage.getItem('bd_lang'); } catch (e) {}
     var nav2 = (navigator.language || 'pt').slice(0, 2).toLowerCase();
-    var inicial = salvo || ((nav2 === 'en' || nav2 === 'es') ? nav2 : 'pt');
+    // robô de busca (Google lê com o navegador em inglês) fica sempre na versão em português
+    var robo = /bot|crawl|spider|slurp|lighthouse|headless|inspectiontool/i.test(navigator.userAgent);
+    var inicial = robo ? 'pt' : (salvo || ((nav2 === 'en' || nav2 === 'es') ? nav2 : 'pt'));
     if (inicial !== 'pt') aplicar(inicial);
   })();
 
