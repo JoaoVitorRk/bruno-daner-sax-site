@@ -669,9 +669,10 @@
   <!-- ======================= HERO — painel de LED ======================= -->
   <section class="hero" aria-label="Apresentação">
     <div class="hero-wall" aria-hidden="true">
-      <div class="wall-col lado"><video autoplay muted loop playsinline preload="auto" poster="media/videos/poster-hero-b.jpg"><source src="media/videos/hero-b.mp4" type="video/mp4"></video></div>
-      <div class="wall-col meio"><video id="heroMeio" autoplay muted loop playsinline preload="auto" poster="media/videos/poster-hero-a.jpg"><source src="media/videos/hero-a.mp4" type="video/mp4"></video></div>
-      <div class="wall-col lado"><video autoplay muted loop playsinline preload="auto" poster="media/videos/poster-hero-c.jpg"><source src="media/videos/hero-c.mp4" type="video/mp4"></video></div>
+      <!-- a imagem embaixo de cada vídeo é o pôster (abre a página); o vídeo entra por cima depois do load -->
+      <div class="wall-col lado"><img src="media/videos/poster-hero-b.jpg" alt="" width="720" height="1280" loading="lazy"><video muted loop playsinline preload="none" data-src="media/videos/hero-b.mp4"></video></div>
+      <div class="wall-col meio"><picture><source media="(max-width: 820px)" type="image/webp" srcset="media/videos/poster-hero-a-web.webp" width="540" height="960"><source media="(max-width: 820px)" srcset="media/videos/poster-hero-a-web.jpg" width="540" height="960"><img src="media/videos/poster-hero-a.jpg" alt="" width="720" height="1280" fetchpriority="high"></picture><video id="heroMeio" muted loop playsinline preload="none" data-src="media/videos/hero-a.mp4" data-src-mobile="media/videos/hero-a-mobile.mp4"></video></div>
+      <div class="wall-col lado"><img src="media/videos/poster-hero-c.jpg" alt="" width="720" height="1280" loading="lazy"><video muted loop playsinline preload="none" data-src="media/videos/hero-c.mp4"></video></div>
     </div>
     <div class="sweep" aria-hidden="true"><i></i></div>
     <div class="hero-inner">
@@ -1249,17 +1250,29 @@
     update();
   }
 
-  // hero: no celular só a coluna do meio toca; as laterais nem carregam
+  // hero: no celular só a coluna do meio toca (versão leve, 1,5 MB); as laterais nem carregam.
+  // Os vídeos só entram depois do load (ou do primeiro toque): o pôster abre a página rápido no 4G
   var wallVideos = Array.prototype.slice.call(document.querySelectorAll('.hero-wall video'));
   var mqMobile = window.matchMedia('(max-width: 820px)');
+  var heroLiberado = false;
   var aplicarHero = function () {
     wallVideos.forEach(function (v) {
       var lateral = v.closest('.wall-col').classList.contains('lado');
-      if (mqMobile.matches && lateral) { v.removeAttribute('autoplay'); v.preload = 'none'; v.pause(); }
-      else if (!playingCard) { v.preload = 'auto'; v.play().catch(function () {}); }
+      if (mqMobile.matches && lateral) { v.autoplay = false; v.preload = 'none'; v.pause(); return; }
+      if (!heroLiberado || playingCard) return;
+      var src = (mqMobile.matches && v.dataset.srcMobile) || v.dataset.src;
+      if (v.getAttribute('src') !== src) {
+        var capa = v.closest('.wall-col').querySelector('img');
+        if (capa) v.poster = capa.currentSrc || capa.src;
+        v.preload = 'auto'; v.src = src;
+      }
+      v.autoplay = true; v.play().catch(function () {});
     });
   };
+  var liberarHero = function () { if (heroLiberado) return; heroLiberado = true; aplicarHero(); };
   aplicarHero();
+  if (document.readyState === 'complete') liberarHero();
+  else window.addEventListener('load', liberarHero);
   if (mqMobile.addEventListener) mqMobile.addEventListener('change', aplicarHero);
   else if (mqMobile.addListener) mqMobile.addListener(aplicarHero);
 
@@ -1275,6 +1288,8 @@
   }
 
   // iOS em economia de bateria bloqueia autoplay: tenta de novo a cada toque
+  document.addEventListener('touchstart', liberarHero, { passive: true });
+  document.addEventListener('pointerdown', liberarHero, { passive: true });
   var acordarHero = function () { wallVideos.forEach(function (v) { if (v.paused && v.preload !== 'none' && !playingCard) v.play().catch(function () {}); }); };
   document.addEventListener('touchstart', acordarHero, { passive: true });
   document.addEventListener('pointerdown', acordarHero, { passive: true });
